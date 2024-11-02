@@ -168,12 +168,12 @@ const embedUrl = `https://www.youtube.com/embed/${videoID}?enablejsapi=1&version
       <button class="btn btn-sm btn-circle modal-close-btn">✕</button>
     </form>
     <div class="aspect-w-16">
-      <iframe 
-        id="modal-video"
-        src={embedUrl}
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      ></iframe>
+		<iframe 
+		id="modal-video"
+		src={embedUrl}
+		style="border: 0;"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+	  ></iframe>
     </div>
   </div>
 </dialog>
@@ -189,9 +189,11 @@ const embedUrl = `https://www.youtube.com/embed/${videoID}?enablejsapi=1&version
 	
 	  // Click-Handler für Video-Container
 	  videoContainer.addEventListener('click', () => {
-		modal.showModal();
+		if (modal instanceof HTMLDialogElement) {
+		  modal.showModal();
+		}
 		const iframe = document.getElementById('modal-video');
-		if (iframe) {
+		if (iframe instanceof HTMLIFrameElement && iframe.contentWindow) {
 		  iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
 		}
 	  });
@@ -199,19 +201,19 @@ const embedUrl = `https://www.youtube.com/embed/${videoID}?enablejsapi=1&version
 	  // Modal schließen Event
 	  modal.querySelector('form').addEventListener('submit', () => {
 		const iframe = document.getElementById('modal-video');
-		if (iframe) {
+		if (iframe instanceof HTMLIFrameElement && iframe.contentWindow) {
 		  iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
 		}
 	  });
 	
-	    // Event-Listener für Modal-Close (inkl. ESC-Taste)
-  modal.addEventListener('close', () => {
-    const iframe = document.getElementById('modal-video');
-    if (iframe) {
-      // Video pausieren
-      iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-    }
-  });
+	  // Event-Listener für Modal-Close (inkl. ESC-Taste)
+	  modal.addEventListener('close', () => {
+		const iframe = document.getElementById('modal-video');
+		if (iframe instanceof HTMLIFrameElement && iframe.contentWindow) {
+		  iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+		}
+	  });
+	
 	  // Click outside zum Schließen
 	  modal.addEventListener('click', (e) => {
 		const modalDimensions = modal.getBoundingClientRect();
@@ -221,7 +223,9 @@ const embedUrl = `https://www.youtube.com/embed/${videoID}?enablejsapi=1&version
 		  e.clientY < modalDimensions.top ||
 		  e.clientY > modalDimensions.bottom
 		) {
-		  modal.close();
+		  if (modal instanceof HTMLDialogElement) {
+			modal.close();
+		  }
 		}
 	  });
 	
