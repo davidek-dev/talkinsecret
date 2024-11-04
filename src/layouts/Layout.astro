@@ -4,9 +4,11 @@ interface Props {
 }
 
 const { title } = Astro.props;
-import '../css/global.css';
-import '../css/video.css';
+
 ---
+<style is:global>
+	@import global.css;
+</style>
 
 <!doctype html>
 <html lang="en">

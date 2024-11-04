@@ -12,7 +12,18 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
+  publicDir: 'public/',
+  outDir: 'dist/',
+  site: 'https://talkinsecret.netlify.app/',
+  redirects:{
+
+  },
+  build:{
+    format:'file',
+  },
+
+
   integrations: [react(), tailwind(), alpinejs(), mdx()],
-  output: 'server',
+  output: 'static',
   adapter: netlify()
 });
