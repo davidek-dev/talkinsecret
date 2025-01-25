@@ -124,6 +124,7 @@ export const videoVariants = [
     }
 
     const links = document.querySelectorAll("a");
+    const buttons = document.querySelectorAll("button");
 
     const cursor = (e) => {
       gsap.to(mouseCursor, {
@@ -135,7 +136,8 @@ export const videoVariants = [
 
     window.addEventListener("mousemove", cursor);
 
-    links.forEach((link) => {
+    links.forEach
+    ((link) => {
       link.addEventListener("mouseover", () => {
         gsap.to(mouseCursor, {
           duration: 0.2,
@@ -144,6 +146,23 @@ export const videoVariants = [
       });
 
       link.addEventListener("mouseleave", () => {
+        gsap.to(mouseCursor, {
+          duration: 0.2,
+          scale: 1,
+        });
+      });
+    });
+
+    buttons.forEach
+    ((button) => {
+      button.addEventListener("mouseover", () => {
+        gsap.to(mouseCursor, {
+          duration: 0.2,
+          scale: 2.5,
+        });
+      });
+
+      button.addEventListener("mouseleave", () => {
         gsap.to(mouseCursor, {
           duration: 0.2,
           scale: 1,
