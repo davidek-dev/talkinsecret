@@ -13,31 +13,15 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
 
-  vite: {
-    build: {
-      rollupOptions: {
-        output: {
-        }
-      }
-    }
-  },
+ 
   publicDir: 'public/',
   outDir: 'dist/',
   site: 'https://talkinsecret.netlify.app/',
-  redirects:{
-
-  },
   build:{
     format:'file',
   },
-
-
   integrations: [react(), tailwind(), alpinejs(), mdx()],
-  output: 'server',
+  output: 'hybrid',
   adapter: netlify(),
-  scripts: [{
-    stage: 'head-inline',
-    content: () => {
-    }
-  }]
+  
 });
