@@ -9,6 +9,7 @@ import "../global.css";
 import ContactInfo from "../components/contact/ContactInfo.astro";
 import ContactForm from "../components/contact/ContactForm.astro";
 import Video from "../components/Video.tsx"; // Import the Video component
+import Music from "../components/Music.astro";
 
 export const videoVariants = [
   {
@@ -72,14 +73,15 @@ export const videoVariants = [
           </h1>
         </div>
         <div
-          class="section flex items-center justify-center h-screen snap-center py-[20%]"
+          class="section flex flex-col  justify-center h-screen snap-center py-[20%]"
           id="music"
         >
           <h1
-            class="text-[15em] font-extrabold text-left text-white italic pl-[0.2em] mt-[-0.8em]"
+            class="text-[15em] font-extrabold text-left text-white italic pl-[0.2em] mb-[-0.6em]"
           >
             Music
           </h1>
+          <Music class="w-full self-center justify-center content-center items-center"/>
         </div>
         <div
           class="section flex items-center justify-center h-screen snap-center py-[20%]"
