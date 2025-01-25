@@ -12,8 +12,6 @@
   }
 }
 
-// <uniquifier>: Use a unique and descriptive class name
-// <weight>: Use a value from 400 to 900
 
 .bodoni-moda-font {
   font-family: "Bodoni Moda", serif;
@@ -24,4 +22,42 @@
 
 
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(var(--ac));
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #000;
+  background-color: #000;
+  border-radius: 14px;
+  border: 1px solid;
+  border-color: oklch(var(--a)) 
+}
+
+*::-webkit-scrollbar-track {
+  width: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #000;
+  background-color: oklch(var(--a));
+  border-radius: 14px;
+  border: 1px solid;
+  border-color: oklch(var(--a)) 
+}
+
+*::-webkit-scrollbar-thumb {
+  width: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #000;
+  background-color: oklch(var(--a));
+  border-radius: 14px;
+  border: 1px solid;
+  border-color: oklch(var(--a)) 
+}
+
+.drawer-button{
+  @apply btn btn-circle btn-outline;
+}
 
