@@ -3,21 +3,23 @@
     <div class="grid justify-center gap-12 lg:grid-cols-2 lg:gap-8">
       <div class="flex flex-col gap-4 sm:gap-6">
         <h2
-          class="text-3xl font-medium tracking-tight sm:text-4xl text-accent-content"
+          class="text-3xl font-medium tracking-tight sm:text-4xl text-secondary-content"
         >
           Get in touch with us!
         </h2>
-        <p class="text-center max-w-lg text-lg sm:text-xl text-accent-content">
+        <p class="text-center max-w-lg text-lg sm:text-xl text-secondary-content">
           Suggestions for venues or just want to leave a message? Use the
           contact form or write us alternatively via WhatsApp.
         </p>
         <div class="flex justify-center">
+          <a>
           <button
-            class="bg-primary-600 dark:bg-primary-400 hover:bg-primary-700 dark:hover:bg-primary-300 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-400 dark:text-primary-950 inline-flex items-center justify-center rounded-full border border-transparent px-5 py-3 text-base font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            class="bg-[#884d45] hover:bg-[bg-accent] inline-flex items-center justify-center rounded-full border border-transparent px-5 py-3 text-base font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             type="submit"
           >
             WhatsApp
           </button>
+        </a>
         </div>
       </div>
       <form name="contact" data-netlify="true" method="POST" class="mt-3 flex flex-col gap-y-6">
@@ -29,7 +31,7 @@
             name="full-name"
             id="full-name"
             autocomplete="name"
-            class="hover:ring-primary-600 focus:ring-primary-600 dark:hover:ring-primary-400 dark:focus:ring-primary-400 bg-primary-50 dark:bg-primary-950 ring-primary-900/40 dark:ring-primary-200/40 placeholder:text-primary-950/60 dark:placeholder:text-primary-200/60 block w-full appearance-none rounded-md border-0 px-4 py-4 text-base ring-1 transition focus:outline-none focus:ring-2"
+            class=" focus:ring-primary-600 placeholder:text-primary-950/60 block w-full appearance-none rounded-md border-0 px-4 py-4 text-base ring-1 transition focus:outline-none focus:ring-2"
             placeholder="Your name"
           />
         </div>
@@ -58,14 +60,16 @@
             placeholder="Your message for us"></textarea>
         </div>
 
+        <a>
         <div>
           <button
-            class="bg-primary-600 dark:bg-primary-400 hover:bg-primary-700 dark:hover:bg-primary-300 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-400 dark:text-primary-950 inline-flex items-center justify-center rounded-full border border-transparent px-5 py-3 text-base font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            class="bg-[#884d45] dark:bg-primary-400 hover:bg-primary-700 dark:hover:bg-primary-300 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-400 dark:text-primary-950 inline-flex items-center justify-center rounded-full border border-transparent px-5 py-3 text-base font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             type="submit"
           >
             Send
           </button>
         </div>
+      </a>
       </form>
     </div>
   </div>

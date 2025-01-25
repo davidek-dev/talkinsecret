@@ -1,38 +1,151 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
-import { Image } from "astro:assets";
-import LargeVideo from "../components/LargeVideo.astro";
+import Image from "astro/components/Image.astro";
 import Footer from "../components/Footer.astro";
+import "../styles/index.css";
+import "../global.css";
+
 import ContactInfo from "../components/contact/ContactInfo.astro";
 import ContactForm from "../components/contact/ContactForm.astro";
+import Video from "../components/Video.tsx"; // Import the Video component
+
+export const videoVariants = [
+  {
+    url: "https://www.youtube.com/watch?v=2E326wvssNc",
+    bg: "/images/2E326wvssNc-HD.jpg",
+  },
+  {
+    url: "https://www.youtube.com/watch?v=pFXFBMCwblQ",
+    bg: "/images/pFXFBMCwblQ-HD.jpg",
+  },
+  {
+    url: "https://www.youtube.com/watch?v=qIX4H70Ve_o",
+    bg: "/images/qIX4H70Ve_o-HD.jpg",
+  },
+];
 ---
 
-
 <Layout title="Talkin' Secret">
-  <Navbar />
-    <Image
-      src="/images/000626810014.png"
-      alt="Petrichor"
-      width="1920"
-      height="1080"
-      class="w-[100%] h-[100vh] object-cover"
-    />
-    <div class="h-[100vh] flex items-center justify-center flex-col" id="videos">
-      <h1 class="text-5xl">Videos</h1>
-      <LargeVideo videoUrl="https://www.youtube.com/watch?v=2E326wvssNc" />
-    </div>
-    <div class="h-[100vh] flex items-center justify-center" id="music">
-      <h1 class="text-5xl">Music</h1>
-    </div>
-    <div class="h-[100vh] flex items-center justify-center" id="merch">
-      <h1 class="text-5xl">Merch</h1>
-    </div>
-    <div class="h-[100vh] " id="contact">
-      <h1 class="text-5xl text-center">Contact</h1>
-      <ContactInfo />
-      <ContactForm />
+  <div class="cursor"></div>
 
+  <div class="snap-y snap-mandatory h-screen overflow-y-scroll">
+    <div class="section h-5/4 snap-center">
+      <Navbar class="z-30" />
+      <Image
+        src="/images/000626810014.png"
+        alt="Petrichor"
+        width="1920"
+        height="1080"
+        class="w-[100%] h-[100vh] object-cover"
+      />
     </div>
-    <Footer title="Your Title" />
+    <div class="content max-w-full">
+      <div>
+        <ul class="progress-bar w-4" id="sidebar">
+          <li class="pli">
+            <a class="opacity-0 hover:opacity-100" href="#videos">Videos</a>
+          </li>
+          <li class="pli">
+            <a class="opacity-0 hover:opacity-100" href="#music">Music</a>
+          </li>
+          <li class="pli">
+            <a class="opacity-0 hover:opacity-100" href="#merch">Merch</a>
+          </li>
+          <li class="pli">
+            <a class="opacity-0 hover:opacity-100" href="#contact">Contact</a>
+          </li>
+        </ul>
+
+        <div
+          class="section flex flex-col justify-center h-screen snap-center relative"
+          id="videos"
+        >
+          <div class="self-center z-10 relative">
+            <Video client:load videoVariants={videoVariants} />
+          </div>
+
+          <h1
+            class="text-[15em] font-extrabold text-white italic pl-[0.2em] z-0 mt-[-13%] "
+          >
+            Videos
+          </h1>
+        </div>
+        <div
+          class="section flex items-center justify-center h-screen snap-center py-[20%]"
+          id="music"
+        >
+          <h1
+            class="text-[15em] font-extrabold text-left text-white italic pl-[0.2em] mt-[-0.8em]"
+          >
+            Music
+          </h1>
+        </div>
+        <div
+          class="section flex items-center justify-center h-screen snap-center py-[20%]"
+          id="merch"
+        >
+          <h1
+            class="text-[15em] font-extrabold text-left text-white italic pl-[0.2em] mt-[-0.8em]"
+          >
+            Merch
+          </h1>
+        </div>
+        <div class="section h-screen snap-center pt-[10%]" id="contact">
+          <h1
+            class="text-[15em] font-extrabold text-left text-white italic pl-[0.2em] my-[-0.8em]"
+          >
+            Contact
+          </h1>
+          <ContactInfo />
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+    <div class="section h-[35%] snap-center">
+      <Footer title="Talkin' Secret" />
+    </div>
+  </div>
 </Layout>
+
+<script
+  is:inline
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script is:inline>
+  window.addEventListener("load", () => {
+    const mouseCursor = document.querySelector(".cursor");
+
+    if (!mouseCursor) {
+      console.warn("Cursor element nicht gefunden");
+      return;
+    }
+
+    const links = document.querySelectorAll("a");
+
+    const cursor = (e) => {
+      gsap.to(mouseCursor, {
+        duration: 0.4,
+        x: e.clientX,
+        y: e.clientY,
+      });
+    };
+
+    window.addEventListener("mousemove", cursor);
+
+    links.forEach((link) => {
+      link.addEventListener("mouseover", () => {
+        gsap.to(mouseCursor, {
+          duration: 0.2,
+          scale: 2.5,
+        });
+      });
+
+      link.addEventListener("mouseleave", () => {
+        gsap.to(mouseCursor, {
+          duration: 0.2,
+          scale: 1,
+        });
+      });
+    });
+  });
+</script>

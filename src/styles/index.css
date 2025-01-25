@@ -1,0 +1,92 @@
+* {
+  cursor: none !important;
+}
+
+input, 
+textarea {
+  cursor: auto !important;
+}
+
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 3px solid white;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference; 
+  transition: width 0.2s, height 0.2s;
+
+}
+
+.link-grow {
+  background: #fff;
+}
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    display: block;
+  }
+
+  #sidebar {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    width: 3.25rem;
+    padding: 1rem;
+    margin-left: 1rem;
+  }
+
+  :hover#sidebar {
+    width: 10rem;
+  }
+
+  .progress-bar {
+    align-items: flex-start;
+    position: sticky;
+    top: 40%;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 2px solid oklch(var(--b3));
+    border-radius: 2rem;
+    padding: 1rem;
+  }
+
+  .pli {
+    list-style: none;
+    width: 1rem;
+    height: 1rem;
+    background-color: oklch(var(--b3));
+    border-radius: 1rem;
+    color: oklch(var(--b1));
+  }
+
+
+
+  .pli:hover {
+    background-color: oklch(var(--b3));
+  }
+
+  .progress-bar:hover li {
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .pli.active {
+    background-color: oklch(var(--b1));
+    color: oklch(var(--b1));
+  }
+
+  .progress-bar:hover a {
+    opacity: 1;
+  }
+
+
