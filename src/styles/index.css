@@ -1,9 +1,6 @@
 * {
-  cursor: none !important;
   scrollbar-width: thin;
-
 }
-
 
 body {
   --sb-track-color: #dae3da;
@@ -38,19 +35,26 @@ textarea {
   cursor: auto !important;
 }
 
-.cursor {
-  width: 20px;
-  height: 20px;
-  border: 3px solid white;
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference; 
-  transition: width 0.2s, height 0.2s;
-
-}
-
+/* Only apply custom cursor on larger screens */
+@media (min-width: 1024px) {
+  * {
+    cursor: none !important;
+  }
+  
+  .cursor {
+    width: 20px;
+    height: 20px;
+    border: 3px solid white;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference; 
+    transition: width 0.2s, height 0.2s;
+    display: block; /* Make sure it's visible */
+  }
+  
+  
 .link-grow {
   background: #fff;
 }
@@ -98,8 +102,6 @@ textarea {
     color: oklch(var(--b1));
   }
 
-
-
   .pli:hover {
     background-color: oklch(var(--b3));
   }
@@ -120,4 +122,64 @@ textarea {
     opacity: 1;
   }
 
+  input, 
+  textarea {
+    cursor: auto !important;
+  }
+}
 
+/* For mobile and tablet - hide the custom cursor */
+@media (max-width: 1023px) {
+  .cursor {
+    display: none;
+  }
+  
+  /* Enhance mobile navigation */
+  nav.fixed ul {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Proper spacing for mobile sections */
+  .section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Make sure form elements are properly sized on mobile */
+  input, textarea, button {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    max-width: 100%;
+  }
+}
+
+/* Tablet specific adjustments */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .section h1 {
+    line-height: 0.9;
+  }
+  
+  /* Adjust vertical spacing for tablet */
+  .section {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Small mobile specific adjustments */
+@media (max-width: 639px) {
+  .section h1 {
+    line-height: 0.8;
+    margin-bottom: 1rem;
+  }
+  
+  /* Additional padding for small screens */
+  .section {
+    padding-bottom: 4rem; /* Extra space for fixed nav */
+  }
+  
+  /* Ensure the contact form elements stack properly */
+  #contact form input,
+  #contact form textarea {
+    width: 100%;
+  }
+}

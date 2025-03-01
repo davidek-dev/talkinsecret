@@ -5,35 +5,65 @@ import Image from "astro/components/Image.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/index.css";
 import "../global.css";
-
+import Products from "../components/Products.astro";
 import ContactInfo from "../components/contact/ContactInfo.astro";
 import ContactForm from "../components/contact/ContactForm.astro";
 import Video from "../components/Video.tsx"; // Import the Video component
 import Music from "../components/Music.astro";
 
 export const videoVariants = [
-  {
-    url: "https://www.youtube.com/watch?v=2E326wvssNc",
-    bg: "/images/2E326wvssNc-HD.jpg",
+{
+    url: "https://www.youtube.com/watch?v=GErEGaR8tMs",
+    bg: "/images/image00001_scaled.jpeg",
   },
   {
     url: "https://www.youtube.com/watch?v=pFXFBMCwblQ",
     bg: "/images/pFXFBMCwblQ-HD.jpg",
   },
+
   {
-    url: "https://www.youtube.com/watch?v=qIX4H70Ve_o",
-    bg: "/images/qIX4H70Ve_o-HD.jpg",
+    url: "https://www.youtube.com/watch?v=2E326wvssNc",
+    bg: "/images/2E326wvssNc-HD.jpg",
   },
 ];
+
 ---
 
 <Layout title="Talkin' Secret" >
   <div class="snap-y snap-mandatory h-screen overflow-y-scroll">
 
-  <div class="cursor "></div>
-
+  <div class="cursor"></div>
+  <div class="content max-w-full">
+    <div>
+      <!-- Sidebar navigation - visible on desktop, hidden on mobile -->
+      <ul class="progress-bar w-4 hidden lg:flex" id="sidebar">
+        <li class="pli">
+          <a class="opacity-0 hover:opacity-100" href="#videos">Videos</a>
+        </li>
+        <li class="pli">
+          <a class="opacity-0 hover:opacity-100" href="#music">Music</a>
+        </li>
+        <li class="pli">
+          <a class="opacity-0 hover:opacity-100" href="#merch">Merch</a>
+        </li>
+        <li class="pli">
+          <a class="opacity-0 hover:opacity-100" href="#contact">Contact</a>
+        </li>
+      </ul>
+      
+      <!-- Mobile navigation - visible only on mobile and tablet -->
+      <nav class="fixed bottom-4 left-0 right-0 z-50 lg:hidden">
+        <ul class="flex justify-around items-center bg-black/80 backdrop-blur-md py-3 px-4 mx-4 rounded-full">
+          <li><a href="#videos" class="text-white px-3 py-2">Videos</a></li>
+          <li><a href="#music" class="text-white px-3 py-2">Music</a></li>
+          <li><a href="#merch" class="text-white px-3 py-2">Merch</a></li>
+          <li><a href="#contact" class="text-white px-3 py-2">Contact</a></li>
+        </ul>
+      </nav>
+    
     <div class="section h-5/4 snap-center">
-      <Navbar class="z-30" />
+      <Navbar class="z-30 sm:invisible" />
+
       <Image
         src="/images/000626810014.png"
         alt="Petrichor"
@@ -42,87 +72,80 @@ export const videoVariants = [
         class="w-[100%] h-[100vh] object-cover"
       />
     </div>
-    <div class="content max-w-full">
-      <div>
-        <ul class="progress-bar w-4" id="sidebar">
-          <li class="pli">
-            <a class="opacity-0 hover:opacity-100" href="#videos">Videos</a>
-          </li>
-          <li class="pli">
-            <a class="opacity-0 hover:opacity-100" href="#music">Music</a>
-          </li>
-          <li class="pli">
-            <a class="opacity-0 hover:opacity-100" href="#merch">Merch</a>
-          </li>
-          <li class="pli">
-            <a class="opacity-0 hover:opacity-100" href="#contact">Contact</a>
-          </li>
-        </ul>
 
-        <div
-          class="section flex flex-col justify-center h-screen snap-center relative"
-          id="videos"
-        >
-          <div class="self-center z-10 relative">
-            <Video client:load videoVariants={videoVariants} />
-          </div>
-
-          <h1
-            class="text-[15em] font-extrabold text-white italic pl-[0.2em] z-0 mt-[-13%] mb-[-2rem]"
-          >
-            Videos
-          </h1>
-        </div>
-        <div
-          class="section flex flex-col  justify-center h-screen snap-center py-[20%]"
-          id="music"
-        >
-          <h1
-            class="text-[15em] font-extrabold text-left text-white italic pl-[0.2em] mb-[-0.6em]"
-          >
-            Music
-          </h1>
-          <Music class="w-full self-center justify-center content-center items-center"/>
-        </div>
-        <div
-          class="section flex items-center justify-center h-screen snap-center py-[20%]"
-          id="merch"
-        >
-          <h1
-            class="text-[15em] font-extrabold text-left text-white italic pl-[0.2em] mt-[-0.8em]"
-          >
-            Merch
-          </h1>
-        </div>
-        <div class="section h-screen snap-center pt-[10%]" id="contact">
-          <h1
-            class="text-[15em] font-extrabold text-left text-white italic pl-[0.2em] my-[-0.8em]"
-          >
-            Contact
-          </h1>
-          <ContactInfo />
-          <ContactForm />
-        </div>
+    <div
+      class="section flex flex-col justify-center h-screen snap-center relative"
+      id="videos"
+    >
+      <div class="self-center z-10 relative">
+        <Video client:load videoVariants={videoVariants} />
       </div>
+
+      <h1
+        class="text-[15em] md:text-[10em] sm:text-[5em] font-extrabold text-white italic pl-[0.2em] z-0 mt-[-13%] mb-[-2rem] md:mt-[-10%] sm:mt-[-5%]"
+      >
+        Videos
+      </h1>
     </div>
-    <div class="section h-[35%] snap-center">
-      <Footer title="Talkin' Secret" />
+    
+    <div
+      class="section flex flex-col justify-center h-screen snap-center py-[20%] md:py-[15%] sm:py-[10%]"
+      id="music"
+    >
+      <h1
+        class="text-[15em] md:text-[10em] sm:text-[5em] font-extrabold text-left text-white italic pl-[0.2em] mb-[-0.6em]"
+      >
+        Music
+      </h1>
+      <Music class="w-full self-center justify-center content-center items-center"/>
     </div>
+    
+    <div
+      class="section flex flex-col justify-center h-screen snap-center relative"
+      id="merch"
+    >
+      <h1
+        class="text-[15em] md:text-[10em] sm:text-[5em] font-extrabold text-left text-white italic absolute top-0 left-0 pl-[0.2em] mt-[-6%] mb-[-2rem] md:mt-[-4%] sm:mt-[0%]"
+      >
+        Merch
+      </h1>
+      <Products class="w-full self-center justify-center content-center items-center pt-[15%] md:pt-[20%] sm:pt-[25%] pb-8"/>
+    </div>
+    
+    <div class="section h-screen snap-center pt-[10%] md:pt-28 sm:pt-[20%]" id="contact">
+      <h1
+        class="text-[15em] md:text-[10em] sm:text-[5em] font-extrabold text-left text-white italic pl-[0.2em] my-[-0.8em] md:mb-[-0.7em]"
+      >
+        Contact
+      </h1>
+      <ContactInfo />
+      <ContactForm />
+    </div>
+    </div>
+  </div>
+  <div class="section h-[35%] snap-center">
+    <Footer title="Talkin' Secret" />
+  </div>
   </div>
 </Layout>
 
 <script
   is:inline
   src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
 <script is:inline>
-  window.addEventListener("load", () => {
-    const mouseCursor = document.querySelector(".cursor");
+window.addEventListener("load", () => {
+  // Check if the device is a desktop (screen width >= 1024px)
+  const isDesktop = window.innerWidth >= 1024;
+  const mouseCursor = document.querySelector(".cursor");
 
-    if (!mouseCursor) {
-      console.warn("Cursor element nicht gefunden");
-      return;
-    }
+  if (!mouseCursor) {
+    console.warn("Cursor element nicht gefunden");
+    return;
+  }
 
+  // Only enable custom cursor behavior on desktop
+  if (isDesktop) {
     const links = document.querySelectorAll("a");
     const buttons = document.querySelectorAll("button");
 
@@ -136,8 +159,7 @@ export const videoVariants = [
 
     window.addEventListener("mousemove", cursor);
 
-    links.forEach
-    ((link) => {
+    links.forEach((link) => {
       link.addEventListener("mouseover", () => {
         gsap.to(mouseCursor, {
           duration: 0.2,
@@ -153,8 +175,7 @@ export const videoVariants = [
       });
     });
 
-    buttons.forEach
-    ((button) => {
+    buttons.forEach((button) => {
       button.addEventListener("mouseover", () => {
         gsap.to(mouseCursor, {
           duration: 0.2,
@@ -169,5 +190,45 @@ export const videoVariants = [
         });
       });
     });
+  } else {
+    // For mobile and tablet, ensure the cursor element is hidden
+    if (mouseCursor) {
+      mouseCursor.style.display = 'none';
+    }
+  }
+  
+  // Add active class to sidebar links based on scroll position
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('#sidebar li');
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (pageYOffset >= (sectionTop - sectionHeight/3)) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navLinks.forEach(li => {
+      li.classList.remove('active');
+      if (li.querySelector('a').getAttribute('href') === `#${current}`) {
+        li.classList.add('active');
+      }
+    });
   });
+
+  // Smooth scrolling for internal links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+});
 </script>
