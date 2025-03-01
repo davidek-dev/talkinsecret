@@ -139,11 +139,7 @@ textarea {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   
-  /* Proper spacing for mobile sections */
-  .section {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+
   
   /* Make sure form elements are properly sized on mobile */
   input, textarea, button {
@@ -158,11 +154,7 @@ textarea {
     line-height: 0.9;
   }
   
-  /* Adjust vertical spacing for tablet */
-  .section {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
+
 }
 
 /* Small mobile specific adjustments */
