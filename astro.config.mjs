@@ -10,17 +10,19 @@ import netlify from '@astrojs/netlify';
 
 import mdx from '@astrojs/mdx';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
 
  
   publicDir: 'public/',
   outDir: 'dist/',
-  site: 'https://talkinsecret.netlify.app/',
+  site: 'https://talkinsecret.com/',
   build:{
     format:'file',
   },
-  integrations: [react(), tailwind(), alpinejs(), mdx()],
+  integrations: [react(), tailwind(), alpinejs(), mdx(), sitemap()],
   output: 'hybrid',
   adapter: netlify(),
   

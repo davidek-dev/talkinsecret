@@ -30,7 +30,7 @@ export const videoVariants = [
 ---
 
 <Layout title="Talkin' Secret" >
-  <div class="snap-y snap-mandatory h-screen overflow-y-scroll">
+  <div class="lg:snap-y lg:snap-mandatory h-screen overflow-y-scroll">
 
   <div class="cursor"></div>
   <div class="content max-w-full">
@@ -61,7 +61,7 @@ export const videoVariants = [
         </ul>
       </nav>
     -->
-    <div class="section h-3/4 snap-center">
+    <div class="section h-screen lg:snap-center">
       <Navbar class="z-30" />
 
       <Image
@@ -74,7 +74,7 @@ export const videoVariants = [
     </div>
 
     <div
-      class="section flex flex-col justify-center h-screen snap-center relative"
+      class="section flex flex-col justify-center h-screen lg:snap-center relative"
       id="videos"
     >
       <div class="self-center z-10 relative w-[90%] lg:w-auto">
@@ -82,18 +82,18 @@ export const videoVariants = [
       </div>
 
       <h1
-        class="lg:text-[15em] md:text-[10em] text-[8em] font-extrabold text-white italic pl-[0.2em] z-0 lg:mt-[-13%] mb-[-2rem] md:mt-[-10%] mt-[-5%]"
+        class="lg:text-[15em] md:text-[10em] text-[5em] font-extrabold text-white italic pt-4 z-0 lg:mt-[-5%] text-center md:mt-[-10%] "
       >
         Videos
       </h1>
     </div>
     
     <div
-      class="section flex flex-col justify-center h-screen snap-center lg:py-[20%] md:py-[15%] py-[10%]"
+      class="section flex flex-col justify-center h-screen lg:snap-center lg:py-[20%] md:py-[15%]  "
       id="music"
     >
       <h1
-        class="lg:text-[15em] md:text-[10em] text-[8em]  font-extrabold text-left text-white italic pl-[0.2em] mb-[-0.6em]"
+        class="lg:text-[15em] md:text-[10em] text-[5em]  font-extrabold text-center text-white italic pb-4 lg:mb-[-0.6em]"
       >
         Music
       </h1>
@@ -101,20 +101,20 @@ export const videoVariants = [
     </div>
     
     <div
-      class="section flex flex-col justify-center h-screen snap-center relative"
+      class="section flex flex-col justify-center h-screen lg:snap-center relative"
       id="merch"
     >
       <h1
-        class="lg:text-[15em] md:text-[10em] text-[8em]  font-extrabold text-left text-white italic absolute lg:top-0 left-0 pl-[0.2em] lg:mt-[-6%] mb-[-2rem] md:mt-[-4%] mt-[0%]"
+        class="lg:text-[15em] md:text-[10em] text-[5em]  font-extrabold text-center text-white italic  lg:top-0  lg:mt-[-6%]  md:mt-[-4%] "
       >
         Merch
       </h1>
-      <Products class="w-full self-center justify-center content-center items-center lg:pt-[15%] md:pt-[20%] pt-[25%] pb-8"/>
+      <Products class="w-full self-center justify-center content-center items-center lg:pt-[15%] md:pt-[20%] "/>
     </div>
     
-    <div class="section h-screen snap-center pt-[10%] md:pt-28 sm:pt-[20%]" id="contact">
+    <div class="section lg:h-screen h-[200vh] lg:snap-center  md:pt-28 " id="contact">
       <h1
-        class="lg:text-[15em] md:text-[10em] text-[8em]  font-extrabold text-left text-white italic pl-[0.2em] my-[-0.8em] md:mb-[-0.7em]"
+        class="lg:text-[15em] md:text-[10em] text-[5em]  font-extrabold text-center text-white italic  md:mb-[-0.7em]"
       >
         Contact
       </h1>
@@ -123,7 +123,7 @@ export const videoVariants = [
     </div>
     </div>
   </div>
-  <div class="section h-[35%] snap-center">
+  <div class="section h-[35%] lg:snap-center">
     <Footer title="Talkin' Secret" />
   </div>
   </div>
