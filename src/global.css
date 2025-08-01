@@ -10,7 +10,50 @@
     font-family: 'Bodoni Moda';
     src: url("./fonts/BodoniModa-VariableFont_opsz,wght.ttf") format('ttf');
   }
-}
+    :root {
+      --background: 200 30% 4%;
+      --foreground: 200 27% 91%;
+      --card: 200 30% 4%;
+      --card-foreground: 200 27% 91%;
+      --popover: 200 30% 4%;
+      --popover-foreground: 200 27% 91%;
+      --primary: 345 44% 17%;
+      --primary-foreground: 200 27% 91%;
+      --secondary: 234 28% 32%;
+      --secondary-foreground: 200 27% 91%;
+      --muted: 200 29% 80%;
+      --muted-foreground: 200 27% 91%;
+      --accent: 105 19% 35%;
+      --accent-foreground: 200 27% 91%;
+      --destructive: 0 62% 30%;
+      --destructive-foreground: 198 25% 10%;
+      --border: 200 30% 60%;
+      --input: 200 29% 80%;
+      --ring: 106 19% 60%;
+    }
+   
+    .dark {
+      --background: 200 30% 4%;
+      --foreground: 200 27% 91%;
+      --card: 200 30% 4%;
+      --card-foreground: 200 27% 91%;
+      --popover: 200 30% 4%;
+      --popover-foreground: 200 27% 91%;
+      --primary: 345 44% 17%;
+      --primary-foreground: 200 27% 91%;
+      --secondary: 234 28% 32%;
+      --secondary-foreground: 200 27% 91%;
+      --muted: 200 29% 80%;
+      --muted-foreground: 200 27% 91%;
+      --accent: 105 19% 35%;
+      --accent-foreground: 200 27% 91%;
+      --destructive: 0 62% 30%;
+      --destructive-foreground: 198 25% 10%;
+      --border: 200 30% 60%;
+      --input: 200 29% 80%;
+      --ring: 106 19% 60%;
+    }
+  }
 
 
 .bodoni-moda-font {
@@ -18,6 +61,19 @@
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+}
+
+
+
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
 

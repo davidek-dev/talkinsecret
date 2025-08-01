@@ -139,7 +139,7 @@ const VideoPlayer: React.FC<Props> = ({ videoVariants }) => {
         <i className="fa fa-solid fa-play" />
       </div>
 
-      <div id="video-container" className="rounded-2xl" ref={videoContainerRef}>
+      <div id="video-container" className="rounded-2xl h-[400px]" ref={videoContainerRef}>
         <button title="Play Button" id="play-button" className="circle-button" ref={playButtonRef}>
           <span className="play-icon">
             <i className="fa fa-solid fa-play" />
@@ -165,12 +165,12 @@ const VideoPlayer: React.FC<Props> = ({ videoVariants }) => {
 
       <div className="carousel carousel-center mt-2 max-w-full w-[704px] gap-2 pr-4">
         {videoVariants.map((variant, index) => (
-          <div key={index} className={`carousel-item w-1/3 `}>
+          <div key={index} className={`carousel-item w-1/4 `}>
             <a><img
               src={variant.bg}
               className={
                 selectedIndex === index
-                  ? 'rounded-2xl border-4 border-white brightness-75'
+                  ? 'rounded-2xl border-4 border-primary brightness-75'
                   : 'rounded-2xl'
               }
               data-index={index}

@@ -10,9 +10,14 @@ import ContactInfo from "../components/contact/ContactInfo.astro";
 import ContactForm from "../components/contact/ContactForm.astro";
 import Video from "../components/Video.tsx"; // Import the Video component
 import Music from "../components/Music.astro";
+import Gigs from "../components/Gigs.astro";
 
 export const videoVariants = [
-{
+    {
+    url: "https://www.youtube.com/watch?v=8EeFU2--plk",
+    bg: "/images/8EeFU2--plk-HD.jpg",
+  },
+  {
     url: "https://www.youtube.com/watch?v=GErEGaR8tMs",
     bg: "/images/image00001_scaled.jpeg",
   },
@@ -20,11 +25,11 @@ export const videoVariants = [
     url: "https://www.youtube.com/watch?v=pFXFBMCwblQ",
     bg: "/images/pFXFBMCwblQ-HD.jpg",
   },
-
   {
     url: "https://www.youtube.com/watch?v=2E326wvssNc",
     bg: "/images/2E326wvssNc-HD.jpg",
   },
+
 ];
 
 ---
@@ -36,18 +41,21 @@ export const videoVariants = [
   <div class="content max-w-full">
     <div>
       <!-- Sidebar navigation - visible on desktop, hidden on mobile -->
-      <ul class="progress-bar w-4 hidden lg:flex" id="sidebar">
+      <ul class="progress-bar fixed w-4 hidden lg:flex" id="sidebar">
         <li class="pli">
-          <a class="opacity-0 hover:opacity-100" href="#videos">Videos</a>
+          <a class="opacity-0 hover:opacity-100 text-background" href="#videos">Videos</a>
         </li>
         <li class="pli">
-          <a class="opacity-0 hover:opacity-100" href="#music">Music</a>
+          <a class="opacity-0 hover:opacity-100 text-background" href="#music">Music</a>
         </li>
         <li class="pli">
-          <a class="opacity-0 hover:opacity-100" href="#merch">Merch</a>
+          <a class="opacity-0 hover:opacity-100 text-background" href="#gigs">Gigs</a>
         </li>
         <li class="pli">
-          <a class="opacity-0 hover:opacity-100" href="#contact">Contact</a>
+          <a class="opacity-0 hover:opacity-100 text-background" href="#merch">Merch</a>
+        </li>
+        <li class="pli">
+          <a class="opacity-0 hover:opacity-100 text-background" href="#contact">Contact</a>
         </li>
       </ul>
       
@@ -56,7 +64,6 @@ export const videoVariants = [
         <ul class="flex justify-around items-center bg-black/80 backdrop-blur-md py-3 px-4 mx-4 rounded-full">
           <li><a href="#videos" class="text-white px-3 py-2">Videos</a></li>
           <li><a href="#music" class="text-white px-3 py-2">Music</a></li>
-          <li><a href="#merch" class="text-white px-3 py-2">Merch</a></li>
           <li><a href="#contact" class="text-white px-3 py-2">Contact</a></li>
         </ul>
       </nav>
@@ -65,7 +72,7 @@ export const videoVariants = [
       <Navbar class="z-30" />
 
       <Image
-        src="/images/000626810014.png"
+        src="/images/e4d55f4b-503f-4b25-b30f-03d1740df704.jpeg"
         alt="Petrichor"
         width="1920"
         height="1080"
@@ -77,15 +84,14 @@ export const videoVariants = [
       class="section flex flex-col justify-center h-screen lg:snap-center relative"
       id="videos"
     >
-      <div class="self-center z-10 relative w-[90%] lg:w-auto">
-        <Video client:load videoVariants={videoVariants} />
-      </div>
-
       <h1
-        class="lg:text-[15em] md:text-[10em] text-[5em] font-extrabold text-white italic pt-4 z-0 lg:mt-[-5%] text-center md:mt-[-10%] "
+        class="lg:text-[15em] md:text-[10em] -ml-5 text-[5em] font-extrabold text-[#131c20] italic z-0  text-center lg:-mt-44 mb-7"
       >
         Videos
       </h1>
+      <div class="self-center z-10 relative w-[90%] lg:w-auto lg:-mt-24">
+        <Video client:load videoVariants={videoVariants} />
+      </div>
     </div>
     
     <div
@@ -93,28 +99,40 @@ export const videoVariants = [
       id="music"
     >
       <h1
-        class="lg:text-[15em] md:text-[10em] text-[5em]  font-extrabold text-center text-white italic pb-4 lg:mb-[-0.6em]"
+        class="lg:text-[15em] md:text-[10em] text-[5em] pb-14 -mt-28 font-extrabold text-center text-[#131c20] italic pb-4 lg:mb-[-0.6em]"
       >
         Music
       </h1>
       <Music class="w-full self-center justify-center content-center items-center"/>
     </div>
-    
+
     <div
       class="section flex flex-col justify-center h-screen lg:snap-center relative"
+      id="gigs"
+    >
+      <h1
+        class="lg:text-[15em] md:text-[10em] text-[5em] font-extrabold -mt-48 text-center text-[#131c20] italic "
+      >
+        Gigs
+      </h1>
+      <Gigs />
+    </div>
+    
+    <div
+      class="section flex flex-col justify-center h-screen lg:snap-center  relative"
       id="merch"
     >
       <h1
-        class="lg:text-[15em] md:text-[10em] text-[5em]  font-extrabold text-center text-white italic  lg:top-0  lg:mt-[-6%]  md:mt-[-4%] "
+        class="lg:text-[15em] md:text-[10em] text-[5em] font-extrabold text-center text-[#131c20] italic -mt-48 -mb-20 "
       >
         Merch
       </h1>
-      <Products class="w-full self-center justify-center content-center items-center lg:pt-[15%] md:pt-[20%] "/>
+      <Products class="w-full self-center justify-center content-center items-center "/>
     </div>
     
     <div class="section lg:h-screen h-[200vh] lg:snap-center  md:pt-28 " id="contact">
       <h1
-        class="lg:text-[15em] md:text-[10em] text-[5em]  font-extrabold text-center text-white italic  md:mb-[-0.7em]"
+        class="lg:text-[15em] md:text-[10em] text-[5em]  font-extrabold text-center text-[#131c20] italic  -mt-36 -mb-24"
       >
         Contact
       </h1>
@@ -151,7 +169,7 @@ window.addEventListener("load", () => {
 
     const cursor = (e) => {
       gsap.to(mouseCursor, {
-        duration: 0.4,
+        duration: 0.2,
         x: e.clientX,
         y: e.clientY,
       });

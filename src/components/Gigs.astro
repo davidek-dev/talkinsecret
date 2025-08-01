@@ -1,0 +1,64 @@
+---
+import { createClient } from "contentful";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+
+const client = createClient({
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_DELIVERY_TOKEN,
+});
+
+const response = await client.getEntries({ content_type: "talkinSecretGigs" });
+const today = new Date();
+today.setHours(0, 0, 0, 0); // Set to midnight to compare dates only
+
+
+const gigs = response.items
+  .filter(gig => {
+    const gigDate = new Date(gig.fields.datum as string);
+    return gigDate >= today;
+  })
+  .sort((a, b) => {
+    const dateA = new Date(a.fields.datum as string).getTime();
+    const dateB = new Date(b.fields.datum as string).getTime();
+    return dateA - dateB;
+  });
+---
+
+<div class="w-full  container mx-auto max-w-4xl overflow-x-auto">
+  <Table>
+    <TableCaption className="pt-16 text-xl">Your town ain't on the list? Leave us a message <a href="#contact" class="text-secondary font-bold">here!</a></TableCaption>
+    <TableHeader>
+      <TableRow className="text-xl">
+        <TableHead>Date</TableHead>
+        <TableHead>Venue / Event</TableHead>
+        <TableHead>City</TableHead>
+        <TableHead>Country</TableHead>
+        <TableHead>Link</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody className="text-lg">
+      {gigs.map((gig) => (
+        <TableRow>
+          <TableCell>{new Date(gig.fields.datum as string).toLocaleDateString('en-GB')}</TableCell>
+          <TableCell>{gig.fields.venueevent as string}</TableCell>
+          <TableCell>{gig.fields.city as string}</TableCell>
+          <TableCell>{gig.fields.country as string}</TableCell>
+          <TableCell>
+            <a href={gig.fields.link as string} target="_blank" rel="noopener noreferrer">
+              <Button>Tickets</Button>
+            </a>
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</div>
