@@ -11,26 +11,38 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 
-const client = createClient({
-  space: import.meta.env.CONTENTFUL_SPACE_ID,
-  accessToken: import.meta.env.CONTENTFUL_DELIVERY_TOKEN,
-});
+const spaceId = import.meta.env.CONTENTFUL_SPACE_ID;
+const accessToken = import.meta.env.CONTENTFUL_DELIVERY_TOKEN;
 
-const response = await client.getEntries({ content_type: "talkinSecretGigs" });
-const today = new Date();
-today.setHours(0, 0, 0, 0); // Set to midnight to compare dates only
+let gigs = [];
 
-
-const gigs = response.items
-  .filter(gig => {
-    const gigDate = new Date(gig.fields.datum as string);
-    return gigDate >= today;
-  })
-  .sort((a, b) => {
-    const dateA = new Date(a.fields.datum as string).getTime();
-    const dateB = new Date(b.fields.datum as string).getTime();
-    return dateA - dateB;
+if (spaceId && accessToken) {
+  const client = createClient({
+    space: spaceId,
+    accessToken: accessToken,
   });
+
+  const response = await client.getEntries({ content_type: "talkinSecretGigs" });
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Set to midnight to compare dates only
+
+  gigs = response.items
+    .filter((gig) => {
+      const gigDate = new Date(gig.fields.datum as string);
+      return gigDate >= today;
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.fields.datum as string).getTime();
+      const dateB = new Date(b.fields.datum as string).getTime();
+      return dateA - dateB;
+    });
+} else {
+  if (import.meta.env.PROD) {
+    console.error(
+      "Contentful environment variables are not set. Gigs will not be displayed."
+    );
+  }
+}
 ---
 
 <div class="w-full  container mx-auto max-w-4xl overflow-x-auto">
