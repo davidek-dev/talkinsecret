@@ -8,7 +8,7 @@ export default {
 	theme: {
     	extend: {
     		fontFamily: {
-    			bandfont: 'Binggo Wood'
+    			bandfont: "'LibreBaskerville', serif",
     		},
     		borderRadius: {
     			lg: 'var(--radius)',
