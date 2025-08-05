@@ -1,0 +1,33 @@
+/* Video Carousel Fix */
+.carousel {
+  display: flex !important;
+  flex-direction: row !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+}
+
+.carousel-item {
+  flex: 0 0 auto !important;
+  scroll-snap-align: start;
+}
+
+/* YouTube Placeholder Styling */
+.youtube-placeholder {
+  border: 2px dashed #9ca3af;
+}
+
+/* Cookie Banner Fixes */
+.cookie-banner {
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure no overflow issues */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Fix scrolling container */
+.snap-y {
+  scroll-behavior: smooth;
+}

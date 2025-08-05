@@ -22,7 +22,13 @@ export default defineConfig({
   build:{
     format:'file',
   },
-  integrations: [react(), tailwind(), alpinejs(), mdx(), sitemap()],
+  integrations: [
+    react(),
+    tailwind(),
+    alpinejs(),
+    mdx(),
+    sitemap(),
+  ],
   output: 'hybrid',
   adapter: netlify(),
   

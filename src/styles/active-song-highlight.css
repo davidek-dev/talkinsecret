@@ -1,0 +1,316 @@
+/* Aktiver Song-Hervorhebungen und Animationen */
+
+/* Hover-Effekt für alle Song-Liste Items (dezent wie Control-Panel Buttons) */
+.song-list-item.modern-song-list-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Grundstil für den aktiven Song */
+.song-list-item.modern-song-list-item.active {
+  background: hsla(345, 44%, 17%, 0.3); /* Primärfarbe mit Transparenz */
+  border-left: 4px solid hsl(345, 44%, 30%); /* Hellere Version der Primärfarbe */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Leichter Schattenwurf */
+  transform: translateX(4px); /* Leichte Verschiebung nach rechts */
+  transition: all 0.3s ease; /* Sanfte Übergänge */
+  position: relative; /* Für absolute Positionierung von Pseudo-Elementen */
+  z-index: 2; /* Stellt sicher, dass der aktive Song über anderen liegt */
+  animation: selectSong 0.5s ease-out; /* Animation beim Auswählen */
+}
+
+/* Animation beim Auswählen eines Songs */
+@keyframes selectSong {
+  0% {
+    transform: translateX(0);
+    background: hsla(345, 44%, 17%, 0);
+  }
+  50% {
+    transform: translateX(6px);
+    background: hsla(345, 44%, 25%, 0.4);
+  }
+  100% {
+    transform: translateX(4px);
+    background: hsla(345, 44%, 17%, 0.3);
+  }
+}
+
+/* Hover-Effekt für aktiven Song */
+.song-list-item.modern-song-list-item.active:hover {
+  background: hsla(345, 44%, 20%, 0.4); /* Etwas helleres Rot mit mehr Deckkraft */
+  transform: translateX(6px) scale(1.01); /* Leicht vergrößern beim Hover */
+}
+
+/* Glow-Effekt am rechten Rand */
+.song-list-item.modern-song-list-item.active::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(to right, 
+    transparent, 
+    hsla(105, 19%, 60%, 0.6) /* Akzentfarbe als Glow */
+  );
+  border-radius: 0 4px 4px 0;
+  animation: glowPulse 2s infinite alternate;
+}
+
+/* Animation für den Glow-Effekt */
+@keyframes glowPulse {
+  from {
+    opacity: 0.6;
+    box-shadow: 0 0 5px hsla(105, 19%, 60%, 0.3);
+  }
+  to {
+    opacity: 1;
+    box-shadow: 0 0 12px hsla(105, 19%, 60%, 0.7);
+  }
+}
+
+/* Nummer des aktiven Songs */
+.song-list-item.modern-song-list-item.active .modern-song-list-number {
+  background: hsla(345, 44%, 25%, 0.9); /* Dunkleres Rot mit hoher Deckkraft */
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px hsla(345, 44%, 30%, 0.5); /* Leuchten um die Nummer */
+  animation: pulseBeat 2s infinite alternate;
+}
+
+/* Pulsieren für die Nummer */
+@keyframes pulseBeat {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+/* Titel des aktiven Songs */
+.song-list-item.modern-song-list-item.active .modern-song-list-title {
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 10px hsla(234, 28%, 70%, 0.7); /* Blaues Leuchten um den Text */
+  letter-spacing: 0.02em;
+  transform: translateZ(0); /* Verhindert Flackern bei Animationen */
+}
+
+/* Künstler des aktiven Songs */
+.song-list-item.modern-song-list-item.active .modern-song-list-artist {
+  color: hsla(105, 19%, 80%, 0.9); /* Helleres Grün für den Künstlernamen */
+  font-style: italic;
+}
+
+/* Dauer des aktiven Songs */
+.song-list-item.modern-song-list-item.active .modern-song-list-duration {
+  color: white;
+  font-weight: bold;
+  background: hsla(234, 28%, 32%, 0.4); /* Sekundärfarbe für die Dauer */
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* Grundstil für alle Song-Listeneinträge verbessern */
+.song-list-item.modern-song-list-item {
+  border-radius: 6px;
+  margin-bottom: 4px;
+  padding: 10px 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border-left: 4px solid transparent;
+}
+
+/* Hover-Effekt für nicht-aktive Songs */
+.song-list-item.modern-song-list-item:not(.active):hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(2px);
+}
+
+/* Animation für das schwebende Musiksymbol */
+@keyframes floatNote {
+  0% {
+    opacity: 0.3;
+    transform: translateY(-50%) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-65%) rotate(10deg);
+  }
+  100% {
+    opacity: 0.3;
+    transform: translateY(-50%) rotate(0deg);
+  }
+}
+
+/* Animation für den Equalizer-Effekt */
+@keyframes equalize {
+  0% {
+    height: 3px;
+    box-shadow: 
+      6px 0 0 hsla(234, 28%, 70%, 1),
+      12px 0 0 hsla(105, 19%, 80%, 1);
+  }
+  33% {
+    height: 8px;
+    box-shadow: 
+      6px 0 0 hsla(234, 28%, 70%, 1),
+      12px 0 0 hsla(105, 19%, 80%, 1);
+  }
+  66% {
+    height: 5px;
+    box-shadow: 
+      6px 0 0 hsla(234, 28%, 70%, 1),
+      12px 0 0 hsla(105, 19%, 80%, 1);
+  }
+  100% {
+    height: 12px;
+    box-shadow: 
+      6px 0 0 hsla(234, 28%, 70%, 1),
+      12px 0 0 hsla(105, 19%, 80%, 1);
+  }
+}
+
+/* Spezielle Animation für den aktuell spielenden Song */
+.song-list-item.modern-song-list-item.active[data-is-playing="true"] {
+  background: hsla(345, 44%, 20%, 0.35); /* Etwas intensivere Farbe wenn es spielt */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Stärkerer Schatten */
+}
+
+/* Equalizer-Animation nur anzeigen, wenn der Song tatsächlich spielt */
+.song-list-item.modern-song-list-item.active[data-is-playing="true"] .modern-song-list-info::after {
+  content: '';
+  position: absolute;
+  right: -50px; /* Mittig zwischen Text und Dauer */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px; /* Breiter */
+  height: 12px; /* Höher */
+  background: hsla(105, 19%, 80%, 0.9);
+  border-radius: 2px;
+  box-shadow: 
+    5px 0 0 hsla(234, 28%, 70%, 0.8),
+    10px 0 0 hsla(345, 44%, 60%, 0.9),
+    15px 0 0 hsla(105, 19%, 80%, 0.7),
+    20px 0 0 hsla(200, 50%, 70%, 0.8),
+    25px 0 0 hsla(345, 44%, 60%, 0.6),
+    30px 0 0 hsla(105, 19%, 80%, 0.9);
+  animation: realisticEqualize 0.8s ease-in-out infinite;
+}
+
+/* Song-Info Container positionieren für die Animation */
+.song-list-item.modern-song-list-item .modern-song-list-info {
+  position: relative;
+}
+/* Musik-Noten-Animation nur anzeigen, wenn der Song tatsächlich spielt */
+.song-list-item.modern-song-list-item.active[data-is-playing="true"]::before {
+  content: '♪';
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: hsla(105, 19%, 80%, 0.6);
+  animation: floatNote 2.5s ease infinite;
+}
+
+/* Realistische Equalizer-Animation mit variierenden Höhen */
+@keyframes realisticEqualize {
+  0% {
+    height: 8px;
+    box-shadow: 
+      5px 0 0 4px hsla(234, 28%, 70%, 0.7),
+      10px 0 0 12px hsla(345, 44%, 60%, 0.9),
+      15px 0 0 6px hsla(105, 19%, 80%, 0.6),
+      20px 0 0 15px hsla(200, 50%, 70%, 0.8),
+      25px 0 0 3px hsla(345, 44%, 60%, 0.5),
+      30px 0 0 9px hsla(105, 19%, 80%, 0.8);
+  }
+  12.5% {
+    height: 14px;
+    box-shadow: 
+      5px 0 0 8px hsla(234, 28%, 70%, 0.8),
+      10px 0 0 6px hsla(345, 44%, 60%, 0.6),
+      15px 0 0 11px hsla(105, 19%, 80%, 0.9),
+      20px 0 0 4px hsla(200, 50%, 70%, 0.5),
+      25px 0 0 13px hsla(345, 44%, 60%, 0.8),
+      30px 0 0 7px hsla(105, 19%, 80%, 0.7);
+  }
+  25% {
+    height: 5px;
+    box-shadow: 
+      5px 0 0 12px hsla(234, 28%, 70%, 0.9),
+      10px 0 0 9px hsla(345, 44%, 60%, 0.7),
+      15px 0 0 14px hsla(105, 19%, 80%, 0.8),
+      20px 0 0 7px hsla(200, 50%, 70%, 0.6),
+      25px 0 0 5px hsla(345, 44%, 60%, 0.4),
+      30px 0 0 11px hsla(105, 19%, 80%, 0.9);
+  }
+  37.5% {
+    height: 11px;
+    box-shadow: 
+      5px 0 0 6px hsla(234, 28%, 70%, 0.6),
+      10px 0 0 13px hsla(345, 44%, 60%, 0.8),
+      15px 0 0 4px hsla(105, 19%, 80%, 0.4),
+      20px 0 0 10px hsla(200, 50%, 70%, 0.7),
+      25px 0 0 14px hsla(345, 44%, 60%, 0.9),
+      30px 0 0 8px hsla(105, 19%, 80%, 0.6);
+  }
+  50% {
+    height: 9px;
+    box-shadow: 
+      5px 0 0 10px hsla(234, 28%, 70%, 0.8),
+      10px 0 0 5px hsla(345, 44%, 60%, 0.5),
+      15px 0 0 12px hsla(105, 19%, 80%, 0.7),
+      20px 0 0 13px hsla(200, 50%, 70%, 0.9),
+      25px 0 0 7px hsla(345, 44%, 60%, 0.6),
+      30px 0 0 4px hsla(105, 19., 80%, 0.4);
+  }
+  62.5% {
+    height: 15px;
+    box-shadow: 
+      5px 0 0 3px hsla(234, 28%, 70%, 0.4),
+      10px 0 0 11px hsla(345, 44%, 60%, 0.8),
+      15px 0 0 8px hsla(105, 19%, 80%, 0.6),
+      20px 0 0 6px hsla(200, 50%, 70%, 0.5),
+      25px 0 0 12px hsla(345, 44%, 60%, 0.7),
+      30px 0 0 14px hsla(105, 19%, 80%, 0.9);
+  }
+  75% {
+    height: 7px;
+    box-shadow: 
+      5px 0 0 13px hsla(234, 28%, 70%, 0.9),
+      10px 0 0 8px hsla(345, 44%, 60%, 0.7),
+      15px 0 0 5px hsla(105, 19%, 80%, 0.5),
+      20px 0 0 11px hsla(200, 50%, 70%, 0.8),
+      25px 0 0 9px hsla(345, 44%, 60%, 0.6),
+      30px 0 0 6px hsla(105, 19%, 80%, 0.4);
+  }
+  87.5% {
+    height: 12px;
+    box-shadow: 
+      5px 0 0 7px hsla(234, 28%, 70%, 0.6),
+      10px 0 0 14px hsla(345, 44%, 60%, 0.9),
+      15px 0 0 10px hsla(105, 19%, 80%, 0.8),
+      20px 0 0 4px hsla(200, 50%, 70%, 0.4),
+      25px 0 0 6px hsla(345, 44%, 60%, 0.5),
+      30px 0 0 13px hsla(105, 19%, 80%, 0.8);
+  }
+  100% {
+    height: 6px;
+    box-shadow: 
+      5px 0 0 9px hsla(234, 28%, 70%, 0.7),
+      10px 0 0 4px hsla(345, 44%, 60%, 0.4),
+      15px 0 0 13px hsla(105, 19%, 80%, 0.9),
+      20px 0 0 8px hsla(200, 50%, 70%, 0.6),
+      25px 0 0 11px hsla(345, 44%, 60%, 0.8),
+      30px 0 0 5px hsla(105, 19%, 80%, 0.5);
+  }
+}

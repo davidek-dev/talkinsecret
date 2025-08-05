@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar.astro";
 import Image from "astro/components/Image.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/index.css";
+import "../styles/fixes.css";
+import "../styles/dev-cursor.css"; // Spezielle Cursor-Stile für die Entwicklung
 import "../global.css";
 import Products from "../components/Products.astro";
 import ContactInfo from "../components/contact/ContactInfo.astro";
@@ -11,23 +13,29 @@ import ContactForm from "../components/contact/ContactForm.astro";
 import Video from "../components/Video.tsx"; // Import the Video component
 import Music from "../components/Music.astro";
 import Gigs from "../components/Gigs.astro";
+import Loading from "../components/Loading.astro";
+import CookieConsent from "../components/CookieConsent.astro";
 
 export const videoVariants = [
     {
     url: "https://www.youtube.com/watch?v=8EeFU2--plk",
-    bg: "/images/8EeFU2--plk-HD.jpg",
+    bg: "/images/8EeFU2--plk-HD.webp",
+    title: "Worth The Way"
   },
   {
     url: "https://www.youtube.com/watch?v=GErEGaR8tMs",
-    bg: "/images/image00001_scaled.jpeg",
+    bg: "/images/image00001_scaled.webp",
+    title: "Petrichor"
   },
   {
     url: "https://www.youtube.com/watch?v=pFXFBMCwblQ",
-    bg: "/images/pFXFBMCwblQ-HD.jpg",
+    bg: "/images/pFXFBMCwblQ-HD.webp",
+    title: "Miracles"
   },
   {
     url: "https://www.youtube.com/watch?v=2E326wvssNc",
-    bg: "/images/2E326wvssNc-HD.jpg",
+    bg: "/images/2E326wvssNc-HD.webp",
+    title: "Stranger In Disguise"
   },
 
 ];
@@ -35,29 +43,12 @@ export const videoVariants = [
 ---
 
 <Layout title="Talkin' Secret" >
-  <div class="snap-y snap-mandatory h-screen overflow-y-scroll">
-
+  <Loading />
+  <div class="snap-y snap-mandatory h-screen overflow-y-scroll overflow-x-hidden">
   <div class="cursor"></div>
   <div class="content max-w-full">
     <div>
-      <!-- Sidebar navigation - visible on desktop, hidden on mobile -->
-      <ul class="progress-bar fixed w-4 hidden lg:flex" id="sidebar">
-        <li class="pli">
-          <a class="opacity-0 hover:opacity-100 text-background" href="#videos">Videos</a>
-        </li>
-        <li class="pli">
-          <a class="opacity-0 hover:opacity-100 text-background" href="#music">Music</a>
-        </li>
-        <li class="pli">
-          <a class="opacity-0 hover:opacity-100 text-background" href="#gigs">Gigs</a>
-        </li>
-        <li class="pli">
-          <a class="opacity-0 hover:opacity-100 text-background" href="#merch">Merch</a>
-        </li>
-        <li class="pli">
-          <a class="opacity-0 hover:opacity-100 text-background" href="#contact">Contact</a>
-        </li>
-      </ul>
+
       
       
     <div class="section h-screen snap-center lg:pt-0">
@@ -65,19 +56,19 @@ export const videoVariants = [
 
       <picture >
         <source
-          srcset="/images/fe0d0368-2823-4bf8-9a5b-b6ff5115a29e~3.jpeg"
-          media="(max-width: 1023px)"
+          srcset="/images/fe0d0368-2823-4bf8-9a5b-b6ff5115a29e~3.webp"
+          media="(max-width: 1100px)"
         />
         <source
-          srcset="/images/e4d55f4b-503f-4b25-b30f-03d1740df704.jpeg"
-          media="(min-width: 1024px)"
+          srcset="/images/e4d55f4b-503f-4b25-b30f-03d1740df704.webp"
+          media="(min-width: 1101px)"
         />
         <img
-          src="/images/e4d55f4b-503f-4b25-b30f-03d1740df704.jpeg"
+          src="/images/e4d55f4b-503f-4b25-b30f-03d1740df704.webp"
           alt="Petrichor"
           width="1920"
           height="1080"
-          class="w-[100%] h-[90vh] lg:h-[100vh] mb-32 object-cover"
+          class="w-[100%] h-[90vh] lg:h-[100vh] mb-32 object-cover -mt-[110px]"
         />
       </picture>
     </div>
@@ -92,20 +83,20 @@ export const videoVariants = [
         Videos
       </h1>
       <div class="self-center z-10 relative max-h-[100vh] w-[90%] lg:w-auto lg:-mt-24">
-        <Video client:load videoVariants={videoVariants} />
+            <Video client:load videoVariants={videoVariants} />
       </div>
     </div>
     
     <div
-      class="section md:flex lg:flex flex-col justify-center h-screen snap-center lg:py-[20%] hidden md:py-[15%]  "
+      class="section flex flex-col h-screen snap-center relative overflow-hidden"
       id="music"
     >
+      <Music class="w-full relative z-20" />
       <h1
-        class="lg:text-[15em] md:text-[10em] text-[5em] pb-14 -mt-28 font-extrabold text-center text-[#131c20] italic lg:mb-[-0.6em]"
+        class="absolute inset-0 flex items-center justify-center lg:text-[15em] md:text-[10em] text-[5em] font-extrabold text-[#131c20] italic z-10 pointer-events-none"
       >
         Music
       </h1>
-      <Music class="w-full self-center justify-center content-center items-center"/>
     </div>
 
     <div
@@ -121,33 +112,167 @@ export const videoVariants = [
     </div>
     
     <div
-      class="section flex flex-col justify-center items-center h-[100vh] snap-center relative mb-[20vh] overflow-hidden"
+      class="section merch-section snap-center relative overflow-hidden"
       id="merch"
     >
+      <style>
+        .merch-section {
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+          padding-top: 10vh;
+          padding-bottom: 5vh;
+        }
+        
+        /* Mobile: Text oben, Products darunter */
+        @media (max-width: 767px) {
+          .merch-section {
+            padding-top: 15vh;
+            justify-content: flex-start;
+            gap: 2rem;
+          }
+          
+          .merch-title {
+            font-size: 4rem !important;
+            margin: 0 !important;
+            flex-shrink: 0;
+            z-index: 20;
+          }
+          
+          .merch-products {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 0 !important;
+          }
+        }
+        
+        /* Tablet */
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .merch-section {
+            padding-top: 8vh;
+            justify-content: center;
+            gap: 1.5rem;
+          }
+          
+          .merch-title {
+            font-size: 8rem !important;
+            margin: 0 0 -2rem 0 !important;
+          }
+        }
+        
+        /* Desktop */
+        @media (min-width: 1024px) {
+          .merch-section {
+            justify-content: center;
+            padding-top: 5vh;
+            gap: 6rem;
+          }
+          
+          .merch-title {
+            margin: -12rem 0 -8rem 0 !important;
+          }
+        }
+      </style>
       <h1
-        class="lg:text-[15em] md:text-[10em] text-[5em] font-extrabold text-center text-[#131c20] italic m-0 lg:mb-2"
-        style="margin:0;"
+        class="merch-title lg:text-[15em] md:text-[10em] text-[5em] font-extrabold text-center text-[#131c20] italic"
       >
         Merch
       </h1>
-      <Products class="w-full self-center justify-center content-center items-center lg:mt-0 lg:pt-0"/>
+      <div class="merch-products" style="display: flex; justify-content: center; align-items: center; width: 100%;">
+        <Products class="w-full self-center justify-center content-center items-center" style="margin: 0 auto; display: flex; justify-content: center; align-items: center;"/>
+      </div>
     </div>
 
-    <div class="section h-[200vh] md:h-[100vh] lg:h-[100vh] snap-center md:pt-28 sm:pt-[10vh] sm:mt-[10vh]" id="contact">
+    <div class="section contact-section snap-center" id="contact" style="min-height: fit-content; max-height: 100vh;">
+      <style>
+        .contact-section {
+          /* Mobile: Mehr Höhe für gestapeltes Layout */
+          height: auto;
+          min-height: 100vh;
+          padding-top: 5vh;
+          padding-bottom: 8vh; /* Mehr Abstand zum Footer */
+          margin-bottom: 3vh; /* Zusätzlicher Abstand zum Footer */
+        }
+        
+        /* Tablet: Reduzierte Höhe */
+        @media (min-width: 768px) {
+          .contact-section {
+            height: auto;
+            max-height: 100vh;
+            min-height: 80vh;
+            padding-top: 3vh;
+            padding-bottom: 5vh; /* Mehr Abstand zum Footer */
+            margin-bottom: 2vh; /* Zusätzlicher Abstand zum Footer */
+          }
+        }
+        
+        /* Desktop: Begrenzte Höhe, nie mehr als 100vh */
+        @media (min-width: 1024px) {
+          .contact-section {
+            height: auto;
+            max-height: 100vh;
+            min-height: 70vh;
+            padding-top: 2vh;
+            padding-bottom: 4vh; /* Mehr Abstand zum Footer */
+            margin-bottom: 2vh; /* Zusätzlicher Abstand zum Footer */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+        }
+        
+        /* Große Bildschirme: Kompakter, zentriert */
+        @media (min-width: 1200px) {
+          .contact-section {
+            max-height: 85vh;
+            min-height: 60vh;
+            padding-top: 1vh;
+            padding-bottom: 3vh; /* Mehr Abstand zum Footer */
+            margin-bottom: 1.5vh; /* Zusätzlicher Abstand zum Footer */
+          }
+        }
+        
+        /* Contact-Inhalt responsiv */
+        .contact-content {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          max-width: 100%;
+          overflow-y: auto;
+        }
+        
+        @media (min-width: 1024px) {
+          .contact-content {
+            gap: 1.5rem;
+            max-height: calc(100vh - 15rem); /* Platz für Titel lassen */
+          }
+        }
+      </style>
       <h1
-        class="lg:text-[15em] md:text-[10em] text-[5em]  font-extrabold text-center text-[#131c20] italic  -mt-36 -mb-24"
+        class="lg:text-[15em] md:text-[10em] text-[5em] font-extrabold text-center text-[#131c20] italic flex-shrink-0"
+        style="margin-top: -2rem; margin-bottom: 1rem;"
       >
         Contact
       </h1>
-      <ContactInfo />
-      <ContactForm />
+      <div class="contact-content">
+        <ContactInfo />
+        <ContactForm />
+      </div>
     </div>
     </div>
   </div>
-  <div class="section h-[35%] snap-center">
+  <div class="section footer-section h-[35%] snap-center">
     <Footer title="Talkin' Secret" />
   </div>
   </div>
+  <CookieConsent />
+
+<script is:inline src="/js/protect-images.js"></script>
 </Layout>
 
 <script
@@ -155,70 +280,202 @@ export const videoVariants = [
   src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
 <script is:inline>
-window.addEventListener("load", () => {
-  // Check if the device is a desktop (screen width >= 1024px)
-  const isDesktop = window.innerWidth >= 1024;
+  // Loading screen logic
+  const loadingScreen = document.getElementById('loading-screen');
+  if (loadingScreen) {
+    loadingScreen.classList.add('loaded');
+  }
+  
+  // Verzögern Sie die Cursor-Initialisierung, um sicherzustellen, dass GSAP geladen ist
+  setTimeout(() => {
+    if (typeof gsap !== 'undefined') {
+      initCursor();
+    } else {
+      console.error("GSAP is not loaded properly");
+    }
+  }, 500);
+  
+  // Setup sidebar and scrolling effects
+  setupSidebar();
+  setupSmoothScrolling();
+
+// Custom cursor initialization function
+function initCursor() {
   const mouseCursor = document.querySelector(".cursor");
+  const isNetlifyDev = window.location.port === "8888";
 
   if (!mouseCursor) {
     console.warn("Cursor element nicht gefunden");
     return;
   }
 
-  // Only enable custom cursor behavior on desktop
-  if (isDesktop) {
-    const links = document.querySelectorAll("a");
-    const buttons = document.querySelectorAll("button");
+
+  // Add dev-mode class if we're in Netlify Dev
+  if (isNetlifyDev) {
+    document.body.classList.add('dev-mode');
+  }
+
+  // Check if the device has mouse/pointer capability
+  const hasPointer = window.matchMedia('(pointer: fine)').matches;
+  const hasHover = window.matchMedia('(hover: hover)').matches;
+  const supportsTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const screenWidth = window.innerWidth;
+  
+  // Device has mouse capability if it has fine pointer control AND hover capability
+  // This works for: desktop PCs, laptops (even with touchscreen), tablets with mouse
+  // Excludes: pure touch devices (smartphones, tablets without mouse)
+  const hasMouseCapability = hasPointer && hasHover;
+  
+
+
+  // Check if GSAP is working properly
+  const gsapWorking = typeof gsap !== 'undefined' && gsap.to;
+  
+  
+  // Force enable for testing - remove this later
+  const forceEnable = screenWidth >= 1000; // Temporary force enable for laptop screens
+  
+  // Only enable custom cursor if device has mouse capability and GSAP is working
+  if ((hasMouseCapability || forceEnable) && gsapWorking) {
+    // Hide the default cursor everywhere with !important override
+    document.body.style.cursor = 'none';
+    
+    // Add comprehensive CSS to hide all cursor types
+    const style = document.createElement('style');
+    style.textContent = `
+      * {
+        cursor: none !important;
+      }
+      a, button, input, textarea, select, 
+      [role="button"], [onclick], 
+      .cursor-pointer, [type="submit"], 
+      [type="button"], [type="reset"] {
+        cursor: none !important;
+      }
+      input:focus, textarea:focus, select:focus {
+        cursor: none !important;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Make sure cursor is visible with force styles
+    mouseCursor.style.display = 'block';
+    mouseCursor.style.visibility = 'visible';
+    mouseCursor.style.opacity = '1';
+    mouseCursor.style.pointerEvents = 'none';
+    mouseCursor.style.position = 'fixed';
+    mouseCursor.style.zIndex = '9999';
+    mouseCursor.style.width = '20px';
+    mouseCursor.style.height = '20px';
+    mouseCursor.style.border = '3px solid white';
+    mouseCursor.style.borderRadius = '50%';
+    mouseCursor.style.mixBlendMode = 'difference';
+    mouseCursor.style.transition = 'width 0.2s, height 0.2s';
+    
+  
+    // Select all clickable/interactive elements
+    const interactiveElements = document.querySelectorAll(`
+      a, button, input, textarea, select,
+      [role="button"], [onclick], [tabindex],
+      .cursor-pointer, [type="submit"], [type="button"], [type="reset"],
+      [data-clickable], .clickable, .btn,
+      .play-button, .pause-button, .next-button, .prev-button,
+      .volume-control, .progress-bar, .seek-bar,
+      .nav-link, .menu-item, .toggle, .switch,
+      [href], [data-action], .interactive
+    `);
+
 
     const cursor = (e) => {
-      gsap.to(mouseCursor, {
-        duration: 0.2,
-        x: e.clientX,
-        y: e.clientY,
-      });
+      try {
+        gsap.to(mouseCursor, {
+          duration: 0.2,
+          x: e.clientX,
+          y: e.clientY,
+        });
+      } catch (error) {
+        console.error("GSAP cursor animation error:", error);
+      }
     };
-
     window.addEventListener("mousemove", cursor);
 
-    links.forEach((link) => {
-      link.addEventListener("mouseover", () => {
-        gsap.to(mouseCursor, {
-          duration: 0.2,
-          scale: 2.5,
-        });
+    // Add hover effects to all interactive elements
+    interactiveElements.forEach((element, index) => {
+      element.addEventListener("mouseenter", () => {
+        try {
+          gsap.to(mouseCursor, {
+            duration: 0.2,
+            scale: 2.5,
+          });
+          mouseCursor.classList.add('hover');
+        } catch (error) {
+          console.error("GSAP element hover error:", error);
+        }
       });
-
-      link.addEventListener("mouseleave", () => {
-        gsap.to(mouseCursor, {
-          duration: 0.2,
-          scale: 1,
-        });
+      element.addEventListener("mouseleave", () => {
+        try {
+          gsap.to(mouseCursor, {
+            duration: 0.2,
+            scale: 1,
+          });
+          mouseCursor.classList.remove('hover');
+        } catch (error) {
+          console.error("GSAP element leave error:", error);
+        }
       });
     });
-
-    buttons.forEach((button) => {
-      button.addEventListener("mouseover", () => {
-        gsap.to(mouseCursor, {
-          duration: 0.2,
-          scale: 2.5,
-        });
-      });
-
-      button.addEventListener("mouseleave", () => {
+    document.addEventListener('mouseover', (e) => {
+      const target = e.target;
+      const isInteractive = target.matches(`
+        a, button, input, textarea, select,
+        [role="button"], [onclick], [tabindex],
+        .cursor-pointer, [type="submit"], [type="button"], [type="reset"],
+        [data-clickable], .clickable, .btn,
+        .play-button, .pause-button, .next-button, .prev-button,
+        .volume-control, .progress-bar, .seek-bar,
+        .nav-link, .menu-item, .toggle, .switch,
+        [href], [data-action], .interactive
+      `) || target.closest(`
+        a, button, input, textarea, select,
+        [role="button"], [onclick], [tabindex],
+        .cursor-pointer, [type="submit"], [type="button"], [type="reset"],
+        [data-clickable], .clickable, .btn,
+        .play-button, .pause-button, .next-button, .prev-button,
+        .volume-control, .progress-bar, .seek-bar,
+        .nav-link, .menu-item, .toggle, .switch,
+        [href], [data-action], .interactive
+      `);
+      if (!isInteractive) {
         gsap.to(mouseCursor, {
           duration: 0.2,
           scale: 1,
         });
-      });
+        mouseCursor.classList.remove('hover');
+      }
     });
   } else {
-    // For mobile and tablet, ensure the cursor element is hidden
+    // For devices without mouse capability or when GSAP doesn't work
+    
+    // Ensure the cursor element is hidden
     if (mouseCursor) {
       mouseCursor.style.display = 'none';
     }
+    
+    // Make sure default cursor is visible
+    document.body.style.cursor = 'default';
+    
+    // If GSAP is not working, log the issue
+    if (!gsapWorking) {
+      console.warn('GSAP not available - falling back to default cursor');
+    }
+    
+    if (!hasMouseCapability) {
+    }
   }
-  
-  // Add active class to sidebar links based on scroll position
+}
+
+// Sidebar highlight based on scroll position
+function setupSidebar() {
   const sections = document.querySelectorAll('.section');
   const navLinks = document.querySelectorAll('#sidebar li');
   
@@ -240,8 +497,10 @@ window.addEventListener("load", () => {
       }
     });
   });
+}
 
-  // Smooth scrolling for internal links
+// Smooth scrolling for internal links
+function setupSmoothScrolling() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
@@ -251,5 +510,5 @@ window.addEventListener("load", () => {
       });
     });
   });
-});
+}
 </script>

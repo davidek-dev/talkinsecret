@@ -1,0 +1,82 @@
+/* Spezieller Fix für die Song-Liste, um den vollen verfügbaren Platz zu nutzen */
+.music-player-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: 70vh; /* Begrenzt die maximale Höhe auf 70% der Viewport-Höhe */
+  overflow: visible; /* Geändert von hidden zu visible für Popup-Sichtbarkeit */
+  margin-bottom: 0; /* Entfernt zusätzlichen Abstand */
+  position: relative; /* Für absolute Positionierung des Popups */
+}
+
+.modern-player-layout {
+  flex: 0 0 auto; /* Dieser Teil schrumpft nicht und wächst nicht */
+}
+
+.song-list.modern-song-list-scroll {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: visible; /* Popup soll sichtbar sein */
+  padding: 0 32px; /* Horizontal-Padding beibehalten */
+  padding-bottom: 24px; /* Unten etwas Platz lassen, aber weniger als zuvor */
+  margin-top: 0; /* Entfernt Abstand nach oben */
+  max-height: none; /* Keine maximale Höhe festlegen, lässt den Container wachsen */
+}
+
+.song-list-tracks.modern-song-list-tracks.scrollable-tracks {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden; /* Verhindert horizontale Scrollleiste */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0; /* Entfernt Abstand nach unten */
+  width: 100%; /* Stellt sicher, dass der Container die volle Breite nutzt */
+  box-sizing: border-box; /* Padding wird in die Breite eingerechnet */
+}
+
+/* Entfernt jegliche festen Höhen */
+.modern-song-list-scroll {
+  max-height: none !important;
+  overflow-y: auto;
+}
+
+/* Stellt sicher, dass der Inhaltsbereich den gesamten verfügbaren Platz nutzt */
+.flex-grow {
+  flex: 1 1 auto !important;
+  padding-bottom: 0 !important; /* Entfernt Padding am unteren Rand */
+}
+
+/* Song-Liste-Elemente */
+.song-list-item.modern-song-list-item {
+  flex: 0 0 auto; /* Verhindert, dass diese Elemente wachsen */
+}
+
+/* Verbesserte Scrollbar für eine bessere Sichtbarkeit */
+.scrollable-tracks::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.scrollable-tracks::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 3px !important;
+}
+
+.scrollable-tracks::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  border-radius: 3px !important;
+  border: 1px solid transparent !important;
+  background-clip: content-box !important;
+}
+
+.scrollable-tracks::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Firefox-Scrollbar */
+.scrollable-tracks {
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.05) !important;
+}

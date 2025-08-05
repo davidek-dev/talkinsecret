@@ -1,0 +1,229 @@
+---
+---
+<style is:global>
+  /* 
+    Use more specific selectors and define fonts directly in this component 
+    to prevent style overrides from global.css during page load.
+  */
+  @font-face {
+    font-family: 'LibreBaskerville';
+    src: url('/fonts/LibreBaskerville-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  #loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.75s ease-out;
+    transition-delay: 0.5s;
+    font-family: 'LibreBaskerville', serif; /* Set base font */
+  }
+
+  #loading-screen.loaded {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #loading-screen.loaded #loading-text-wrapper {
+    transform: translateY(-150px) scale(0.5); /* Example transform */
+  }
+
+  #loading-screen #loading-text-wrapper {
+    position: relative;
+    transition: transform 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #loading-screen #loading-text {
+    font-family: 'LibreBaskerville', serif;
+    font-weight: normal;
+    font-size: 2.5rem;
+    color: white;
+    opacity: 1;
+  }
+
+  @media (min-width: 768px) {
+    #loading-screen #loading-text {
+      font-size: 5rem;
+    }
+  }
+
+  #loading-screen #progress-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    width: 100px;
+    height: 100px;
+  }
+
+  #loading-screen #progress-circle {
+    transform: rotate(-90deg);
+  }
+
+  #loading-screen #progress-circle .progress-bg {
+    fill: none;
+    stroke: #ffffff30;
+    stroke-width: 5;
+  }
+
+  #loading-screen #progress-circle .progress-bar {
+    fill: none;
+    stroke: white;
+    stroke-width: 5;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.2s linear;
+  }
+
+  #loading-screen #progress-percentage {
+    color: white;
+    font-size: 1.5rem;
+    font-family: 'LibreBaskerville', serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
+
+<div id="loading-screen">
+  <div id="loading-text-wrapper">
+    <h1 id="loading-text">Talkin' Secret</h1>
+    <div id="progress-container">
+      <svg id="progress-circle" width="100" height="100" viewBox="0 0 100 100">
+        <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+        <circle class="progress-bar" cx="50" cy="50" r="45"></circle>
+      </svg>
+      <span id="progress-percentage">0%</span>
+    </div>
+  </div>
+</div>
+<script is:inline>
+  (function() {
+    const body = document.querySelector('body');
+    if (body) {
+      body.classList.add('overflow-y-hidden');
+    }
+
+    const loadingScreen = document.getElementById('loading-screen');
+    const loadingTextWrapper = document.getElementById('loading-text-wrapper');
+    const loadingText = document.getElementById('loading-text');
+    const progressPercentage = document.getElementById('progress-percentage');
+    const progressBar = document.querySelector('#progress-circle .progress-bar');
+    if (!loadingScreen || !progressBar || !progressPercentage || !loadingTextWrapper || !loadingText) {
+      return;
+    }
+
+    const radius = progressBar.r.baseVal.value;
+    const circumference = 2 * Math.PI * radius;
+    progressBar.style.strokeDasharray = `${circumference} ${circumference}`;
+
+    function setProgress(percent) {
+      const offset = circumference - (percent / 100) * circumference;
+      progressBar.style.strokeDashoffset = String(offset);
+      progressPercentage.textContent = `${Math.round(percent)}%`;
+    }
+
+    setProgress(0);
+
+    // Ressourcen-Tracking
+    function getTrackableResources() {
+      // Nur externe Skripte, Bilder, Videos, Stylesheets
+      const scripts = Array.from(document.querySelectorAll('script[src]'));
+      const images = Array.from(document.querySelectorAll('img'));
+      const videos = Array.from(document.querySelectorAll('video'));
+      const styles = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
+      return [...scripts, ...images, ...videos, ...styles];
+    }
+
+    let total = 0;
+    let loaded = 0;
+    let finished = false;
+
+    function updateProgress() {
+      if (total === 0) {
+        setProgress(100);
+        finishLoading();
+        return;
+      }
+      const percent = (loaded / total) * 100;
+      setProgress(percent);
+      if (loaded >= total && !finished) {
+        finished = true;
+        setProgress(100);
+        setTimeout(finishLoading, 300);
+      }
+    }
+
+    function finishLoading() {
+      if (loadingScreen.classList.contains('loaded')) return;
+      const navbarH1 = document.querySelector('.navbar-center h1');
+      if (navbarH1 && loadingText) {
+        const navbarRect = navbarH1.getBoundingClientRect();
+        const loadingTextRect = loadingText.getBoundingClientRect();
+        const translateY = navbarRect.top - loadingTextRect.top + (navbarRect.height - loadingTextRect.height) / 2;
+        const scale = navbarRect.height / loadingTextRect.height;
+        loadingTextWrapper.style.transform = `translateY(${translateY}px) scale(${scale})`;
+      } else {
+        loadingTextWrapper.style.transform = 'translateY(-150px) scale(0.5)';
+      }
+      loadingScreen.classList.add('loaded');
+      if (body) {
+        body.classList.remove('overflow-y-hidden');
+        body.classList.add('overflow-y-auto');
+      }
+    }
+
+    function resourceLoaded() {
+      loaded++;
+      updateProgress();
+    }
+
+    function trackResources() {
+      const resources = getTrackableResources();
+      total = resources.length;
+      loaded = 0;
+      if (total === 0) {
+        updateProgress();
+        return;
+      }
+      resources.forEach(res => {
+        if (
+          (res.tagName === 'IMG' && res.complete) ||
+          (res.tagName === 'VIDEO' && res.readyState >= 3) ||
+          (res.tagName === 'LINK' && res.sheet) ||
+          (res.tagName === 'SCRIPT' && res.readyState === 'complete')
+        ) {
+          resourceLoaded();
+        } else {
+          res.addEventListener('load', resourceLoaded, { once: true });
+          res.addEventListener('error', resourceLoaded, { once: true });
+        }
+      });
+    }
+
+    // Starte das Tracking, sobald DOM bereit ist
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(trackResources, 0);
+    } else {
+      document.addEventListener('DOMContentLoaded', trackResources);
+    }
+
+    // Fallback: Wenn window.load ausgelöst wird, alles als geladen markieren
+    window.addEventListener('load', () => {
+      loaded = total;
+      updateProgress();
+    });
+  })();
+</script>
+

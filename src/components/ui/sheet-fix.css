@@ -1,0 +1,10 @@
+@media (max-width: 700px) {
+  /* SheetContent: Begrenze Höhe auf 90vh und mache Inhalt scrollbar */
+  .sheet-content-mobile-fix {
+    max-height: 90vh !important;
+    height: auto !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}

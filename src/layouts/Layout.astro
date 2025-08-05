@@ -1,34 +1,301 @@
 ---
+import CookieConsent from "../components/CookieConsent.astro";
+
 interface Props {
-	title: string;
+  title: string;
+  bodyClass?: string;
 }
 
-
-
-const { title } = Astro.props;
+const { title, bodyClass = "" } = Astro.props;
 ---
 
-
 <!doctype html>
-<html lang="en">
-	<head>
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<meta name="apple-mobile-web-app-title" content="Talkin' S" />
-		<link rel="manifest" href="/site.webmanifest" />
-		
-		<title>{title}</title>
-	</head>
-	<body class="overflow-y-hidden selection:bg-accent selection:text-base-100">
-		<slot />
-	</body>
-</html>
+<html lang="en-GB" dir="ltr">
+  <head>
+    <meta name="language" content="en-GB" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
 
+    <title>
+      Talkin' Secret – Britpop & Post-Punk from Hamburg | Official Website
+    </title>
+    <meta
+      name="description"
+      content="Talkin' Secret is a Britpop/Post-Punk band from Hamburg, Germany. Their debut album 'Petrichor' channels the raw energy of UK indie and themes of longing and nostalgia. REAL MUSIC FOR LIKE MINDED. Discover their music and live dates."
+    />
+    <meta
+      name="keywords"
+      content="Talkin' Secret, talkin secret band, talkin secrets, talking secret, talking secrets, Britpop, Post-Punk, band, music, Hamburg, Petrichor, album, Oasis, UK, Fontaines DC, Shame, The Murder Capital, Wet Leg, Altona, Kneipe, Bier, In der Schwebe Festival, Gängeviertel, live music"
+    />
+    <meta name="author" content="Talkin' Secret" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://talkinsecret.com/" />
+
+    <meta
+      property="og:title"
+      content="Talkin' Secret | The Sound of Longing and Loud Nights"
+    />
+    <meta
+      property="og:description"
+      content="From Hamburg with the spirit of UK indie. The debut album 'Petrichor' by Talkin' Secret is out now. Keep it loud!"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://talkinsecret.com/" />
+    <meta
+      property="og:image"
+      content="https://talkinsecret.com/images/og-image-talkin-secret.jpg"
+    />
+    <meta property="og:image:alt" content="The band Talkin' Secret" />
+    <meta property="og:site_name" content="Talkin' Secret" />
+    <meta property="og:locale" content="en_GB" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Talkin' Secret | Debut Album 'Petrichor' Out Now"
+    />
+    <meta
+      name="twitter:description"
+      content="Hamburg's Britpop/Post-Punk outfit Talkin' Secret. REAL MUSIC FOR LIKE MINDED. 'Petrichor' is the soundtrack for dreamers and pub nights."
+    />
+    <meta
+      name="twitter:image"
+      content="https://talkinsecret.com/images/twitter-image-talkin-secret.jpg"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Talkin' Secret – Album Cover Petrichor"
+    />
+    <meta name="twitter:site" content="@talkinsecret" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "Talkin' Secret",
+  "alternateName": [
+    "talkin secret band", 
+    "talking secret", 
+    "talkin secrets", 
+    "talking secrets"
+  ],
+  "description": "Talkin' Secret is a four-piece Britpop/Post-Punk band from Hamburg, Germany. Founded in 2022, their sound is heavily influenced by UK acts like Oasis, The Smiths, and modern post-punk bands such as Fontaines D.C. and The Murder Capital. Their music captures a raw energy, blending themes of longing (Sehnsucht), nostalgia, and the unfiltered experience of life. Their debut album 'Petrichor' was released in 2025.",
+  "genre": ["Britpop", "Post-Punk", "Indie Rock"],
+  "url": "https://talkinsecret.com/",
+  "logo": "https://talkinsecret.com/images/logo.png",
+  "image": "https://talkinsecret.com/images/og-image-talkin-secret.jpg",
+  "foundingDate": "2022",
+  "foundingLocation": {
+    "@type": "City",
+    "name": "Hamburg",
+    "sameAs": "https://en.wikipedia.org/wiki/Hamburg"
+  },
+  "member": [
+    {
+      "@type": "Person",
+      "name": "Marti",
+      "roleName": ["Lead Vocals", "Rhythm Guitar"]
+    },
+    {
+      "@type": "Person",
+      "name": "Lina",
+      "roleName": "Lead Guitar"
+    },
+    {
+      "@type": "Person",
+      "name": "Ole",
+      "roleName": ["Bass", "Backing Vocals"]
+    },
+    {
+      "@type": "Person",
+      "name": "Nick",
+      "roleName": "Drums"
+    }
+  ],
+  "album": {
+    "@type": "MusicAlbum",
+    "name": "Petrichor",
+    "byArtist": {
+      "@type": "MusicGroup",
+      "name": "Talkin' Secret"
+    },
+    "datePublished": "2025-02-14",
+    "numTracks": 9,
+    "track": [
+      {"@type": "MusicRecording", "name": "Petrichor"},
+      {"@type": "MusicRecording", "name": "Worth The Way"},
+      {"@type": "MusicRecording", "name": "Come On"},
+      {"@type": "MusicRecording", "name": "Changes"},
+      {"@type": "MusicRecording", "name": "Stranger In Disguise"},
+      {"@type": "MusicRecording", "name": "Glimpse Of The Morning"},
+      {"@type": "MusicRecording", "name": "Miracles"},
+      {"@type": "MusicRecording", "name": "Only Friend"},
+      {"@type": "MusicRecording", "name": "Somehow Somewhere"}
+    ]
+  },
+  "sameAs": [
+    "https://open.spotify.com/intl-de/artist/1MdTDN4vXdIXvmTMn3pLjQ",
+    "https://music.apple.com/de/artist/talkin-secret/1763604270",
+    "https://music.amazon.de/artists/B0DDL9HMW3/talkin'-secret",
+    "https://www.deezer.com/de/artist/278486001",
+    "https://music.youtube.com/channel/UCgpNvup1NeKna2lFet805LQ",
+    "https://www.instagram.com/talkinsecret/",
+    "https://www.tiktok.com/@talkinsecret",
+    "https://www.threads.net/@talkinsecret"
+  ]
+}
+</script>
+    <meta name="theme-color" content="#000000" />
+    <!-- Preload critical resources -->
+    <link
+      rel="preload"
+      href="/fonts/LibreBaskerville-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link rel="preload" href="/images/image00001_scaled.webp" as="image" />
+
+    <!-- Responsive utilities CSS -->
+    <link
+      rel="preload"
+      href="/src/styles/responsive-utilities.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="/src/styles/responsive-utilities.css"
+      /></noscript
+    >
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MusicGroup",
+        "name": "Talkin' Secret",
+        "genre": ["Britpop", "Post-Punk"],
+        "description": "Britpop/Post-Punk Band",
+        "url": "https://talkinsecret.com",
+        "sameAs": [
+          "https://open.spotify.com/intl-de/album/2n3P39BKiFLF71iH1nmiv6",
+          "https://music.apple.com/de/album/petrichor/1789391867"
+        ],
+        "album": {
+          "@type": "MusicAlbum",
+          "name": "Petrichor",
+          "datePublished": "2024"
+        }
+      }
+    </script>
+
+    <meta name="generator" content={Astro.generator} />
+    <!-- LCP-Headerbild preload für bessere LCP -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/e4d55f4b-503f-4b25-b30f-03d1740df704.webp"
+      imagesrcset="/images/e4d55f4b-503f-4b25-b30f-03d1740df704.webp 1920w"
+      imagesizes="100vw"
+    />
+    <title>{title}</title>
+  </head>
+  <body class={`${bodyClass} antialiased`}>
+    <script>
+      // Stylischer Browser-Console-Prompt für Dave 'The Tank' Zeplin (modern, auffällig)
+      window.addEventListener("DOMContentLoaded", function () {
+        const win = window as Window & { __TS_CREDIT_LOGGED?: boolean };
+        if (win.hasOwnProperty("__TS_CREDIT_LOGGED") && win.__TS_CREDIT_LOGGED)
+          return;
+        win.__TS_CREDIT_LOGGED = true;
+        // Noch kompakter, kein Hintergrund, nur ASCII und Farben
+        const styleTitle = "color: #ffb347; font-weight: bold;";
+        const styleName = "color: #ff0057; font-weight: bold;";
+        const styleSlogan = "color: #ffb347; font-weight: bold;";
+        const ascii = `%c┌───────────── Talkin' Secret ─────────────┐\n│ Created by %cDave \"The Tank\" Zeplin%c           \n│ %cREAL MUSIK FOR LIKE MINDED.Keep it loud.T.S.%c \n└──────────────────────────────────────────┘`;
+        console.log(
+          ascii,
+          styleTitle,
+          styleName,
+          styleTitle,
+          styleSlogan,
+          styleTitle
+        );
+      });
+    </script>
+    <!-- Skip to main content link for screen readers -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[9999] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      aria-label="Skip to main content"
+    >
+      Skip to main content
+    </a>
+
+    <!-- Main content wrapper -->
+    <div>
+      <main
+        id="main-content"
+        tabindex="-1"
+        class="min-h-screen h-full w-full focus:outline-none"
+        aria-label="Main content"
+      >
+        <slot />
+      </main>
+    </div>
+
+    <CookieConsent />
+
+    <footer aria-label="Footer"></footer>
+    <!-- Enhanced focus management -->
+    <script>
+      // Improve keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Tab") {
+          document.body.classList.add("keyboard-navigation");
+        }
+      });
+
+      document.addEventListener("mousedown", function () {
+        document.body.classList.remove("keyboard-navigation");
+      });
+
+      // Announce page changes to screen readers
+      const announcer = document.createElement("div");
+      announcer.setAttribute("aria-live", "polite");
+      announcer.setAttribute("aria-atomic", "true");
+      announcer.className = "sr-only";
+      document.body.appendChild(announcer);
+    </script>
+
+    <!-- CSS for keyboard navigation -->
+    <style>
+      .keyboard-navigation *:focus {
+        outline: 2px solid #3b82f6 !important;
+        outline-offset: 2px !important;
+      }
+
+      /* Ensure focus is visible on all interactive elements */
+      button:focus,
+      a:focus,
+      input:focus,
+      textarea:focus,
+      select:focus,
+      [tabindex]:focus {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+      }
+    </style>
+  </body>
+</html>

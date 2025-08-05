@@ -1,0 +1,763 @@
+/* Responsive Grid für Streaming Services */
+.music-services-flex {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+/* Mobile Breakpoint: Kompakter MusicPlayer für bessere Sichtbarkeit der Services */
+@media (max-width: 767px) {
+  .music-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important; /* Reduziert von 1.5rem */
+  }
+  
+  /* MusicPlayer noch kompakter machen */
+  .music-player-container,
+  .player-container {
+    max-height: 45vh !important; /* Reduziert von 60vh auf 45vh */
+    overflow-y: auto !important; /* Scrollbar falls nötig */
+  }
+  
+  /* Song-Liste noch stärker begrenzen */
+  .song-list,
+  .playlist-container {
+    max-height: 25vh !important; /* Reduziert von 30vh auf 25vh */
+    overflow-y: auto !important;
+  }
+  
+  /* Services-Container sichtbar halten und zentrieren */
+  .services-container {
+    margin-top: 0.5rem !important; /* Reduziert von 1rem */
+    flex-shrink: 0 !important; /* Verhindert dass Services weggedrückt werden */
+    display: flex !important;
+    justify-content: center !important; /* Zentriert die Services horizontal */
+  }
+  
+  .music-services-flex {
+    grid-template-columns: repeat(3, 1fr) !important; /* Bis zu 3 pro Reihe */
+    gap: 1rem !important;
+    padding: 0 0.5rem !important;
+    max-width: 100vw !important;
+    margin: 0 auto !important;
+    justify-items: center !important;
+  }
+  .service-tile {
+    aspect-ratio: 1 !important;
+    padding: 0.7rem !important;
+    max-width: 120px !important;
+    width: 100% !important;
+  }
+  .service-icon img {
+    max-width: 65px !important;
+    max-height: 48px !important;
+  }
+}
+
+/* Tablet Breakpoint: 3 Spalten - zentriert */
+@media (min-width: 640px) and (max-width: 767px) {
+  .services-container {
+    display: flex !important;
+    justify-content: center !important;
+  }
+  .music-services-flex {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.2rem !important;
+    padding: 0 1.5rem !important;
+    max-width: 600px !important;
+    margin: 0 auto 1.2rem !important;
+    justify-items: center !important;
+  }
+  .service-tile {
+    max-width: 140px !important;
+    padding: 1rem !important;
+    aspect-ratio: 1 !important;
+  }
+  .service-icon img {
+    max-width: 80px !important;
+    max-height: 60px !important;
+  }
+}
+
+/* Optimiertes Layout für mittlere Bildschirmbreiten - Services in einer Spalte */
+@media (min-width: 768px) and (max-width: 1050px) {
+  .music-services-flex {
+    grid-template-columns: 1fr !important; /* Eine einzige Spalte */
+    gap: 1rem !important;
+    max-width: none !important; /* Entfernt max-width Beschränkung */
+    margin: 0 !important; /* Entfernt auto-centering */
+    padding: 0 !important; /* Entfernt padding */
+    justify-items: start !important; /* Services links ausgerichtet */
+  }
+  
+  .music-container {
+    display: grid !important;
+    grid-template-columns: 3fr 1fr !important; /* MusicPlayer bekommt noch mehr Platz (75% vs 25%) */
+    gap: 2.5rem !important;
+    align-items: flex-start !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  .services-container {
+    justify-self: start !important; /* Services-Container links ausgerichtet */
+    padding-top: 0 !important; /* Keine zusätzliche Höhenverschiebung */
+    width: 100% !important; /* Volle Breite der zugewiesenen Spalte nutzen */
+  }
+  
+  .service-tile {
+    max-width: 140px !important; /* Etwas größer als vorher (120px) */
+    width: 100% !important; /* Nutzt verfügbare Breite */
+    padding: 1rem !important; /* Mehr Padding */
+    aspect-ratio: 1.3 !important; /* Leicht rechteckig */
+    justify-self: start !important; /* Einzelne Tiles links ausgerichtet */
+  }
+  
+  .service-icon img {
+    max-width: 75px !important; /* Größere Icons */
+    max-height: 60px !important;
+  }
+}
+
+/* Desktop: Entfernt da fehlerhaft */
+
+/* 2-Spalten-Layout ab 1024px - skaliert mit Bildschirmbreite und -höhe */
+@media (min-width: 1024px) {
+  .music-services-flex {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* Mittlere Bildschirme: etwas größere Container - aber begrenzt durch Höhe */
+@media (min-width: 1200px) and (min-height: 700px) {
+  .music-services-flex {
+    gap: 2.1rem !important; /* Leicht reduziert */
+    max-width: 500px !important; /* Leicht reduziert von 520px */
+    margin: 0 auto 2.1rem !important;
+  }
+}
+
+/* Große Bildschirme: frühere maximale Containergröße */
+@media (min-width: 1300px) and (min-height: 800px) {
+  .music-services-flex {
+    gap: 2.5rem;
+    max-width: 540px; /* Reduziert von 600px */
+    margin: 0 auto 2.5rem;
+    padding-bottom: 1.75rem;
+  }
+}
+
+/* Maximale Containergröße früher erreicht */
+@media (min-width: 1400px) and (min-height: 900px) {
+  .music-services-flex {
+    gap: 2.75rem;
+    max-width: 560px; /* Deutlich kleiner als vorher */
+    margin: 0 auto 2.75rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* Bei geringer Bildschirmhöhe: Container kompakter */
+@media (max-height: 600px) {
+  .music-services-flex {
+    gap: 1.5rem !important;
+    max-width: 450px !important;
+    margin: 0 auto 1.5rem !important;
+    padding-bottom: 1rem !important;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 1024px) {
+  .music-services-flex {
+    gap: 1.75rem !important;
+    max-width: 480px !important;
+    margin: 0 auto 1.75rem !important;
+  }
+}
+
+/* Ultra-wide screens: Größe kontrolliert halten */
+@media (min-width: 1536px) {
+  .music-services-flex {
+    max-width: 620px; /* Gleich wie 1600px - nicht weiter vergrößern */
+    gap: 3rem;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+  }
+}
+
+.service-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  padding: 1.25rem;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 135px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-tile:hover {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  transform: translateY(-4px) scale(1.05);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.service-tile:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.service-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+}
+
+.service-icon img {
+  width: 100%;
+  height: 100%;
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.service-tile:hover .service-icon img {
+  transform: scale(1.1);
+}
+
+/* Responsive Breakpoints für service-tile Größen */
+@media (min-width: 375px) {
+  .service-tile {
+    max-width: 140px;
+    padding: 1.375rem;
+  }
+  
+  .service-icon img {
+    max-width: 85px;
+    max-height: 85px;
+  }
+}
+
+@media (min-width: 640px) {
+  .service-tile {
+    max-width: 150px;
+    padding: 1.5rem;
+  }
+  
+  .service-icon img {
+    max-width: 90px;
+    max-height: 90px;
+  }
+}
+
+@media (min-width: 768px) {
+  .service-tile {
+    max-width: 160px;
+    padding: 1.625rem;
+  }
+  
+  .service-icon img {
+    max-width: 95px;
+    max-height: 95px;
+  }
+}
+
+/* Ab 1024px: 2-Spalten-Layout mit skalierenden Kacheln */
+@media (min-width: 1024px) {
+  .service-tile {
+    max-width: 160px;
+    padding: 1.5rem;
+    aspect-ratio: 1.1; /* Leicht rechteckig */
+  }
+  
+  .service-icon img {
+    max-width: 100px;
+    max-height: 90px;
+  }
+  
+  .service-icon {
+    padding: 0.5rem;
+  }
+}
+
+/* Mittlere Bildschirme: etwas größere Kacheln - aber begrenzt durch Höhe */
+@media (min-width: 1200px) and (min-height: 700px) {
+  .service-tile {
+    max-width: 170px;
+    padding: 1.6rem;
+    aspect-ratio: 1.15;
+  }
+  
+  .service-icon img {
+    max-width: 105px;
+    max-height: 90px;
+  }
+  
+  .service-icon {
+    padding: 0.55rem;
+  }
+}
+
+/* Große Bildschirme: kontrollierte Vergrößerung - frühere Begrenzung */
+@media (min-width: 1300px) and (min-height: 800px) {
+  .service-tile {
+    max-width: 165px !important; /* Leicht reduziert von 180px */
+    padding: 1.65rem !important;
+    aspect-ratio: 1.2 !important;
+  }
+  
+  .service-icon img {
+    max-width: 100px !important; /* Leicht reduziert von 110px */
+    max-height: 82px !important; /* Leicht reduziert von 92px */
+  }
+  
+  .service-icon {
+    padding: 0.6rem !important;
+  }
+}
+
+/* Maximale Größe früher erreicht - für Surface Laptop Studio */
+@media (min-width: 1400px) and (min-height: 900px) {
+  .service-tile {
+    max-width: 170px !important; /* Leicht reduziert von 190px */
+    padding: 1.7rem !important;
+    aspect-ratio: 1.25 !important;
+  }
+  
+  .service-icon img {
+    max-width: 105px !important; /* Leicht reduziert von 115px */
+    max-height: 85px !important; /* Leicht reduziert von 95px */
+  }
+  
+  .service-icon {
+    padding: 0.65rem !important;
+  }
+}
+
+/* Bei geringer Bildschirmhöhe: Kacheln kleiner halten */
+@media (max-height: 600px) {
+  .service-tile {
+    max-width: 140px !important;
+    padding: 1.25rem !important;
+  }
+  
+  .service-icon img {
+    max-width: 85px !important;
+    max-height: 75px !important;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 1024px) {
+  .service-tile {
+    max-width: 150px !important;
+    padding: 1.4rem !important;
+  }
+  
+  .service-icon img {
+    max-width: 95px !important;
+    max-height: 80px !important;
+  }
+}
+
+/* Breitere Media Query für hohe Auflösungen - Surface Laptop Studio */
+@media (min-width: 1800px) {
+  .service-tile {
+    max-width: 140px !important;
+    padding: 1.2rem !important;
+    aspect-ratio: 1.5 !important;
+  }
+  
+  .service-icon img {
+    max-width: 85px !important;
+    max-height: 58px !important;
+  }
+  
+  .service-icon {
+    padding: 0.35rem !important;
+  }
+  
+  .music-services-flex {
+    gap: 1.6rem !important;
+    max-width: 460px !important;
+    margin: 0 auto 1.6rem !important;
+    padding-bottom: 1.2rem !important;
+  }
+}
+
+/* Spezifische Media Query für Surface Laptop Studio 2400x1600 */
+@media (min-width: 2400px) and (max-width: 2500px) and (min-height: 1600px) and (max-height: 1700px) {
+  .service-tile {
+    max-width: 140px !important;
+    padding: 1.2rem !important;
+    aspect-ratio: 1.5 !important;
+  }
+  
+  .service-icon img {
+    max-width: 85px !important;
+    max-height: 58px !important;
+  }
+  
+  .service-icon {
+    padding: 0.35rem !important;
+  }
+  
+  .music-services-flex {
+    gap: 1.6rem !important;
+    max-width: 460px !important;
+    margin: 0 auto 1.6rem !important;
+    padding-bottom: 1.2rem !important;
+  }
+}
+
+/* Spezielle Anpassung für hohe Auflösungen wie Surface Laptop Studio */
+@media (min-width: 2000px) and (min-height: 1400px) {
+  .service-tile {
+    max-width: 150px !important; /* Noch kleiner */
+    padding: 1.3rem !important;
+    aspect-ratio: 1.4 !important; /* Flacher */
+  }
+  
+  .service-icon img {
+    max-width: 90px !important; /* Kleinere Icons */
+    max-height: 65px !important; /* Deutlich reduzierte Höhe */
+  }
+  
+  .service-icon {
+    padding: 0.4rem !important;
+  }
+}
+
+/* Für sehr hohe Auflösungen: Icons kompakt halten */
+@media (min-width: 2200px) and (min-height: 1500px) {
+  .service-tile {
+    max-width: 155px !important; /* Kompakter */
+    padding: 1.4rem !important;
+    aspect-ratio: 1.5 !important; /* Noch flacher */
+  }
+  
+  .service-icon img {
+    max-width: 95px !important;
+    max-height: 68px !important; /* Sehr reduzierte Höhe */
+  }
+  
+  .service-icon {
+    padding: 0.45rem !important;
+  }
+}
+
+/* Container-Anpassung für hohe Auflösungen */
+@media (min-width: 2000px) and (min-height: 1400px) {
+  .music-services-flex {
+    gap: 1.8rem !important; /* Noch kompakter */
+    max-width: 480px !important; /* Kleinerer Container */
+    margin: 0 auto 1.8rem !important;
+    padding-bottom: 1.3rem !important;
+  }
+}
+
+/* Ultra-wide: Noch größere Kacheln */
+@media (min-width: 1536px) {
+  .service-tile {
+    max-width: 280px;
+    padding: 3rem;
+    border-radius: 1.25rem;
+  }
+  
+  .service-icon img {
+    max-width: 170px;
+    max-height: 170px;
+  }
+  
+  .service-icon {
+    padding: 1.25rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .service-tile {
+    border: 2px solid white;
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .service-tile:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .service-tile,
+  .service-icon img {
+    transition: none;
+  }
+  
+  .service-tile:hover {
+    transform: none;
+  }
+  
+  .service-tile:hover .service-icon img {
+    transform: none;
+  }
+}
+
+/* Focus styles for better accessibility */
+.service-tile:focus {
+  outline: none;
+}
+
+.service-tile:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Music container responsive layout */
+.music-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .music-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: start;
+  }
+  
+  .services-container {
+    min-width: min-content;
+  }
+}
+
+@media (min-width: 1280px) {
+  .music-container {
+    gap: 4rem;
+  }
+}
+
+/* Error message responsive styles */
+.error-message {
+  margin: 2rem auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .error-message {
+    margin: 3rem auto;
+  }
+}
+
+/* Container responsive padding */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 3rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 4rem 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    padding: 5rem 2rem;
+  }
+}
+/* Maximal 2 pro Zeile, zentriert */
+.music-services-flex {
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Player und Services gleich hoch */
+.music-section .music-container {
+  align-items: stretch;
+}
+/* Player und Services gleich hoch */
+.music-section .services-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  height: 100%;
+}
+.music-section .music-player-container {
+  /* max-width: 900px; */ /* Entfernt, da die Breite vom Grid kommt */
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  margin: 0 auto;
+  width: 100%;
+  height: 100%; /* Nutzt die volle Höhe des übergeordneten Containers */
+  /* max-height entfernt - lässt Player natürlich wachsen */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Verhindert, dass der Inhalt über den Radius hinausgeht */
+  margin-bottom: 0; /* Entfernt Abstand am unteren Rand */
+}
+.music-section .services-container {
+  max-width: none;
+  width: 100%;
+}
+.music-section {
+  padding: 1rem 0 3rem 0; /* Mehr Padding unten für große Kacheln */
+  /* Hintergrund entfernt */
+  color: #fff;
+  /* max-height entfernt - lässt Section natürlich wachsen */
+  overflow: visible;
+  position: relative;
+  z-index: 20;
+}
+
+.music-section .container {
+  max-width: 1200px;
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 2.5rem 2rem 2rem 2rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.music-section .album-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: #fff;
+}
+
+.music-section .album-subtitle {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.music-section .error-message {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(229, 62, 62, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.music-section .music-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  height: auto;
+  min-height: 0; /* Entfernt die Mindesthöhe */
+  /* max-height entfernt - lässt Container natürlich wachsen */
+  overflow: visible; /* Stellt sicher, dass Inhalte sichtbar bleiben */
+  padding-bottom: 2rem; /* Mehr Padding unten für große Kacheln */
+}
+
+@media (min-width: 992px) {
+  .music-section .music-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.music-section .music-player-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+
+.music-section .services-container {
+  padding: 20px 20px 40px 20px; /* Extra Padding unten für große Kacheln */
+}
+
+/* Kompakte Ansicht für schmale Bildschirme */
+@media (max-width: 768px) {
+  .music-section {
+    padding: 1rem 0;
+  }
+  
+  .music-section .album-header h2 {
+    font-size: 2rem;
+  }
+  
+  .music-section .album-subtitle {
+    font-size: 1rem;
+  }
+  
+  .music-section .music-player-container {
+    height: calc(100vh - 150px);
+  }
+}
+
+/* Überschreiben der Musik-Player-Styles für bessere Integration */
+.music-section .music-player-content {
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.music-section .music-player-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.music-section .music-player-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.music-section .music-player-content::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  padding: 22px 18px 16px 18px;
+  min-width: 140px;
+  min-height: 110px;
+  max-width: 220px;
+  transition: box-shadow 0.15s, transform 0.15s;
+}

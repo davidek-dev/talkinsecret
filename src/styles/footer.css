@@ -5,16 +5,15 @@
 
 }
 
-footer-body {
-  
+.footer_body {
   background-color: black;
   color: white;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   margin: 0;
-
+  width: 100%;
+  min-width: 100vw; /* Stellt sicher, dass Footer mindestens die Viewport-Breite hat */
   font-size: calc(0.3 * var(--m));
 }
 
@@ -67,57 +66,30 @@ button {
 }
 
 footer {
-  margin-top: 10vh;
+  margin-top: auto;
+  margin-bottom: 2rem;
   z-index: 500;
   width: 100%;
-  height: 70vh;
-
+  min-width: 100%;
+  height: auto;
+  min-height: 30vh;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  align-items: flex-end;
-  padding: 5rem 2vw;
+  align-items: center;
+  padding: 3rem 0;
   position: relative;
-}
-
-footer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+  /* Gradient von oben background color zu unten schwarz */
   background: linear-gradient(
-    rgba(0, 0, 0, 0) 5%,
-    rgba(0, 0, 0, 0.3) 20%,
-    rgba(0, 0, 0, 0.6) 30%,
-    rgba(0, 0, 0, 0.8) 40%,
-    rgba(0, 0, 0, 1) 50%,
-    rgb(0, 0, 0)
+    to bottom,
+    hsl(var(--background)) 0%,
+    #000 100%
   );
-  z-index: -7;
 }
 
+/* Entferne Blur und Masken komplett */
 .backdrop {
-  z-index: -5;
-  position: absolute;
-  inset: 0;
-
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-
-  mask-image: linear-gradient(
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.5) 10%,
-    rgba(0, 0, 0, 0.8) 20%,
-    rgba(0, 0, 0, 1) 30%,
-    rgb(0, 0, 0)
-  );
-
-  -webkit-mask-image: linear-gradient(
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.5) 10%,
-    rgba(0, 0, 0, 0.8) 20%,
-    rgba(0, 0, 0, 1) 30%,
-    rgb(0, 0, 0)
-  );
+  display: none !important;
 }
 
 .col {
@@ -128,9 +100,13 @@ footer::before {
   width: 28%;
 }
 
+.col3 {
+  width: 70%; /* Noch breiter für Navigation und Legal */
+}
+
 .col2,
 .col3 {
-  background-color: #121212;
+  background-color: #131c20;
   border-radius: calc(0.5 * var(--m));
 }
 
@@ -168,10 +144,38 @@ a {
   }
 }
 
+/* Spezifische Anpassung für mittlere Bildschirmgrößen (1020x980) */
+@media screen and (min-width: 1000px) and (max-width: 1100px) and (max-height: 1000px) {
+  footer {
+    min-height: 25vh; /* Reduzierte Mindesthöhe für bessere Darstellung */
+    padding: 2rem 0;
+  }
+}
+
 @media screen and (max-width: 700px) {
   footer {
     flex-direction: column;
-    padding: 5rem 20vw;
+    padding: 5rem 4vw;
+  }
+  .footer-content .footer-nav .menu-container > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .footer-content .footer-nav .menu-container .nav-section nav > div {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem 1.5rem !important;
+    text-align: left !important;
+  }
+  .footer-content .footer-nav .menu-container .nav-section nav > div > div {
+    space-y-2: unset;
+  }
+  .footer-content .footer-nav .menu-container .legal-section nav > div {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem 1.5rem !important;
+    text-align: left !important;
   }
   .col {
     width: 100%;

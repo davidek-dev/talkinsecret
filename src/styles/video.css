@@ -3,35 +3,139 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 394px;
-    width: 700px;
+    width: 100%;
+    max-width: 700px;
+    aspect-ratio: 16/9;
     position: relative;
-    cursor: none;
-    max-width: 100%;
+    cursor: pointer;
     background-size: cover;
-    background-image: url('/images/2E326wvssNc-HD.jpg');
+    background-image: var(--bg-image, url('/images/8EeFU2--plk-HD.webp'));
     background-position: center;
     background-repeat: no-repeat;
+    margin: 0 auto;
   }
 
-  /* Gemeinsame Basis-Styles für Play Button und Custom Cursor */
+  /* Responsive sizes for larger screens - maintaining 16:9 aspect ratio */
+  @media (min-width: 768px) {
+    #video-container {
+      max-width: 800px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #video-container {
+      max-width: 900px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    #video-container {
+      max-width: 1000px;
+    }
+  }
+
+  /* YouTube placeholder styling - same aspect ratio */
+  .youtube-placeholder {
+    width: 100%;
+    max-width: 700px;
+    aspect-ratio: 16/9;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .youtube-placeholder {
+      max-width: 800px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .youtube-placeholder {
+      max-width: 900px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .youtube-placeholder {
+      max-width: 1000px;
+    }
+  }
+
+  /* Thumbnail container styling */
+  .thumbnail-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0.5rem auto 0 auto; /* 0.5rem top margin to match gap-2 (0.5rem) */
+  }
+
+  @media (min-width: 768px) {
+    .thumbnail-container {
+      max-width: 800px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .thumbnail-container {
+      max-width: 900px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .thumbnail-container {
+      max-width: 1000px;
+    }
+  }
+
+  /* Gemeinsame Basis-Styles für Play Button */
   .circle-button {
     width: 120px;
     height: 120px;
-    border: 3px solid #884d45;
+    border: 1px solid white;
     border-radius: 50%;
-    background-color: rgb(218, 227, 218); /* Transparenz entfernt */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease; /* Transition für Hover-Effekt */
+    transition: all 0.3s ease;
+    position: relative;
   }
 
   .circle-button:hover {
-    background-color: #884d45; /* Hintergrundfarbe ändern */
-    color: rgb(218, 227, 218); /* Textfarbe ändern */
-    transform: scale(1.1); /* Skalierungseffekt */
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
+    transform: scale(1.1);
   }
+
+  .circle-button:focus {
+    outline: none;
+  }
+  
+  .circle-button:hover::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid white;
+    border-radius: 50%;
+    animation: wave 1.5s infinite;
+    opacity: 0;
+  }
+
+  @keyframes wave {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
 
   #play-button {
     position: absolute;
@@ -40,24 +144,17 @@
     transform: translate(-50%, -50%);
     opacity: 1;
     transition: opacity 0.2s ease;
-    cursor: none;
-  }
-
-  #custom-cursor {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    display: none;
-    transform: translate(-50%, -50%);
-    background-color: rgb(218, 227, 218); /* Transparenz entfernt */
   }
 
   /* Gemeinsame Icon-Styles */
   .play-icon,
-  .pause-icon,
-  #custom-cursor i {
+  .pause-icon {
     font-size: 40px;
-    color: #884d45;
+    color: white;
+  }
+
+  .circle-button:hover .play-icon {
+    color: white;
   }
 
   .modal {
@@ -95,7 +192,6 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    padding: 1rem;
   }
 
   .modal-close-btn {
@@ -120,4 +216,38 @@
     background-color: #884d45 !important;
     color: white !important;
     transform: scale(1.1) !important;
+  }
+
+  /* Modal Styles */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+
+  .modal[open] {
+    display: flex;
+  }
+
+  .modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  /* Ensure perfect video sizing */
+  @media (max-width: 768px) {
+    .modal > div > div {
+      width: 90vw !important;
+      height: calc(90vw * 9 / 16) !important;
+      min-width: 320px !important;
+      min-height: 180px !important;
+    }
   }

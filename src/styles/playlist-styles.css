@@ -1,0 +1,172 @@
+/* Verbesserte Playlist-Styles */
+
+/* Song-Liste Container */
+.song-list {
+  margin-top: 30px;
+  padding: 10px 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.song-list-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.song-list-tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Einzelne Song-Einträge */
+.song-list-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #f9f9f9;
+  position: relative;
+  overflow: hidden;
+}
+
+.song-list-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+}
+
+/* Aktiver Song-Zustand */
+.song-list-item.active {
+  background-color: #f0f0f0;
+}
+
+.song-list-item.active::before {
+  background-color: #ff5252;
+}
+
+.song-list-item:hover {
+  background-color: #f0f0f0;
+}
+
+.song-list-number {
+  font-size: 14px;
+  font-weight: 600;
+  color: #888;
+  width: 25px;
+}
+
+.song-list-info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.song-list-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.song-list-artist {
+  font-size: 12px;
+  color: #888;
+}
+
+.song-list-duration {
+  font-size: 13px;
+  color: #999;
+}
+
+/* Music Services Grid */
+.music-services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.service-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  color: #333;
+  aspect-ratio: 1/1;
+}
+
+.service-tile:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.service-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.service-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Moderne Layout-Anpassungen */
+@media (min-width: 768px) {
+  .music-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: flex-start;
+  }
+  
+  .player-container {
+    grid-column: 1;
+  }
+  
+  .services-container {
+    grid-column: 2;
+    padding-top: 90px; /* Abstand zum Album-Titel */
+  }
+}
+
+/* Optimiertes Layout für mittlere Bildschirmbreiten - Services vertikal gestapelt */
+@media (min-width: 768px) and (max-width: 1050px) {
+  .music-container {
+    display: grid !important;
+    grid-template-columns: 3fr 1fr !important; /* MusicPlayer bekommt 75% des Platzes */
+    gap: 2.5rem !important;
+    align-items: flex-start !important;
+  }
+  
+  .player-container {
+    grid-column: 1 !important;
+    max-width: none !important; /* Entfernt Breitenbeschränkungen */
+  }
+  
+  .services-container {
+    grid-column: 2 !important;
+    padding-top: 0 !important; /* Kein Abstand nach oben - beginnt auf gleicher Höhe */
+    justify-self: start !important; /* Links ausgerichtet statt zentriert */
+    margin-top: 0 !important; /* Sicherstellen dass kein zusätzlicher Margin da ist */
+  }
+  
+  .services-container.mt-8 {
+    margin-top: 0 !important; /* Überschreibt Tailwind mt-8 Klasse */
+  }
+  
+  .services-container.lg\:mt-0 {
+    margin-top: 0 !important; /* Überschreibt Tailwind lg:mt-0 Klasse */
+  }
+}

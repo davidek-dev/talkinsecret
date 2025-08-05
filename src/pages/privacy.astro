@@ -1,0 +1,167 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import "../global.css";
+---
+
+<Layout title="Privacy Policy - Talkin' Secret" bodyClass="static-page">
+  <div class="min-h-screen overflow-y-auto bg-background" style="height: auto; min-height: 100vh;">
+    <Navbar />
+    
+    <div class="container mx-auto px-6 py-32 max-w-4xl">
+      <h1 class="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
+      
+      <div class="prose prose-lg max-w-none text-gray-300">
+        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">1. Data Controller</h2>
+        <p>
+          Responsible for data processing on this website:<br>
+          David Zeplin<br>
+          Grindelallee 114, 20146, Hamburg<br>
+          david.zeplin@outlook.de
+        </p>
+
+        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">2. Collection and Processing of Personal Data</h2>
+        <p>
+          When you visit our website, our web server automatically collects certain technical information:
+        </p>
+        <ul>
+          <li>IP address of the requesting computer</li>
+          <li>Date and time of access</li>
+          <li>Browser type and version</li>
+          <li>Operating system</li>
+          <li>Referrer URL</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">3. Cookies</h2>
+        <p>
+          This website uses cookies to provide you with the best possible user experience. You can manage your cookie preferences through our cookie banner.
+        </p>
+
+        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">4. YouTube Integration</h2>
+        <p>
+          Our website integrates YouTube videos. When you consent to cookies, YouTube may collect data according to their privacy policy.
+        </p>
+
+        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">5. Your Rights</h2>
+        <p>
+          You have the right to information, correction, deletion, and restriction of processing of your personal data.
+        </p>
+
+        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">6. Contact</h2>
+        <p>
+          For questions regarding data protection, please contact us at: david.zeplin@outlook.de
+        </p>
+
+        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">7. Cookie Settings</h2>
+        <p class="mb-6">
+          You can reset your cookie preferences at any time. This will delete all stored cookie settings and reload the page so you can make new choices.
+        </p>
+        
+        <!-- Cookie Reset Button -->
+        <button 
+          id="reset-cookies-btn" 
+          class="bg-white hover:bg-transparent text-gray-900 hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl border hover:border hover:border-white"
+        >
+          Reset Cookie Settings
+        </button>
+        
+        <!-- Modal Dialog -->
+        <div id="cookieResetDialog" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
+          <div class="bg-[rgba(255,255,255,0.1)] backdrop-blur-[20px] border border-[rgba(255,255,255,0.2)] rounded-2xl p-6 max-w-md mx-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-lg">
+            <h3 class="text-xl font-semibold text-white mb-2">Reset Cookie Preferences</h3>
+            <p class="text-gray-300 mb-6">
+              This will reset all your cookie preferences and reload the page. You will be asked again to choose your cookie preferences.
+            </p>
+            <div class="flex justify-between space-x-6">
+              <button id="cancelReset" class="px-5 py-3 text-white bg-transparent border border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300">
+                Cancel
+              </button>
+              <button id="confirmReset" class="px-5 py-3 bg-white text-gray-900 rounded-lg hover:bg-transparent hover:text-white hover:border-white border border-transparent transition-all duration-300">
+                Reset Cookies
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <Footer title="Talkin' Secret" />
+  </div>
+</Layout>
+
+<script is:inline>
+  // Cookie Reset Dialog Functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const dialog = document.getElementById('cookieResetDialog');
+    const resetBtn = document.getElementById('reset-cookies-btn');
+    const cancelBtn = document.getElementById('cancelReset');
+    const confirmBtn = document.getElementById('confirmReset');
+    
+    // Show dialog
+    resetBtn.addEventListener('click', () => {
+      dialog.classList.remove('hidden');
+      dialog.classList.add('flex');
+    });
+    
+    // Hide dialog
+    cancelBtn.addEventListener('click', () => {
+      dialog.classList.add('hidden');
+      dialog.classList.remove('flex');
+    });
+    
+    // Reset cookies and reload
+    confirmBtn.addEventListener('click', () => {
+      // Reset all cookie related localStorage items
+      localStorage.removeItem('cookieConsent');
+      localStorage.removeItem('allowAnalytics');
+      localStorage.removeItem('allowYouTube');
+      
+      // Hide dialog
+      dialog.classList.add('hidden');
+      dialog.classList.remove('flex');
+      
+      // Redirect to homepage
+      window.location.href = '/';
+    });
+    
+    // Close dialog when clicking outside
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) {
+        dialog.classList.add('hidden');
+        dialog.classList.remove('flex');
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Scrolling für statische Seiten erzwingen */
+  html, body {
+    overflow: auto !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  .prose h2 {
+    border-bottom: 2px solid #444;
+    padding-bottom: 0.5rem;
+  }
+  
+  .prose a {
+    color: #60a5fa;
+    text-decoration: underline;
+  }
+  
+  .prose a:hover {
+    color: #93c5fd;
+  }
+  
+  .prose p {
+    color: #d1d5db;
+  }
+  
+  .prose li {
+    color: #d1d5db;
+  }
+</style>

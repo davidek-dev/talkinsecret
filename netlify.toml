@@ -1,0 +1,39 @@
+
+# Netlify configuration for talkinsecret.com
+# Sicherheit, Performance und Routing
+[build]
+  publish = "dist"
+  command = "npm run build"
+  functions = "netlify/functions"
+
+[dev]
+  framework = "astro"
+  targetPort = 4321
+  port = 8888      # Der Port, auf dem Netlify Dev läuft
+  publish = "dist" # Das Verzeichnis, das Netlify Dev bereitstellt
+
+# Netlify empfiehlt nicht mehr, Redirects für /.netlify/functions/ zu verwenden.
+# Stattdessen sollten wir direkt in den Funktionen auf den Pfad zugreifen.
+# Die folgende Zeile wurde auskommentiert, um den Fehler zu beheben:
+# [[redirects]]
+#   from = "/.netlify/functions/*"
+#   to = "/.netlify/functions/:splat"
+#   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; script-src 'self' https://www.youtube.com https://open.spotify.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-src https://www.youtube.com https://open.spotify.com; require-trusted-types-for 'script'; frame-ancestors 'none';"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    Cross-Origin-Opener-Policy = "same-origin"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-XSS-Protection = "1; mode=block"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), fullscreen=(self)"
+
+# Optional: Weiterleitungen (z.B. für SPA)
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200

@@ -1,0 +1,27 @@
+/* Custom cursor styles for development mode */
+.dev-mode body {
+  cursor: none !important;
+}
+
+.dev-mode .cursor {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ff5722 !important; /* Leuchtend orange für Entwicklungsumgebung */
+  background-color: rgba(255, 87, 34, 0.3);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: normal !important; /* Überschreibe difference für bessere Sichtbarkeit */
+  transition: width 0.2s, height 0.2s;
+  display: block !important; /* Make sure it's visible */
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+/* Größer beim Hover */
+.dev-mode .cursor.hover {
+  transform: scale(1.5);
+  background-color: rgba(255, 87, 34, 0.5);
+}
