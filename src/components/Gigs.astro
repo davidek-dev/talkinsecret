@@ -14,7 +14,17 @@ import { Button } from "@/components/ui/button";
 const spaceId = import.meta.env.CONTENTFUL_SPACE_ID;
 const accessToken = import.meta.env.CONTENTFUL_DELIVERY_TOKEN;
 
-let gigs = [];
+type Gig = {
+  fields: {
+    datum: string;
+    venueevent: string;
+    city: string;
+    country: string;
+    link: string;
+  };
+};
+
+let gigs: Gig[] = [];
 
 if (spaceId && accessToken) {
   const client = createClient({
@@ -27,15 +37,24 @@ if (spaceId && accessToken) {
   today.setHours(0, 0, 0, 0); // Set to midnight to compare dates only
 
   gigs = response.items
-    .filter((gig) => {
-      const gigDate = new Date(gig.fields.datum as string);
+    .filter((entry) => {
+      const gigDate = new Date(entry.fields.datum as string);
       return gigDate >= today;
     })
     .sort((a, b) => {
       const dateA = new Date(a.fields.datum as string).getTime();
       const dateB = new Date(b.fields.datum as string).getTime();
       return dateA - dateB;
-    });
+    })
+    .map((entry) => ({
+      fields: {
+        datum: entry.fields.datum as string,
+        venueevent: entry.fields.venueevent as string,
+        city: entry.fields.city as string,
+        country: entry.fields.country as string,
+        link: entry.fields.link as string,
+      },
+    }));
 } else {
   if (import.meta.env.PROD) {
     console.error(

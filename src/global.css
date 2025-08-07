@@ -76,7 +76,6 @@ img {
 
 
 
-
 @layer base {
   * {
     @apply border-border;
@@ -114,3 +113,29 @@ img {
     min-height: 100vh !important;
   }
 }
+
+@media (min-width: 1024px) {
+  * {
+    cursor: none !important;
+  }
+  
+  .cursor {
+    width: 20px;
+    height: 20px;
+    border: 3px solid white !important;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    background: transparent !important;
+    mix-blend-mode: difference  !important; 
+    transition: width 0.2s, height 0.2s;
+    display: block; /* Make sure it's visible */
+  }}
+
+  /* For mobile and tablet - hide the custom cursor */
+@media (max-width: 1023px) {
+  .cursor {
+    display: none;
+  }}
+  

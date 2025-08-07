@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import YouTube from 'react-youtube';
 import '../global.css'; // Assuming you have global styles
 import '../styles/video.css'; // Assuming you have video-specific styles
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 interface VideoVariant {
   url: string;
@@ -222,10 +223,7 @@ const VideoPlayer: React.FC<Props> = ({ videoVariants }) => {
 
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      />
+
 
       {/* Show placeholder if YouTube cookies are not accepted, otherwise show video player */}
       {cookieConsent !== 'true' ? (

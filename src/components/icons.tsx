@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-export const SpotifyIcon = (props) => (
+export const SpotifyIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     
@@ -14,7 +14,7 @@ export const SpotifyIcon = (props) => (
   </svg>
 );
 
-export const TiktokIcon = (props) => (
+export const TiktokIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     

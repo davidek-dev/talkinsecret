@@ -23,7 +23,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; script-src 'self' https://www.youtube.com https://open.spotify.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-src https://www.youtube.com https://open.spotify.com; require-trusted-types-for 'script'; frame-ancestors 'none';"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; script-src 'self' https://www.youtube.com https://open.spotify.com https://cdnjs.cloudflare.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-src https://www.youtube.com https://open.spotify.com; require-trusted-types-for 'script'; frame-ancestors 'none';"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     Cross-Origin-Opener-Policy = "same-origin"
     X-Frame-Options = "DENY"
