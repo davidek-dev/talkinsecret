@@ -1,5 +1,6 @@
 ---
 import CookieConsent from "../components/CookieConsent.astro";
+import '../styles/responsive-utilities.css';
 
 interface Props {
   title: string;
@@ -168,19 +169,7 @@ const { title, bodyClass = "" } = Astro.props;
     />
     <link rel="preload" href="/images/image00001_scaled.webp" as="image" />
 
-    <!-- Responsive utilities CSS -->
-    <link
-      rel="preload"
-      href="/src/styles/responsive-utilities.css"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript
-      ><link
-        rel="stylesheet"
-        href="/src/styles/responsive-utilities.css"
-      /></noscript
-    >
+
 
     <!-- Structured Data -->
     <script type="application/ld+json">
