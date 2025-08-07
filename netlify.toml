@@ -5,6 +5,9 @@
   command = "npm run build"
   functions = "netlify/functions"
 
+    [build.environment]
+    SECRETS_SCAN_OMIT_KEYS = "PUBLIC_AUDIO_SECRET_KEY"
+
 # HINZUGEFÜGT: Dieser Block stellt sicher, dass die Audio-Dateien
 # für die stream-audio Funktion verfügbar sind.
 [functions]
