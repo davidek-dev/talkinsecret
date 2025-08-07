@@ -37,15 +37,15 @@ export const handler = async (event, context) => {
 
   // Map of song IDs to file paths (store this securely)
   const songMapping = {
-    'petrichor-01': 'audio/petrichor/1 - Petrichor - Talkin\'Secret Master 2 - 24_48.wav',
-    'petrichor-02': 'audio/petrichor/2 - Worth the Way - Talkin\'Secret Master 2 - 24_48.wav',
-    'petrichor-03': 'audio/petrichor/3 - Come On - Talkin\'Secret Master 2 - 24_48.wav',
-    'petrichor-04': 'audio/petrichor/4 - Changes - Talkin\'Secret Master 2 - 24_48.wav',
-    'petrichor-05': 'audio/petrichor/5 - Stranger in Disguise - Talkin\'Secret Master 2 - 24_48.wav',
-    'petrichor-06': 'audio/petrichor/6 - Glimpse of the Morning - Talkin\'Secret Master 2 - 24_48.wav',
-    'petrichor-07': 'audio/petrichor/7 - Miracles - Talkin\'Secret Master 3 - 24_48.wav',
-    'petrichor-08': 'audio/petrichor/8 - Only Friend - Talkin\'Secret Master 2 - 24_48.wav',
-    'petrichor-09': 'audio/petrichor/9 - Somehow Somewhere - Talkin\'Secret Master 3 - 24_48.wav'
+    'petrichor-01': 'petrichor/1 - Petrichor - Talkin\'Secret Master 2 - 24_48.aac',
+    'petrichor-02': 'petrichor/2 - Worth the Way - Talkin\'Secret Master 2 - 24_48.aac',
+    'petrichor-03': 'petrichor/3 - Come On - Talkin\'Secret Master 2 - 24_48.aac',
+    'petrichor-04': 'petrichor/4 - Changes - Talkin\'Secret Master 2 - 24_48.aac',
+    'petrichor-05': 'petrichor/5 - Stranger in Disguise - Talkin\'Secret Master 2 - 24_48.aac',
+    'petrichor-06': 'petrichor/6 - Glimpse of the Morning - Talkin\'Secret Master 2 - 24_48.aac',
+    'petrichor-07': 'petrichor/7 - Miracles - Talkin\'Secret Master 3 - 24_48.aac',
+    'petrichor-08': 'petrichor/8 - Only Friend - Talkin\'Secret Master 2 - 24_48.aac',
+    'petrichor-09': 'petrichor/9 - Somehow Somewhere - Talkin\'Secret Master 3 - 24_48.aac'
   };
   const filePath = songMapping[songId];
 
@@ -57,7 +57,7 @@ export const handler = async (event, context) => {
   }
 
   try {
-    const fullPath = join(process.cwd(), 'public', filePath);
+    const fullPath = join(process.cwd(), '_audio_files', filePath);
     
     // Sicherstellen, dass nur Audio-Dateien gestreamt werden
     if (!filePath.match(/\.(wav|mp3|ogg|flac|aac|m4a)$/i)) {

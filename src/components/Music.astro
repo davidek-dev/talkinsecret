@@ -10,29 +10,32 @@ let playlist = null;
 let error = null;
 
 try {
-  // In der Entwicklungsumgebung müssen wir die Netlify Dev URL verwenden
-  let baseUrl = '';
-  
-  if (import.meta.env.DEV) {
-    // Im DEV-Modus nutzen wir direkt lokale Daten ohne Serveranfrage
-    // Log entfernt für Production
-    // Absichtlich abbrechen, um direkt zum Fallback-Daten zu springen
+  // Die Basis-URL wird aus den Umgebungsvariablen von Netlify bezogen.
+  // In `netlify dev` ist dies `http://localhost:8888`, im Live-Betrieb deine Domain.
+  const baseUrl = import.meta.env.URL;
+
+  // Im lokalen `astro dev`-Modus (nicht Netlify Dev) wird baseUrl undefiniert sein.
+  // Wir werfen hier einen Fehler, um wie bisher die lokalen Daten zu nutzen.
+  if (!baseUrl && import.meta.env.DEV) {
     throw new Error('LOCAL_DATA_DEV_MODE');
   }
-  
-  const response = await fetch(`${baseUrl}/.netlify/functions/get-playlist`);
+
+  // Baue die vollständige URL zur Funktion
+  const playlistUrl = `${baseUrl}/.netlify/functions/get-playlist`;
+  const response = await fetch(playlistUrl);
+
   if (!response.ok) {
-    // Error-Log entfernt für Production
-    throw new Error('Failed to fetch playlist');
+    throw new Error(`Failed to fetch playlist. Status: ${response.status}`);
   }
   playlist = await response.json();
+
 } catch (e) {
-  // Prüfe, ob es sich um unseren lokalen Daten-Modus handelt
   if (e instanceof Error && e.message === 'LOCAL_DATA_DEV_MODE') {
-    // Log entfernt für Production
+    // Gewolltes Verhalten im lokalen Astro-Modus
   } else {
-    // Error-Log entfernt für Production
+    // Echter Fehler im Live-Betrieb
     error = 'Unable to load playlist from API. Using local data instead.';
+    console.error(e); // Gib den echten Fehler im Build-Log aus!
   }
   
   // Fallback playlist data for development with all tracks
@@ -130,9 +133,9 @@ try {
     
     {error ? (
       <div class="error-message bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-        <p class="font-bold">Fehler beim Laden der Playlist</p>
+        <p class="font-bold">Error loading playlist</p>
         <p>{error}</p>
-        <p class="mt-2">Sie können unsere Musik auch direkt auf Ihrer bevorzugten Streaming-Plattform anhören.</p>
+        <p class="mt-2">You can also listen to our music directly on your preferred streaming platform.</p>
       </div>
     ) : (
       <div class="music-container">

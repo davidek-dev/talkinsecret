@@ -1,4 +1,3 @@
-
 # Netlify configuration for talkinsecret.com
 # Sicherheit, Performance und Routing
 [build]
@@ -6,19 +5,16 @@
   command = "npm run build"
   functions = "netlify/functions"
 
+# HINZUGEFÜGT: Dieser Block stellt sicher, dass die Audio-Dateien
+# für die stream-audio Funktion verfügbar sind.
+[functions]
+  included_files = ["_audio_files/**"]
+
 [dev]
   framework = "astro"
   targetPort = 4321
   port = 8888      # Der Port, auf dem Netlify Dev läuft
   publish = "dist" # Das Verzeichnis, das Netlify Dev bereitstellt
-
-# Netlify empfiehlt nicht mehr, Redirects für /.netlify/functions/ zu verwenden.
-# Stattdessen sollten wir direkt in den Funktionen auf den Pfad zugreifen.
-# Die folgende Zeile wurde auskommentiert, um den Fehler zu beheben:
-# [[redirects]]
-#   from = "/.netlify/functions/*"
-#   to = "/.netlify/functions/:splat"
-#   status = 200
 
 [[headers]]
   for = "/*"
@@ -31,9 +27,3 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-XSS-Protection = "1; mode=block"
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), fullscreen=(self)"
-
-# Optional: Weiterleitungen (z.B. für SPA)
-# [[redirects]]
-#   from = "/*"
-#   to = "/index.html"
-#   status = 200
