@@ -45,7 +45,7 @@ export const handler = async (event, context) => {
     'petrichor-06': 'petrichor/6 - Glimpse of the Morning - Talkin\'Secret Master 2 - 24_48.aac',
     'petrichor-07': 'petrichor/7 - Miracles - Talkin\'Secret Master 3 - 24_48.aac',
     'petrichor-08': 'petrichor/8 - Only Friend - Talkin\'Secret Master 2 - 24_48.aac',
-    'petrichor-09': 'petrichor/9 - Somehow Somewhere - Talkin\'Secret Master 3 - 24_48.aac'
+    'petrichor-09': 'petrichor/9-Somehow-Somewhere-TalkinSecret.mp3'
   };
   const filePath = songMapping[songId];
 
