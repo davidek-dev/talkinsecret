@@ -48,30 +48,15 @@ const MobileNav = () => {
           <SheetTrigger asChild>
             {/* Der Trigger-Button für das mobile Menü - iOS optimiert */}
             <div 
-              className="text-white h-24 w-24 flex items-center justify-center cursor-pointer" 
+              className="text-white h-24 w-24 flex items-center justify-center cursor-pointer mobile-tap-optimised" 
               aria-label="Menü öffnen"
-              style={{ 
-                WebkitTapHighlightColor: 'transparent',
-                touchAction: 'manipulation'
-              }}
             >
               <Menu size={30} />
             </div>
           </SheetTrigger>
           <SheetContent 
             side="left" 
-            className="w-full max-w-xs bg-black/90 backdrop-blur-md text-white border-r-gray-700 p-0 z-[1002]" 
-            style={{
-              position: 'fixed',
-              top: 0,
-              bottom: 0,
-              height: '100vh',
-              maxHeight: '100vh',
-              overflow: 'auto',
-              WebkitOverflowScrolling: 'touch',
-              transform: 'translateZ(0)',
-              willChange: 'transform'
-            }}
+            className="w-full max-w-xs bg-black/90 backdrop-blur-md text-white border-r-gray-700 p-0 z-[1002] mobile-sheet-styles" 
           >
             <div className="h-full flex flex-col">
               {/* Sheet Header mit Close-X */}
@@ -79,11 +64,7 @@ const MobileNav = () => {
                 <div 
                   aria-label="Menü schließen" 
                   onClick={()=>setIsOpen(false)} 
-                  className="text-white h-24 w-24 flex items-center justify-center cursor-pointer"
-                  style={{ 
-                    WebkitTapHighlightColor: 'transparent',
-                    touchAction: 'manipulation'
-                  }}
+                  className="text-white h-24 w-24 flex items-center justify-center cursor-pointer mobile-tap-optimised"
                 >
                   <X size={20}/>
                 </div>

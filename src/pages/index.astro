@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
-import Image from "astro/components/Image.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/index.css";
 import "../styles/fixes.css";
@@ -148,7 +147,7 @@ export const videoVariants = [
       </div>
     </div>
 
-    <div class="section contact-section snap-center" id="contact" style="min-height: fit-content; max-height: 100vh;">
+  <div class="section contact-section snap-center" id="contact" style="min-height: fit-content; max-height: 100vh;">
       <style>
         .contact-section {
           /* Mobile: Mehr Höhe für gestapeltes Layout */
@@ -221,12 +220,15 @@ export const videoVariants = [
       </div>
     </div>
     
+  </div>
+  </div>
+
+  <!-- Footer außerhalb des Snap-Containers: normales Scrollen bis zum Ende -->
+  <div class="content max-w-full">
     <!-- Footer Section -->
-    <div class="section snap-start" style="height: auto; min-height: fit-content;">
+    <div class="section" style="height: auto; min-height: fit-content;">
       <Footer title="Talkin' Secret" />
     </div>
-    
-  </div>
   </div>
 
 </Layout>

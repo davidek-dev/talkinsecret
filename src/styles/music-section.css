@@ -1,3 +1,85 @@
+/* Info panel styles extracted from inline React styles */
+.info-panel-styles {
+  position: absolute;
+  top: -55px;
+  left: 0;
+  width: 400px;
+  height: 60px;
+  background-color: rgb(255, 255, 255);
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 15px 15px 0 0;
+  z-index: 3;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.info-panel.active.info-panel-styles {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.info-panel.info-panel-styles {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.95);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.info-panel-text {
+  position: absolute;
+  left: 130px;
+  top: 10px;
+  width: 205px;
+}
+
+.info-artist {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info-title {
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info-progress {
+  width: 100%;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.info-progress-bar {
+  height: 100%;
+  background-color: #dc2626; /* Tailwind red-600 */
+  transition: width 0.2s ease;
+  width: var(--progress, 0%);
+}
+
+/* Map data-progress attribute to CSS variable for common percentages */
+[data-progress] {
+  --progress: attr(data-progress percentage);
+}
+
+/* Audio element performance tweaks */
+.audio-perf {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
 /* Responsive Grid für Streaming Services */
 .music-services-flex {
   display: grid;
@@ -18,7 +100,13 @@
     display: flex !important;
     flex-direction: column !important;
     gap: 0 !important; /* KEIN Gap zwischen Player und Services */
-    margin-top: 0.5rem !important; /* Kleiner Abstand nach oben zum Text */
+    margin-top: 0 !important; /* Noch näher an den Text darüber */
+  }
+  .music-section header {
+    margin-bottom: 0.2rem !important; /* Kopfbereich noch knapper */
+  }
+  .music-section header p {
+    margin-bottom: 0.15rem !important; /* Textzeile noch knapper */
   }
   
   /* MusicPlayer auf Mobile: Keine Height-Beschränkung, nicht scrollbar */
@@ -27,7 +115,7 @@
     max-height: none !important;
     overflow-y: visible !important;
     height: auto !important;
-    margin-bottom: 0 !important; /* KEIN Abstand nach unten */
+    margin-bottom: 80px !important; /* noch mehr Abstand zum Button-Grid */
   }
   
   /* Backdrop-Filter und Hintergrund nur auf Mobile entfernen */
@@ -254,6 +342,9 @@
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     border: none !important;
+    height: auto !important; /* verhindert vertikales Strecken */
+    aspect-ratio: auto !important; /* löst festes Quadrat auf */
+    padding: 0.6rem !important; /* geringfügig kompakter */
   }
 }
 
@@ -407,8 +498,8 @@
   }
   
   .service-icon img {
-    max-width: 85px !important;
-    max-height: 75px !important;
+    max-width: 60px !important;
+    max-height: 44px !important;
   }
 }
 

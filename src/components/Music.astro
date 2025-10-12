@@ -15,7 +15,7 @@ import '../styles/playlist-styles.css';
       <h2 id="music-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bandfont">
         Petrichor
       </h2>
-      <p class="text-base sm:text-lg lg:text-xl"> 
+      <p class="text-base sm:text-lg lg:text-xl " > 
         Now available on all major streaming platforms!
       </p>
     </header>
@@ -73,10 +73,25 @@ import '../styles/playlist-styles.css';
             
             /* Mobile: 3-2 Layout */
             @media (max-width: 767px) {
+              /* Kopfbereich/Player-Distanz minimieren */
+              .music-section header,
+              .music-section header p {
+                margin-bottom: 0 !important;
+              }
+              .music-container {
+                margin-top: 0 !important;
+              }
+              .music-player-container {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+              }
+              .modern-player {
+                padding-top: 0 !important;
+              }
               .music-services-grid {
                 max-width: 100%;
                 gap: 0.8rem !important; /* Gap zwischen den Reihen */
-                margin: -60px 0 0 0 !important; /* Negativer Margin oben, um näher ran zu kommen */
+                margin: 80px 0 0 0 !important; /* Noch mehr Abstand zum Player */
                 padding: 0 !important; /* KEIN Padding */
               }
               
@@ -87,6 +102,16 @@ import '../styles/playlist-styles.css';
                 padding: 0 !important; /* KEIN Padding */
               }
               
+              /* Zusätzlicher Abstand unter dem Player, damit erste Reihe nicht darunter liegt */
+              .services-container {
+                margin-top: 64px !important; /* deutlich mehr Abstand unter dem Player */
+              }
+
+              /* Sicherstellen, dass der Player selbst genug Platz nach unten lässt */
+              .music-player-container {
+                margin-bottom: 96px !important;
+              }
+
               /* YouTube Mobile anzeigen, Desktop verstecken */
               .youtube-mobile {
                 display: flex !important;

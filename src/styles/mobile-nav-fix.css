@@ -1,3 +1,20 @@
+/* MobileNav inline-style replacements */
+.mobile-tap-optimised {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.mobile-sheet-styles {
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  transform: translateZ(0) !important;
+  will-change: transform !important;
+}
 /* Mobile Navigation Sheet Fixes */
 
 /* Sheet Content - volle Höhe ohne Abschnitt */

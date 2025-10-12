@@ -3,7 +3,7 @@
 @media (max-width: 767px) {
   /* Modern Player: KEIN Padding oben */
   .modern-player {
-    padding-top: 70px !important; /* Platz für Info Panel beibehalten */
+    padding-top: 0px !important; /* direkt unter dem Text */
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
   }
@@ -16,36 +16,21 @@
     margin-bottom: 0 !important;
   }
   
-  /* Song-Liste: KEIN Margin oben */
-  .song-list {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-    padding-top: 0 !important;
-  }
-  
-  /* Album-Überschrift: KEIN Padding/Margin */
-  .song-list h3,
-  .modern-song-list-scroll h3 {
-    padding: 0 !important;
-    margin: 0 !important;
-    display: none !important; /* Auf Mobile komplett verstecken */
-  }
-
-  /* Song List: Kein Scrolling, volle Höhe */
+  /* Songliste und deren Überschrift auf Mobile komplett verstecken */
   .song-list,
   .modern-song-list-scroll,
-  .scrollable-tracks {
-    max-height: none !important;
-    height: auto !important;
-    overflow: visible !important;
-  }
-
+  .scrollable-tracks,
   .song-list-tracks,
-  .modern-song-list-tracks {
-    max-height: none !important;
-    height: auto !important;
-    overflow: visible !important;
+  .modern-song-list-tracks,
+  .modern-song-list-scroll h3,
+  .song-list h3 {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
   }
 
   /* Control Panel kleiner auf Mobile */

@@ -204,6 +204,12 @@
     object-fit: contain;
   }
 
+  /* iOS performance transform for iframe moved from inline style */
+  .video-iframe {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
   .modal-action {
     position: absolute;
     bottom: 0;

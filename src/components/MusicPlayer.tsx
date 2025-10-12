@@ -5,6 +5,7 @@ import '../styles/debug.css';
 import '../styles/modern-player-new.css';
 import '../styles/playlist-height-fix.css';
 import '../styles/active-song-highlight.css';
+import '../styles/music-section.css';
 
 // You can keep your SVG Icon components here if you defined them in this file
 // For brevity, they are omitted here but should be included in your final file.
@@ -31,6 +32,9 @@ const MusicPlayer: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  const progressRef = useRef<HTMLDivElement | null>(null);
+  const albumArtRef = useRef<HTMLDivElement | null>(null);
 
   const audioKey = import.meta.env.PUBLIC_AUDIO_SECRET_KEY;
 const getAudioUrlWithKey = (audioUrl: string) => {
@@ -82,6 +86,21 @@ const getAudioUrlWithKey = (audioUrl: string) => {
       audio.removeEventListener('ended', handleEnded);
     };
   }, [currentSongIndex, songs]); // Depends on songs now
+
+  // Reflect progress into CSS without inline styles in JSX
+  useEffect(() => {
+    if (progressRef.current) {
+      progressRef.current.style.width = `${progress}%`;
+    }
+  }, [progress]);
+
+  // Update album art CSS variable without inline styles in JSX
+  useEffect(() => {
+    const current = songs[currentSongIndex];
+    if (albumArtRef.current && current) {
+      albumArtRef.current.style.setProperty('--album-image', `url(${current.albumArt})`);
+    }
+  }, [songs, currentSongIndex]);
 
   const togglePlay = () => {
     if (songs.length === 0) return;
@@ -179,28 +198,17 @@ const getAudioUrlWithKey = (audioUrl: string) => {
       <div className="modern-player">
         <div className={`control-panel ${isPlaying ? 'active' : ''}`}>
           <div 
-            className={`info-panel ${isPlaying ? 'active' : ''}`}
-            style={{
-              position: 'absolute', top: '-55px', left: '0', width: '400px',
-              height: '60px', backgroundColor: 'rgb(255, 255, 255)',
-              color: '#333', padding: '10px 15px', borderRadius: '15px 15px 0 0',
-              zIndex: 3, opacity: isPlaying ? 1 : 0, visibility: isPlaying ? 'visible' : 'hidden',
-              transform: isPlaying ? 'translateY(0) scale(1)' : 'translateY(-10px) scale(0.95)',
-              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', border: '1px solid rgba(0,0,0,0.1)',
-              backdropFilter: 'none',
-              WebkitBackdropFilter: 'none',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
-            }}
+            className={`info-panel info-panel-styles ${isPlaying ? 'active' : ''}`}
           >
-            <div style={{ position: 'absolute', left: '130px', top: '10px', width: '205px' }}>
-              <div style={{ fontSize: '13px', fontWeight: '600', marginBottom: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <div className="info-panel-text">
+              <div className="info-artist">
                 {currentSong.artist}
               </div>
-              <div style={{ fontSize: '11px', color: '#666', marginBottom: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              <div className="info-title">
                 {currentSong.title}
               </div>
-              <div style={{ width: '100%', height: '3px', backgroundColor: 'rgba(0,0,0,0.2)', borderRadius: '2px', overflow: 'hidden' }}>
-                <div style={{ height: '100%', backgroundColor: '#dc2626', width: `${progress}%`, transition: 'width 0.2s ease' }} />
+              <div className="info-progress">
+                <div className="info-progress-bar" ref={progressRef} />
               </div>
             </div>
           </div>
@@ -208,7 +216,7 @@ const getAudioUrlWithKey = (audioUrl: string) => {
           <div className="album-art-container">
             <div 
               className="album-art"
-              style={{ '--album-image': `url(${currentSong.albumArt})` } as React.CSSProperties}
+              ref={albumArtRef}
               onClick={handleFirstPlay}
             />
           </div>
@@ -247,10 +255,7 @@ const getAudioUrlWithKey = (audioUrl: string) => {
         src={getAudioUrlWithKey(currentSong.audioUrl)}
         preload={hasInteracted ? "auto" : "none"}
         playsInline // iOS-spezifisch: verhindert Fullscreen
-        style={{
-          WebkitTransform: 'translateZ(0)',
-          transform: 'translateZ(0)'
-        }}
+        className="audio-perf"
       />
     </div>
   );

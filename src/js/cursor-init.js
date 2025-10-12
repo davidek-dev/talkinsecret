@@ -59,8 +59,8 @@ function initCursor() {
     mouseCursor.style.pointerEvents = 'none';
     mouseCursor.style.position = 'fixed';
     mouseCursor.style.zIndex = '9999';
-    mouseCursor.style.width = '20px';
-    mouseCursor.style.height = '20px';
+  mouseCursor.style.width = '20px';
+  mouseCursor.style.height = '20px';
     mouseCursor.style.border = '3px solid white';
     mouseCursor.style.background = 'transparent';
     mouseCursor.style.borderRadius = '50%';
@@ -94,15 +94,17 @@ function initCursor() {
     interactiveElements.forEach((element) => {
       element.addEventListener("mouseenter", () => {
         gsap.to(mouseCursor, {
-          duration: 0.2,
-          width: 50,
-          height: 50,
+          duration: 0.28,
+          ease: 'power2.out',
+          width: 38,
+          height: 38,
         });
         mouseCursor.classList.add('hover');
       });
       element.addEventListener("mouseleave", () => {
         gsap.to(mouseCursor, {
           duration: 0.2,
+          ease: 'power2.out',
           width: 20,
           height: 20,
         });
@@ -134,6 +136,7 @@ function initCursor() {
       if (!isInteractive) {
         gsap.to(mouseCursor, {
           duration: 0.2,
+          ease: 'power2.out',
           width: 20,
           height: 20,
         });
@@ -161,7 +164,7 @@ function setupSidebar() {
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.clientHeight;
-      if (pageYOffset >= (sectionTop - sectionHeight/3)) {
+      if (window.scrollY >= (sectionTop - sectionHeight/3)) {
         current = section.getAttribute('id');
       }
     });

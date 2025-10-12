@@ -286,14 +286,9 @@ const VideoPlayer: React.FC<Props> = ({ videoVariants }) => {
                 src={videoEmbedUrls[selectedIndex]}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
                 allowFullScreen
-                className="w-full h-full rounded-2xl border-0"
-                frameBorder="0"
+                className="w-full h-full rounded-2xl border-0 video-iframe"
                 title={getVideoTitle(selectedIndex) + ' (YouTube Video)'}
                 aria-label={getVideoTitle(selectedIndex) + ' (YouTube Video)'}
-                style={{
-                  WebkitTransform: 'translateZ(0)', // iOS Hardware-Beschleunigung
-                  transform: 'translateZ(0)'
-                }}
               />
             </div>
           </div>
