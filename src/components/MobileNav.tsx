@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu, X } from 'lucide-react';
@@ -7,6 +7,34 @@ import { SpotifyIcon, TiktokIcon } from './icons';
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  // iOS-spezifisches Scroll-Locking beim Öffnen des Menüs
+  useEffect(() => {
+    if (isOpen) {
+      // Scrollposition speichern
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Scrollposition wiederherstellen
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
+    
+    return () => {
+      // Cleanup
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   const handleLinkClick = () => {
     setIsOpen(false);
@@ -18,16 +46,45 @@ const MobileNav = () => {
     <div className="w-full">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            {/* Der Trigger-Button für das mobile Menü */}
-            <div className="text-white h-24 w-24 flex items-center justify-center cursor-pointer" aria-label="Menü öffnen">
+            {/* Der Trigger-Button für das mobile Menü - iOS optimiert */}
+            <div 
+              className="text-white h-24 w-24 flex items-center justify-center cursor-pointer" 
+              aria-label="Menü öffnen"
+              style={{ 
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation'
+              }}
+            >
               <Menu size={30} />
             </div>
           </SheetTrigger>
-          <SheetContent side="left" className="w-full max-w-xs bg-black/90 backdrop-blur-md text-white border-r-gray-700 p-0 z-[1002]" style={{position: 'fixed', height: '100vh', overflow: 'hidden'}}>
+          <SheetContent 
+            side="left" 
+            className="w-full max-w-xs bg-black/90 backdrop-blur-md text-white border-r-gray-700 p-0 z-[1002]" 
+            style={{
+              position: 'fixed',
+              top: 0,
+              bottom: 0,
+              height: '100vh',
+              maxHeight: '100vh',
+              overflow: 'auto',
+              WebkitOverflowScrolling: 'touch',
+              transform: 'translateZ(0)',
+              willChange: 'transform'
+            }}
+          >
             <div className="h-full flex flex-col">
               {/* Sheet Header mit Close-X */}
               <div className="flex items-center justify-end h-[100px] px-4 sticky top-0 z-10">
-                <div aria-label="Menü schließen" onClick={()=>setIsOpen(false)} className="text-white h-24 w-24 flex items-center justify-center cursor-pointer">
+                <div 
+                  aria-label="Menü schließen" 
+                  onClick={()=>setIsOpen(false)} 
+                  className="text-white h-24 w-24 flex items-center justify-center cursor-pointer"
+                  style={{ 
+                    WebkitTapHighlightColor: 'transparent',
+                    touchAction: 'manipulation'
+                  }}
+                >
                   <X size={20}/>
                 </div>
               </div>
@@ -35,11 +92,11 @@ const MobileNav = () => {
               {/* Navigation Links */}
               <div className="px-6 pt-3">
                 <ul className="text-xl space-y-1">
-                  <li><a href="#videos" onClick={handleLinkClick} className="block py-1">Videos</a></li>
-                  <li><a href="#music" onClick={handleLinkClick} className="block py-1">Music</a></li>
-                  <li><a href="#merch" onClick={handleLinkClick} className="block py-1">Merch</a></li>
-                  <li><a href="#gigs" onClick={handleLinkClick} className="block py-1">Gigs</a></li>
-                  <li><a href="#contact" onClick={handleLinkClick} className="block py-1">Contact</a></li>
+                  <li><a href="#videos" onClick={handleLinkClick} className="block py-3 min-h-[44px]">Videos</a></li>
+                  <li><a href="#music" onClick={handleLinkClick} className="block py-3 min-h-[44px]">Music</a></li>
+                  <li><a href="#merch" onClick={handleLinkClick} className="block py-3 min-h-[44px]">Merch</a></li>
+                  <li><a href="#gigs" onClick={handleLinkClick} className="block py-3 min-h-[44px]">Gigs</a></li>
+                  <li><a href="#contact" onClick={handleLinkClick} className="block py-3 min-h-[44px]">Contact</a></li>
                 </ul>
               </div>
 

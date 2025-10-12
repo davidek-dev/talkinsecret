@@ -1,0 +1,139 @@
+/* iOS Scroll-Optimierungen für Snap-Scrolling */
+
+.ios-scroll-container {
+  /* iOS Safari Scroll-Fixes */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  scroll-behavior: smooth;
+  
+  /* Hardware-Beschleunigung für iOS */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: scroll-position;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Snap-Scrolling iOS-kompatibel */
+.snap-y {
+  scroll-snap-type: y mandatory;
+  -webkit-scroll-snap-type: y mandatory;
+}
+
+.snap-center {
+  scroll-snap-align: center;
+  -webkit-scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+/* iOS Momentum Scrolling für alle scrollbaren Container */
+.overflow-y-scroll,
+.overflow-x-hidden,
+[style*="overflow"] {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* iOS-spezifische Section-Optimierungen */
+.section {
+  /* Verhindert Layout-Probleme beim Scrollen */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+  
+  /* Wichtig: Platz für iOS Safari URL-Bar (unten) */
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport - berücksichtigt UI-Elemente */
+}
+
+/* iOS Safe Area für Sections - NUR auf sehr alten Geräten */
+@media (max-width: 1023px) {
+  .section {
+    /* Kein Padding - volle Breite */
+  }
+}
+
+/* Smooth Scroll für iOS */
+@supports (-webkit-touch-callout: none) {
+  /* iOS-spezifische Styles */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  .snap-y {
+    /* Verbesserte Snap-Performance auf iOS */
+    scroll-snap-type: y proximity;
+  }
+  
+  /* Verhindere Rubber-Band-Effekt am Ende */
+  body {
+    overscroll-behavior-y: none;
+  }
+  
+  /* iOS Safari URL-Bar Handling */
+  .h-screen {
+    /* Verwende min-height statt height für bessere Kompatibilität */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Dynamic Viewport Height für iOS und alte Geräte */
+.h-screen {
+  /* Fallback */
+  height: 100vh;
+  min-height: 100vh;
+  
+  /* Modern: Dynamic viewport height */
+  height: 100dvh;
+  min-height: 100dvh;
+  
+  /* iOS Safari mit JavaScript-berechneter Höhe */
+  height: calc(var(--vh, 1vh) * 100);
+  min-height: calc(var(--vh, 1vh) * 100);
+}
+
+/* iOS Safari Sections - verwende real viewport height */
+@supports (-webkit-touch-callout: none) {
+  .section {
+    height: calc(var(--real-vh, 1vh) * 100);
+    min-height: calc(var(--real-vh, 1vh) * 100);
+  }
+}
+
+/* Alte Mobile Geräte mit kleiner Höhe */
+@media (max-height: 667px) {
+  .section {
+    /* Kleinere Sections für alte iPhones (iPhone 6/7/8) */
+    min-height: 100vh;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+  }
+  
+  .h-screen {
+    min-height: 100vh;
+  }
+}
+
+/* Sehr alte/kleine Mobile Geräte */
+@media (max-height: 568px) {
+  .section {
+    /* iPhone 5/SE */
+    min-height: 100vh;
+    padding-top: 0.25rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* iOS Scroll-Performance für Bilder */
+img {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Verhindere iOS Scroll-Bounce bei Nested Scroll Containern */
+.music-section,
+.contact-section {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}

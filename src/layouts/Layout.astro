@@ -2,86 +2,67 @@
 import CookieConsent from "../components/CookieConsent.astro";
 import '../styles/responsive-utilities.css';
 
+// Erweitere die Props für dynamische SEO-Daten
 interface Props {
   title: string;
+  description: string; // Jede Seite braucht eine eigene Beschreibung
+  canonicalURL: URL;   // Jede Seite braucht ihre eigene Canonical URL
+  image?: string;     // Optional: Ein spezielles Bild für Unterseiten
   bodyClass?: string;
 }
 
-const { title, bodyClass = "" } = Astro.props;
+const {
+  title,
+  description,
+  canonicalURL, // Wir verwenden diese jetzt statt eines festen Links
+  image = "/images/og-image-talkin-secret.jpg", // Standard-Bild, falls keins übergeben wird
+  bodyClass = "",
+} = Astro.props;
+
+// Erstelle den Seitentitel nach einem konsistenten Muster
+const pageTitle = `${title} | Talkin' Secret`;
 ---
 
 <!doctype html>
 <html lang="en-GB" dir="ltr">
 
-  <head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-	<meta name="language" content="en-GB" />
-    <meta name="color-scheme" content="dark light" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
+  <title>{pageTitle}</title>
 
-    <title>
-      Talkin' Secret – Britpop & Post-Punk from Hamburg | Official Website
-    </title>
-    <meta
-      name="description"
-      content="Talkin' Secret is a Britpop/Post-Punk band from Hamburg, Germany. Their debut album 'Petrichor' channels the raw energy of UK indie and themes of longing and nostalgia. REAL MUSIC FOR LIKE MINDED. Discover their music and live dates."
-    />
-    <meta
-      name="keywords"
-      content="Talkin' Secret, talkin secret band, talkin secrets, talking secret, talking secrets, Britpop, Post-Punk, band, music, Hamburg, Petrichor, album, Oasis, UK, Fontaines DC, Shame, The Murder Capital, Wet Leg, Altona, Kneipe, Bier, In der Schwebe Festival, Gängeviertel, live music"
-    />
-    <meta name="author" content="Talkin' Secret" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://talkinsecret.com/" />
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
 
-    <meta
-      property="og:title"
-      content="Talkin' Secret | The Sound of Longing and Loud Nights"
-    />
-    <meta
-      property="og:description"
-      content="From Hamburg with the spirit of UK indie. The debut album 'Petrichor' by Talkin' Secret is out now. Keep it loud!"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://talkinsecret.com/" />
-    <meta
-      property="og:image"
-      content="https://talkinsecret.com/images/og-image-talkin-secret.jpg"
-    />
-    <meta property="og:image:alt" content="The band Talkin' Secret" />
-    <meta property="og:site_name" content="Talkin' Secret" />
-    <meta property="og:locale" content="en_GB" />
+  <meta name="author" content="Talkin' Secret" />
+  <meta name="robots" content="index, follow" />
+  <meta name="generator" content={Astro.generator} />
+  <meta name="theme-color" content="#000000" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Talkin' Secret | Debut Album 'Petrichor' Out Now"
-    />
-    <meta
-      name="twitter:description"
-      content="Hamburg's Britpop/Post-Punk outfit Talkin' Secret. REAL MUSIC FOR LIKE MINDED. 'Petrichor' is the soundtrack for dreamers and pub nights."
-    />
-    <meta
-      name="twitter:image"
-      content="https://talkinsecret.com/images/twitter-image-talkin-secret.jpg"
-    />
-    <meta
-      name="twitter:image:alt"
-      content="Talkin' Secret – Album Cover Petrichor"
-    />
-    <meta name="twitter:site" content="@talkinsecret" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:image" content={new URL(image, Astro.site)} />
+  <meta property="og:image:alt" content={`Image for ${title}`} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Talkin' Secret" />
+  <meta property="og:locale" content="en_GB" />
 
-  <script src="/src/js/cursor-init.js"></script>
-<script is:inline type="application/ld+json">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(image, Astro.site)} />
+  <meta name="twitter:image:alt" content={`Image for ${title}`} />
+  <meta name="twitter:site" content="@talkinsecret" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  <script type="application/ld+json" is:inline>
+
 {
   "@context": "https://schema.org",
   "@type": "MusicGroup",
@@ -158,51 +139,12 @@ const { title, bodyClass = "" } = Astro.props;
   ]
 }
 </script>
-    <meta name="theme-color" content="#000000" />
-    <!-- Preload critical resources -->
-    <link
-      rel="preload"
-      href="/fonts/LibreBaskerville-Regular.ttf"
-      as="font"
-      type="font/ttf"
-      crossorigin
-    />
-    <link rel="preload" href="/images/image00001_scaled.webp" as="image" />
+      <script type="module" src="/src/js/cursor-init.js"></script>
+      <script type="module" src="/src/js/ios-viewport-fix.js"></script>
 
-
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "MusicGroup",
-        "name": "Talkin' Secret",
-        "genre": ["Britpop", "Post-Punk"],
-        "description": "Britpop/Post-Punk Band",
-        "url": "https://talkinsecret.com",
-        "sameAs": [
-          "https://open.spotify.com/intl-de/album/2n3P39BKiFLF71iH1nmiv6",
-          "https://music.apple.com/de/album/petrichor/1789391867"
-        ],
-        "album": {
-          "@type": "MusicAlbum",
-          "name": "Petrichor",
-          "datePublished": "2024"
-        }
-      }
-    </script>
-
-    <meta name="generator" content={Astro.generator} />
-    <!-- LCP-Headerbild preload für bessere LCP -->
-    <link
-      rel="preload"
-      as="image"
-      href="/images/e4d55f4b-503f-4b25-b30f-03d1740df704.webp"
-      imagesrcset="/images/e4d55f4b-503f-4b25-b30f-03d1740df704.webp 1920w"
-      imagesizes="100vw"
-    />
-    <title>{title}</title>
+  <link rel="preload" href="/fonts/LibreBaskerville-Regular.ttf" as="font" type="font/ttf" crossorigin />
   </head>
+  
   <body class={`${bodyClass} antialiased`}>
 	  <div class="cursor"></div>
 

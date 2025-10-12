@@ -31,6 +31,13 @@
   background-color: #f9f9f9;
   position: relative;
   overflow: hidden;
+  
+  /* iOS Touch-Optimierungen */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-height: 44px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .song-list-item::before {

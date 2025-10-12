@@ -1,0 +1,17 @@
+/* Footer Mobile & Desktop - Normal scrollbar */
+
+/* Footer ist immer scrollbar und hat Snap-Punkt */
+.section:has(footer),
+.section:last-of-type {
+  scroll-snap-align: center;
+  min-height: 50vh;
+}
+
+/* Stelle sicher dass man zum Footer scrollen kann */
+@media (max-width: 767px) {
+  .section:has(footer),
+  .section:last-of-type {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+}

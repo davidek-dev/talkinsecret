@@ -91,7 +91,16 @@ const getAudioUrlWithKey = (audioUrl: string) => {
     if (isPlaying) {
       audio.pause();
     } else {
-      audio.play().catch(() => setIsPlaying(false)); // Autoplay may fail
+      // iOS Audio-Handling: play() mit User-Interaction und Fehlerbehandlung
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch((error) => {
+            console.log('Autoplay prevented:', error);
+            setIsPlaying(false);
+          });
+      }
     }
     setIsPlaying(!isPlaying);
   };
@@ -172,20 +181,22 @@ const getAudioUrlWithKey = (audioUrl: string) => {
           <div 
             className={`info-panel ${isPlaying ? 'active' : ''}`}
             style={{
-              position: 'absolute', top: '-55px', left: '25px', width: '350px',
-              height: '60px', backgroundColor: 'rgba(255, 255, 255, 0.85)',
+              position: 'absolute', top: '-55px', left: '0', width: '400px',
+              height: '60px', backgroundColor: 'rgb(255, 255, 255)',
               color: '#333', padding: '10px 15px', borderRadius: '15px 15px 0 0',
               zIndex: 3, opacity: isPlaying ? 1 : 0, visibility: isPlaying ? 'visible' : 'hidden',
               transform: isPlaying ? 'translateY(0) scale(1)' : 'translateY(-10px) scale(0.95)',
               transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', border: '1px solid rgba(0,0,0,0.1)',
-              backdropFilter: 'blur(15px)', boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+              backdropFilter: 'none',
+              WebkitBackdropFilter: 'none',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
             }}
           >
-            <div style={{ position: 'absolute', left: '145px', top: '10px', width: '190px' }}>
-              <div style={{ fontSize: '13px', fontWeight: '600', marginBottom: '2px' }}>
+            <div style={{ position: 'absolute', left: '130px', top: '10px', width: '205px' }}>
+              <div style={{ fontSize: '13px', fontWeight: '600', marginBottom: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {currentSong.artist}
               </div>
-              <div style={{ fontSize: '11px', color: '#666', marginBottom: '4px' }}>
+              <div style={{ fontSize: '11px', color: '#666', marginBottom: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {currentSong.title}
               </div>
               <div style={{ width: '100%', height: '3px', backgroundColor: 'rgba(0,0,0,0.2)', borderRadius: '2px', overflow: 'hidden' }}>
@@ -235,6 +246,11 @@ const getAudioUrlWithKey = (audioUrl: string) => {
         ref={audioRef}
         src={getAudioUrlWithKey(currentSong.audioUrl)}
         preload={hasInteracted ? "auto" : "none"}
+        playsInline // iOS-spezifisch: verhindert Fullscreen
+        style={{
+          WebkitTransform: 'translateZ(0)',
+          transform: 'translateZ(0)'
+        }}
       />
     </div>
   );

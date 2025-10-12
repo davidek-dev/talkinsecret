@@ -85,6 +85,8 @@ function initCursor() {
         duration: 0.2,
         x: e.clientX,
         y: e.clientY,
+        xPercent: -50,
+        yPercent: -50,
       });
     });
 
@@ -93,14 +95,16 @@ function initCursor() {
       element.addEventListener("mouseenter", () => {
         gsap.to(mouseCursor, {
           duration: 0.2,
-          scale: 2.5,
+          width: 50,
+          height: 50,
         });
         mouseCursor.classList.add('hover');
       });
       element.addEventListener("mouseleave", () => {
         gsap.to(mouseCursor, {
           duration: 0.2,
-          scale: 1,
+          width: 20,
+          height: 20,
         });
         mouseCursor.classList.remove('hover');
       });
@@ -130,7 +134,8 @@ function initCursor() {
       if (!isInteractive) {
         gsap.to(mouseCursor, {
           duration: 0.2,
-          scale: 1,
+          width: 20,
+          height: 20,
         });
         mouseCursor.classList.remove('hover');
       }

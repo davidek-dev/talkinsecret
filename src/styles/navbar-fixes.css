@@ -1,0 +1,93 @@
+/* Navbar Visibility Fixes */
+
+.navbar {
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  pointer-events: auto;
+}
+
+/* Verhindere dass andere Elemente die Navbar überlagern */
+.section:first-child {
+  position: relative;
+}
+
+.section:first-child .navbar {
+  position: relative;
+  z-index: 1000;
+}
+
+.section:first-child picture,
+.section:first-child img {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive Navbar Height */
+.navbar {
+  min-height: 110px;
+}
+
+@media (max-width: 1023px) {
+  .navbar {
+    min-height: 90px;
+  }
+}
+
+/* Hero Image Anpassungen */
+.hero-image {
+  display: block;
+}
+
+/* Bild-Positionierung für Desktop - negative margin für Overlap */
+@media (min-width: 1024px) {
+  .hero-image {
+    margin-top: -110px;
+  }
+}
+
+/* Bild-Positionierung für Mobile - kein negative margin, dafür angepasste Höhe */
+@media (max-width: 1023px) {
+  .hero-image {
+    margin-top: 0;
+    height: calc(100vh - 90px) !important;
+    height: calc(100dvh - 90px) !important;
+    /* Für iOS Safari mit Custom Property */
+    height: calc(var(--real-vh, 1vh) * 100 - 90px) !important;
+  }
+}
+
+/* Alte Mobile Geräte - kleinere Navbar */
+@media (max-height: 667px) {
+  .hero-image {
+    height: calc(100vh - 80px) !important;
+    height: calc(var(--vh, 1vh) * 100 - 80px) !important;
+  }
+  
+  .navbar {
+    min-height: 80px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* Sehr alte/kleine Mobile Geräte (iPhone 5/SE) */
+@media (max-height: 568px) {
+  .hero-image {
+    height: calc(100vh - 70px) !important;
+    height: calc(var(--vh, 1vh) * 100 - 70px) !important;
+  }
+  
+  .navbar {
+    min-height: 70px;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  
+  /* Kompaktere Navbar-Elemente */
+  .navbar a,
+  .navbar button {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+  }
+}

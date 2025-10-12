@@ -2,9 +2,15 @@
   /* SheetContent: Begrenze Höhe auf 90vh und mache Inhalt scrollbar */
   .sheet-content-mobile-fix {
     max-height: 90vh !important;
+    max-height: 90dvh !important; /* Dynamic viewport height für iOS */
     height: auto !important;
     overflow-y: auto !important;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+    
+    /* iOS Performance */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
   }
 }

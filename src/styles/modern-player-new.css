@@ -12,27 +12,41 @@
   -moz-osx-font-smoothing: grayscale;
   overflow: visible; /* Wichtig für Popup-Sichtbarkeit */
   z-index: 100; /* Hoch genug für Popup */
+  
+  /* iOS Performance-Optimierungen */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-/* Info Panel - TEST VERSION - immer sichtbar */
+/* Info Panel - Production Version */
 .info-panel {
-  background-color: red; /* Rot für Sichtbarkeitstest */
-  color: white;
-  padding: 15px;
-  border-radius: 12px;
-  z-index: 999; /* Sehr hoch */
-  width: 200px;
+  background-color: rgb(255, 255, 255);
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 15px 15px 0 0;
+  z-index: 3;
+  width: 400px;
   height: 60px;
   position: absolute;
-  top: -80px; /* Über dem Control Panel */
-  left: 100px; /* Feste Position */
-  opacity: 1; /* Immer sichtbar für Test */
-  visibility: visible; /* Immer sichtbar */
-  border: 2px solid yellow; /* Gelber Rand für Sichtbarkeit */
+  top: -55px;
+  left: 0; /* Desktop: Links ausgerichtet */
+  opacity: 0;
+  visibility: hidden;
+  border: 1px solid rgba(0,0,0,0.1);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-10px) scale(0.95);
 }
 
 .info-panel.active {
-  background-color: green; /* Grün wenn aktiv */
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
 }
 
 .artist-name,
@@ -40,7 +54,7 @@
   display: block;
   text-align: left;
   padding: 0;
-  color: white; /* Weiße Schrift für dunklen Hintergrund */
+  color: #333;
 }
 
 .artist-name {
@@ -86,6 +100,12 @@
   display: flex;
   align-items: center;
   transition: border-radius 0.3s ease;
+  
+  /* iOS Touch-Optimierungen */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .control-panel.active {
@@ -111,6 +131,12 @@
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
+  
+  /* iOS Touch-Feedback */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  touch-action: manipulation;
+  min-height: 44px;
+  min-width: 44px;
   background-size: cover;
   background-image: var(--album-image, url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" fill="%23f0f0f0"/%3E%3Ctext x="50" y="50" text-anchor="middle" dy=".3em" font-family="Arial" font-size="12" fill="%23999"%3EAlbum%3C/text%3E%3C/svg%3E'));
 }
@@ -155,6 +181,8 @@
   padding: 0 20px;
   margin-left: auto;
   gap: 5px;
+  position: relative;
+  z-index: 20; /* Höher als Album Art (z-index: 10) */
 }
 
 .control-btn {
@@ -200,7 +228,8 @@
 }
 
 .play-btn.playing {
-  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23c2c6cf'%3E%3Cpath d='M6 19h4V5H6v14zm8-14v14h4V5h-4z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23333333'%3E%3Cpath d='M6 19h4V5H6v14zm8-14v14h4V5h-4z'/%3E%3C/svg%3E");
+  background-size: 18px 18px;
 }
 
 

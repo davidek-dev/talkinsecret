@@ -5,11 +5,16 @@ import Footer from "../components/Footer.astro";
 import "../global.css";
 ---
 
-<Layout title="Imprint - Talkin' Secret" bodyClass="static-page">
-  <div class="min-h-screen overflow-y-auto bg-background" style="height: auto; min-height: 100vh;">
+<Layout 
+  title="Imprint - Talkin' Secret" 
+  bodyClass="static-page"
+  description="Legal information and imprint for Talkin' Secret, a Britpop/Post-Punk band from Hamburg, Germany."
+  canonicalURL={new URL("/imprint", Astro.site)}
+>
+  <div class="static-page-wrapper">
     <Navbar />
     
-    <div class="container mx-auto px-6 py-32 max-w-4xl">
+    <div class="container mx-auto px-6 py-32 max-w-4xl pb-24">
       <h1 class="text-4xl font-bold text-white mb-8">Imprint</h1>
       
       <div class="prose prose-lg max-w-none text-gray-300">
@@ -76,11 +81,32 @@ import "../global.css";
 </Layout>
 
 <style>
-  /* Scrolling für statische Seiten erzwingen */
-  html, body {
-    overflow: auto !important;
-    height: auto !important;
-    max-height: none !important;
+  /* Footer auf statischen Seiten - keine zusätzliche Höhe */
+  :global(body.static-page) {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .static-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    flex: 1 0 auto;
+  }
+  
+  :global(.static-page .footer_body) {
+    flex-shrink: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  :global(.static-page footer) {
+    margin: 0 !important;
   }
   
   .prose h2 {

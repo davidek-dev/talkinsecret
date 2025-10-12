@@ -1,0 +1,167 @@
+/* Mobile Music Player Optimierungen */
+
+@media (max-width: 767px) {
+  /* Modern Player: KEIN Padding oben */
+  .modern-player {
+    padding-top: 70px !important; /* Platz für Info Panel beibehalten */
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Music Player Container: Kein Scrolling, volle Höhe */
+  .music-player-container {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Song-Liste: KEIN Margin oben */
+  .song-list {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  /* Album-Überschrift: KEIN Padding/Margin */
+  .song-list h3,
+  .modern-song-list-scroll h3 {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: none !important; /* Auf Mobile komplett verstecken */
+  }
+
+  /* Song List: Kein Scrolling, volle Höhe */
+  .song-list,
+  .modern-song-list-scroll,
+  .scrollable-tracks {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .song-list-tracks,
+  .modern-song-list-tracks {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Control Panel kleiner auf Mobile */
+  .control-panel {
+    width: 340px !important;
+    height: 85px !important;
+  }
+
+  /* Album Art kleiner auf Mobile */
+  .album-art-container {
+    left: 20px !important;
+    top: -15px !important;
+  }
+
+  .album-art {
+    height: 80px !important;
+    width: 80px !important;
+  }
+
+  /* Weißer Kreis proportional kleiner */
+  .album-art::after {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  /* Schallplatte beim Abspielen kleiner skalieren */
+  .control-panel.active .album-art {
+    transform: scale(1.1) !important;
+  }
+
+  @keyframes rotation {
+    0% {
+      transform: scale(1.1) rotate(0deg);
+    }
+    100% {
+      transform: scale(1.1) rotate(360deg);
+    }
+  }
+
+  /* Controls Container anpassen */
+  .controls-container {
+    height: 85px !important;
+    padding: 0 15px !important;
+    gap: 3px !important;
+  }
+
+  /* Control Buttons kleiner */
+  .control-btn {
+    width: 50px !important;
+    height: 65px !important;
+    background-size: 18px !important;
+  }
+
+  /* Info Panel kleiner und angepasst - KEIN Backdrop, gleiche Breite wie Control Panel */
+  .info-panel {
+    top: -50px !important;
+    right: 0 !important; /* RECHTS statt links */
+    left: auto !important; /* Left entfernen */
+    width: 340px !important;
+    height: 55px !important;
+    padding: 8px 12px !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgb(255, 255, 255) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Text-Container Position anpassen für kleineres Album Art */
+  .info-panel > div {
+    left: 105px !important; /* Zurück zu LEFT - Album Art ist links */
+    top: 8px !important;
+    width: 220px !important;
+  }
+
+  /* Text-Größen für Mobile anpassen */
+  .info-panel > div > div:first-child {
+    font-size: 12px !important;
+  }
+
+  .info-panel > div > div:nth-child(2) {
+    font-size: 10px !important;
+  }
+
+  /* Progress Bar kleiner */
+  .info-panel > div > div:last-child {
+    height: 2.5px !important;
+  }
+}
+
+/* Sehr kleine Bildschirme */
+@media (max-width: 400px) {
+  .control-panel {
+    width: 300px !important;
+    height: 75px !important;
+  }
+
+  .album-art {
+    height: 70px !important;
+    width: 70px !important;
+  }
+
+  .control-btn {
+    width: 45px !important;
+    height: 55px !important;
+    background-size: 16px !important;
+  }
+
+  .info-panel {
+    width: 300px !important;
+    height: 50px !important;
+    background-color: rgb(255, 255, 255) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .info-panel > div {
+    left: 95px !important; /* Zurück zu LEFT - Album Art ist links */
+    width: 195px !important;
+  }
+}

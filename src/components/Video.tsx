@@ -171,6 +171,13 @@ const VideoPlayer: React.FC<Props> = ({ videoVariants }) => {
     
     if (modal && iframe) {
       modal.showModal();
+      // iOS-spezifische Behandlung
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        // Für iOS Safari: allowfullscreen und playsinline erforderlich
+        iframe.setAttribute('allowfullscreen', 'true');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      }
+      
       // Play video using YouTube API
       if (iframe.contentWindow) {
         iframe.contentWindow.postMessage(
@@ -277,11 +284,16 @@ const VideoPlayer: React.FC<Props> = ({ videoVariants }) => {
                 id="modal-video"
                 ref={modalVideoRef}
                 src={videoEmbedUrls[selectedIndex]}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                allowFullScreen
                 className="w-full h-full rounded-2xl border-0"
                 frameBorder="0"
                 title={getVideoTitle(selectedIndex) + ' (YouTube Video)'}
                 aria-label={getVideoTitle(selectedIndex) + ' (YouTube Video)'}
+                style={{
+                  WebkitTransform: 'translateZ(0)', // iOS Hardware-Beschleunigung
+                  transform: 'translateZ(0)'
+                }}
               />
             </div>
           </div>

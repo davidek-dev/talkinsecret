@@ -5,6 +5,14 @@ import Image from "astro/components/Image.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/index.css";
 import "../styles/fixes.css";
+import "../styles/navbar-fixes.css"; // Navbar Visibility Fixes
+import "../styles/ios-scroll-optimizations.css"; // iOS-spezifische Scroll-Optimierungen
+import "../styles/music-player-mobile-fix.css"; // Music Player Mobile Optimierungen
+import "../styles/mobile-nav-fix.css"; // Mobile Navigation Sheet Fixes
+import "../styles/merch-carousel-mobile.css"; // Merch Carousel Mobile Styles
+import "../styles/footer-mobile-scroll.css"; // Footer Mobile Scroll Fix
+import "../styles/section-centering.css"; // Music & Merch Section Centering
+import "../styles/remove-semicolons.css"; // Remove Pseudo-Element Semicolons
 import "../styles/dev-cursor.css"; // Spezielle Cursor-Stile für die Entwicklung
 import "../global.css";
 import Products from "../components/Products.astro";
@@ -42,9 +50,15 @@ export const videoVariants = [
 
 ---
 
-<Layout title="Talkin' Secret" >
+<Layout
+  title="Britpop & Post-Punk from Hamburg | Official Website"
+  description="Talkin' Secret is a Britpop/Post-Punk band from Hamburg, Germany. Their debut album 'Petrichor' channels the raw energy of UK indie..."
+  canonicalURL={Astro.url}
+>  
   <Loading />
-  <div class="snap-y snap-mandatory h-screen overflow-y-scroll overflow-x-hidden">
+  <CookieConsent />
+  
+  <div class="snap-y snap-mandatory h-screen overflow-y-scroll overflow-x-hidden ios-scroll-container">
   <div class="content max-w-full">
     <div>
 
@@ -67,7 +81,7 @@ export const videoVariants = [
           alt="Petrichor"
           width="1920"
           height="1080"
-          class="w-[100%] h-[90vh] lg:h-[100vh] mb-32 object-cover -mt-[110px]"
+          class="hero-image w-[100%] h-[90vh] lg:h-[100vh] mb-32 object-cover"
         />
       </picture>
     </div>
@@ -87,15 +101,24 @@ export const videoVariants = [
     </div>
     
     <div
-      class="section flex flex-col h-screen snap-center relative overflow-hidden"
+      class="section flex flex-col justify-center items-center h-screen snap-center relative overflow-hidden"
       id="music"
     >
-      <Music class="w-full relative z-20" />
+      <!-- Desktop Heading (Background) -->
       <h1
-        class="absolute inset-0 flex items-center justify-center lg:text-[15em] md:text-[10em] text-[5em] font-extrabold text-[#131c20] italic z-10 pointer-events-none"
+        class="hidden sm:flex absolute inset-0 items-center justify-center lg:text-[15em] md:text-[10em] text-[5em] font-extrabold text-[#131c20] italic z-10 pointer-events-none"
       >
         Music
       </h1>
+      
+      <!-- Mobile: Music Heading oben - KEIN margin-bottom -->
+      <h1
+        class="sm:hidden text-[4em] font-extrabold text-center text-[#131c20] italic relative z-20 mb-0"
+      >
+        Music
+      </h1>
+      
+      <Music class="w-full relative z-20" />
     </div>
 
     <div
@@ -111,79 +134,17 @@ export const videoVariants = [
     </div>
     
     <div
-      class="section merch-section snap-center relative overflow-hidden"
+      class="section flex flex-col justify-center items-center h-screen snap-center relative"
       id="merch"
     >
-      <style>
-        .merch-section {
-          height: 100vh;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-          align-items: center;
-          padding-top: 10vh;
-          padding-bottom: 5vh;
-        }
-        
-        /* Mobile: Text oben, Products darunter */
-        @media (max-width: 767px) {
-          .merch-section {
-            padding-top: 15vh;
-            justify-content: flex-start;
-            gap: 2rem;
-          }
-          
-          .merch-title {
-            font-size: 4rem !important;
-            margin: 0 !important;
-            flex-shrink: 0;
-            z-index: 20;
-          }
-          
-          .merch-products {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            margin-top: 0 !important;
-          }
-        }
-        
-        /* Tablet */
-        @media (min-width: 768px) and (max-width: 1023px) {
-          .merch-section {
-            padding-top: 8vh;
-            justify-content: center;
-            gap: 1.5rem;
-          }
-          
-          .merch-title {
-            font-size: 8rem !important;
-            margin: 0 0 -2rem 0 !important;
-          }
-        }
-        
-        /* Desktop */
-        @media (min-width: 1024px) {
-          .merch-section {
-            justify-content: center;
-            padding-top: 5vh;
-            gap: 6rem;
-          }
-          
-          .merch-title {
-            margin: -12rem 0 -8rem 0 !important;
-          }
-        }
-      </style>
+      <!-- Desktop Heading (versteckt auf Mobile) -->
       <h1
-        class="merch-title lg:text-[15em] md:text-[10em] text-[5em] font-extrabold text-center text-[#131c20] italic"
+        class="hidden sm:flex absolute inset-0 items-center justify-center lg:text-[15em] md:text-[10em] text-[5em] font-extrabold text-[#131c20] italic z-10 pointer-events-none"
       >
         Merch
       </h1>
-      <div class="merch-products" style="display: flex; justify-content: center; align-items: center; width: 100%;">
-        <Products class="w-full self-center justify-center content-center items-center" style="margin: 0 auto; display: flex; justify-content: center; align-items: center;"/>
+      <div class="relative z-20 flex justify-center items-center w-full max-w-full">
+        <Products />
       </div>
     </div>
 
@@ -194,8 +155,7 @@ export const videoVariants = [
           height: auto;
           min-height: 100vh;
           padding-top: 5vh;
-          padding-bottom: 8vh; /* Mehr Abstand zum Footer */
-          margin-bottom: 3vh; /* Zusätzlicher Abstand zum Footer */
+          padding-bottom: 5vh;
         }
         
         /* Tablet: Reduzierte Höhe */
@@ -205,8 +165,7 @@ export const videoVariants = [
             max-height: 100vh;
             min-height: 80vh;
             padding-top: 3vh;
-            padding-bottom: 5vh; /* Mehr Abstand zum Footer */
-            margin-bottom: 2vh; /* Zusätzlicher Abstand zum Footer */
+            padding-bottom: 3vh;
           }
         }
         
@@ -217,8 +176,7 @@ export const videoVariants = [
             max-height: 100vh;
             min-height: 70vh;
             padding-top: 2vh;
-            padding-bottom: 4vh; /* Mehr Abstand zum Footer */
-            margin-bottom: 2vh; /* Zusätzlicher Abstand zum Footer */
+            padding-bottom: 2vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -231,8 +189,7 @@ export const videoVariants = [
             max-height: 85vh;
             min-height: 60vh;
             padding-top: 1vh;
-            padding-bottom: 3vh; /* Mehr Abstand zum Footer */
-            margin-bottom: 1.5vh; /* Zusätzlicher Abstand zum Footer */
+            padding-bottom: 1vh;
           }
         }
         
@@ -263,13 +220,14 @@ export const videoVariants = [
         <ContactForm />
       </div>
     </div>
+    
+    <!-- Footer Section -->
+    <div class="section snap-start" style="height: auto; min-height: fit-content;">
+      <Footer title="Talkin' Secret" />
     </div>
-  </div>
-  <div class="section footer-section h-[35%] snap-center">
-    <Footer title="Talkin' Secret" />
+    
   </div>
   </div>
-  <CookieConsent />
 
 </Layout>
 

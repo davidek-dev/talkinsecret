@@ -13,6 +13,14 @@
     background-position: center;
     background-repeat: no-repeat;
     margin: 0 auto;
+    
+    /* iOS Performance-Optimierungen */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* Responsive sizes for larger screens - maintaining 16:9 aspect ratio */
@@ -90,6 +98,14 @@
     width: 120px;
     height: 120px;
     border: 1px solid white;
+    
+    /* iOS Touch-Optimierungen */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    min-height: 44px;
+    min-width: 44px;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);

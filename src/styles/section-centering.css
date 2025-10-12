@@ -1,0 +1,103 @@
+/* Music & Merch Section Mobile Centering */
+
+/* Mobile Optimierungen */
+@media (max-width: 767px) {
+  /* Music Section - Content vertikal zentriert */
+  #music {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    padding: 0 !important;
+    min-height: 100vh !important;
+    padding-top: 20vh !important;
+  }
+
+  /* Music Component Container - kein extra Padding/Margin */
+  #music .music-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0 !important;
+  }
+
+  /* Music Container - zentriert */
+  #music .music-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Merch Section - Content mit Heading vertikal zentriert */
+  #merch {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    gap: 1rem;
+    padding: 1rem 0 !important;
+  }
+  
+  /* Mobile Music Heading - GRÖSSERER Abstand zum Petrichor */
+  #music > h1 {
+    margin: 0 0 2rem 0 !important; /* 2rem statt 1rem */
+    padding: 0 !important;
+  }
+  
+  /* Petrichor Heading */
+  #music h2 {
+    margin: 0 0 0.5rem 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Text unter Petrichor - KEIN eigener Abstand */
+  #music header p {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Music Section Header - GRÖSSERER Abstand zum Player */
+  #music .music-section header {
+    padding: 0 !important;
+    margin: 0 0 4rem 0 !important; /* 4rem für noch mehr Abstand zum Player */
+  }
+  
+  /* Container - kein Padding auf Mobile */
+  #music .container {
+    padding: 0 !important;
+  }
+  
+  /* Music Section selbst - KEIN Padding */
+  #music .music-section {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Kein Abstand zwischen Player und Buttons */
+  #music .music-container {
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  #music .services-container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* Desktop: Beide Sections normal zentriert */
+@media (min-width: 768px) {
+  #music,
+  #merch {
+    justify-content: center !important;
+  }
+}

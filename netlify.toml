@@ -14,10 +14,10 @@
   included_files = ["_audio_files/**"]
 
 [dev]
-  framework = "astro"
+  command = "npm run dev" # Use the local dev script to avoid CLI conflicts
   targetPort = 4321
-  port = 8888      # Der Port, auf dem Netlify Dev läuft
-  publish = "dist" # Das Verzeichnis, das Netlify Dev bereitstellt
+  port = 8888
+  publish = "dist"
 
 [[headers]]
   for = "/*"

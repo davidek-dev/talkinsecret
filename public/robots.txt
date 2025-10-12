@@ -1,4 +1,13 @@
+# Allow all friendly crawlers to access the entire site
 User-agent: *
 Allow: /
 
+# Disallow crawling of system folders and development files
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /.netlify/
+Disallow: /_audio_files/
+
+
+# Sitemap location
 Sitemap: https://talkinsecret.com/sitemap-index.xml

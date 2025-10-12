@@ -1,0 +1,142 @@
+/* Music Section für kleine Mobile Bildschirmhöhen optimiert */
+
+/* Kompakte Streaming-Services für kleine Höhen */
+@media (max-height: 700px) and (max-width: 767px) {
+  /* Container kompakter machen */
+  .music-container {
+    gap: 0 !important; /* KEIN Gap zwischen Player und Services */
+    margin-bottom: 0 !important;
+  }
+  
+  /* Music Player breiter und ohne Song-Liste */
+  .music-player-container {
+    max-height: 180px !important;
+    min-height: 180px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Song-Liste komplett ausblenden */
+  .song-list,
+  .modern-song-list-scroll,
+  .scrollable-tracks,
+  .song-list-tracks {
+    display: none !important;
+  }
+  
+  /* Album Section Header ausblenden */
+  .song-list h3,
+  .modern-song-list-scroll h3 {
+    display: none !important;
+  }
+  
+  /* Streaming Services: Kompakte Icons in einer Reihe */
+  .music-services-flex {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0 !important; /* KEIN Padding */
+    grid-template-columns: none !important;
+    flex-wrap: wrap !important;
+    max-width: 100% !important;
+  }
+  
+  /* Service Tiles: Größere Buttons */
+  .service-tile {
+    width: 64px !important;
+    height: 64px !important;
+    min-width: 64px !important;
+    padding: 0.75rem !important;
+    margin: 0 !important;
+    aspect-ratio: 1 !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* IMG-Tags sollen sichtbar sein für Brand-Logos */
+  .service-tile img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 140px !important; /* Maximale Breite für Logos */
+    max-height: 40px !important; /* Maximale Höhe */
+    object-fit: contain !important;
+  }
+  
+  /* Service Icon Container */
+  .service-icon {
+    padding: 0 !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Entfernt - Icons sollen von IMG-Tags kommen, nicht von CSS */
+  
+  /* Services Container Anpassungen */
+  .services-container {
+    margin-top: 0 !important; /* KEIN Abstand zum Player */
+    margin-bottom: 0 !important;
+    padding: 0 !important; /* KEIN Padding */
+  }
+  
+  /* Control Panel breiter */
+  .control-panel {
+    width: 90% !important;
+    max-width: 450px !important;
+  }
+  
+  /* Überschrift kompakter */
+  .music-section header {
+    padding-bottom: 0.5rem !important;
+  }
+  
+  .music-section h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+  
+  .music-section header p {
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Sehr kleine Höhen - noch kompakter */
+@media (max-height: 600px) and (max-width: 767px) {
+  .music-player-container {
+    max-height: 150px !important;
+    min-height: 150px !important;
+  }
+  
+  .control-panel {
+    width: 95% !important;
+    height: 80px !important;
+  }
+  
+  .album-art {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .music-section header {
+    padding-bottom: 0.25rem !important;
+  }
+  
+  .service-tile {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+  }
+  
+  .service-icon::before {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}

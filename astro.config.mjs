@@ -22,6 +22,13 @@ export default defineConfig({
   build:{
     format:'file',
   },
+  vite: {
+    server: {
+      proxy: {
+        '/.netlify/functions': 'http://localhost:8888'
+      }
+    }
+  },
   integrations: [
     react(),
     tailwind(),

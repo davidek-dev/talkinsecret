@@ -25,21 +25,25 @@
 
 <style>
   .cookie-banner {
-    position: fixed;
-    bottom: 2rem;
-    left: 2rem;
+    position: fixed !important;
+    bottom: 2rem !important;
+    left: 2rem !important;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 1rem;
     padding: 1.5rem;
-    z-index: 1000;
+    z-index: 100000 !important;
     max-width: 400px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     transform: translateX(-150%);
     transition: transform 0.3s ease-in-out;
-    pointer-events: auto;
+    pointer-events: auto !important;
+    overflow: visible !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
   }
 
   .cookie-banner.show {

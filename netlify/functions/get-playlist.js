@@ -1,4 +1,4 @@
-export const handler = async (event, context) => {
+export const handler = async (event) => {
   // Unterstütze CORS für Entwicklungsumgebungen
   const headers = {
     'Content-Type': 'application/json',

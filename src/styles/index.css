@@ -1,11 +1,16 @@
 * {
   scrollbar-width: thin;
+  /* iOS Scroll-Optimierungen */
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
   --sb-track-color: #dae3da;
   --sb-thumb-color: #d94d4a;
   --sb-size: 6px;
+  
+  /* iOS-spezifisch: Overscroll-Verhalten */
+  overscroll-behavior-y: none;
 }
 
 body::-webkit-scrollbar {

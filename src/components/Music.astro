@@ -2,6 +2,7 @@
 // src/components/Music.astro
 import MusicPlayer from '../components/MusicPlayer';
 import '../styles/music-section.css';
+import '../styles/music-compact-mobile.css';
 import '../styles/debug.css';
 import '../styles/playlist-styles.css';
 
@@ -10,11 +11,11 @@ import '../styles/playlist-styles.css';
 
 <section id="music" class="music-section" aria-labelledby="music-heading">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl">
-    <header class="pb-8 sm:pb-12 text-center text-white">
+    <header class="text-center text-white music-header">
       <h2 id="music-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bandfont">
         Petrichor
       </h2>
-      <p class="text-base sm:text-lg lg:text-xl mt-2"> 
+      <p class="text-base sm:text-lg lg:text-xl"> 
         Now available on all major streaming platforms!
       </p>
     </header>
@@ -25,132 +26,263 @@ import '../styles/playlist-styles.css';
       */}
       <MusicPlayer client:only="react" />
       
-      <aside class="services-container mt-8 lg:mt-0" aria-labelledby="streaming-heading">
+      <aside class="services-container" aria-labelledby="streaming-heading">
         <h3 id="streaming-heading" class="sr-only">Streaming-Plattformen</h3>
-        <div class="music-services-flex">
+        <div class=" music-services-grid">
           <style>
-            /* Direkte Überschreibung für hohe Auflösungen */
-            @media (min-width: 1800px) {
-              .service-tile {
-                max-width: 140px !important;
-                padding: 1.2rem !important;
-                aspect-ratio: 1.5 !important;
+            /* Desktop: 2-2-1 Layout (mittig platziert, alle Buttons gleich groß) */
+            .music-services-grid {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center; /* Mittig platziert */
+              gap: 1rem;
+              max-width: 500px;
+              margin: 0 auto;
+            }
+            
+            /* Reihen: Alle Buttons gleich groß */
+            .services-row-1,
+            .services-row-2 {
+              display: flex;
+              gap: 1rem;
+              justify-content: center;
+              width: 100%;
+            }
+            
+            /* Alle Service Tiles gleich groß */
+            .services-row-1 .service-tile,
+            .services-row-2 .service-tile {
+              flex: 0 0 auto;
+              width: 160px;
+              height: 160px;
+            }
+            
+            /* Große Monitore: 2-2-1 Layout */
+            @media (min-width: 1440px) {
+              .music-services-grid {
+                max-width: 600px;
               }
               
-              .service-icon img {
-                max-width: 85px !important;
-                max-height: 58px !important;
+              .services-row-1 .service-tile,
+              .services-row-2 .service-tile {
+                width: 180px;
+                height: 180px;
+              }
+            }
+            
+            /* Mobile: 3-2 Layout */
+            @media (max-width: 767px) {
+              .music-services-grid {
+                max-width: 100%;
+                gap: 0.8rem !important; /* Gap zwischen den Reihen */
+                margin: -60px 0 0 0 !important; /* Negativer Margin oben, um näher ran zu kommen */
+                padding: 0 !important; /* KEIN Padding */
               }
               
-              .service-icon {
-                padding: 0.35rem !important;
+              .services-row-1,
+              .services-row-2 {
+                gap: 0.8rem; /* Gap zwischen Buttons in der Reihe */
+                margin: 0 !important; /* KEIN Margin */
+                padding: 0 !important; /* KEIN Padding */
               }
               
-              .music-services-flex {
-                gap: 1.6rem !important;
-                max-width: 460px !important;
-                margin: 0 auto 1.6rem !important;
-                padding-bottom: 1.2rem !important;
+              /* YouTube Mobile anzeigen, Desktop verstecken */
+              .youtube-mobile {
+                display: flex !important;
+              }
+              
+              .youtube-desktop {
+                display: none !important;
+              }
+              
+              /* Deezer Mobile anzeigen in zweiter Reihe */
+              .deezer-mobile {
+                display: flex !important;
+              }
+              
+              /* Deezer Desktop verstecken */
+              .deezer-desktop {
+                display: none !important;
+              }
+              
+              /* Deezer Desktop-Reihe komplett verstecken */
+              .deezer-desktop-row {
+                display: none !important;
+              }
+            }
+            
+            /* Desktop: YouTube in zweiter Reihe, Deezer in dritter */
+            @media (min-width: 768px) {
+              .youtube-mobile {
+                display: none !important;
+              }
+              
+              .youtube-desktop {
+                display: flex !important;
+              }
+              
+              .deezer-mobile {
+                display: none !important;
+              }
+              
+              .deezer-desktop {
+                display: flex !important;
+              }
+              
+              .deezer-desktop-row {
+                display: flex !important;
               }
             }
           </style>
-          <a 
-            href="https://open.spotify.com/intl-de/album/2n3P39BKiFLF71iH1nmiv6" 
-            class="service-tile focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="Album Petrichor auf Spotify anhören (öffnet neues Fenster)"
-          >
-            <span class="service-icon" aria-hidden="true">
-              <img 
-                src="/images/Spotify_logo_with_text.svg" 
-                alt="" 
-                style="filter: brightness(0) invert(1);" 
-                loading="lazy"
-                width="80"
-                height="80"
-              />
-            </span>
-          </a>
           
-          <a 
-            href="https://music.apple.com/de/album/petrichor/1789391867" 
-            class="service-tile focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="Album Petrichor auf Apple Music anhören (öffnet neues Fenster)"
-          >
-            <span class="service-icon" aria-hidden="true">
-              <img 
-                src="/images/Apple_Music_logo.svg" 
-                alt="" 
-                style="filter: brightness(0) invert(1);" 
-                loading="lazy"
-                width="80"
-                height="80"
-              />
-            </span>
-          </a>
+          <!-- Erste Reihe: Spotify, Apple Music -->
+          <div class="services-row-1">
+            <a 
+              href="https://open.spotify.com/intl-de/album/2n3P39BKiFLF71iH1nmiv6" 
+              class="service-tile focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Album Petrichor auf Spotify anhören (öffnet neues Fenster)"
+            >
+              <span class="service-icon" aria-hidden="true">
+                <img 
+                  src="/images/Spotify_logo_with_text.svg" 
+                  alt="" 
+                  style="filter: brightness(0) invert(1);" 
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                />
+              </span>
+            </a>
+            
+            <a 
+              href="https://music.apple.com/de/album/petrichor/1789391867" 
+              class="service-tile focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Album Petrichor auf Apple Music anhören (öffnet neues Fenster)"
+            >
+              <span class="service-icon" aria-hidden="true">
+                <img 
+                  src="/images/Apple_Music_logo.svg" 
+                  alt="" 
+                  style="filter: brightness(0) invert(1);" 
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                />
+              </span>
+            </a>
+            
+            <!-- YouTube Music - NUR auf Mobile in erster Reihe -->
+            <a 
+              href="https://music.youtube.com/playlist?list=OLAK5uy_mwGChRREfOau5FJbcwTGlMN1qDTrt73B0" 
+              class="service-tile youtube-mobile focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Album Petrichor auf YouTube Music anhören (öffnet neues Fenster)"
+            >
+              <span class="service-icon" aria-hidden="true">
+                <img 
+                  src="/images/YT_Music.svg" 
+                  alt="" 
+                  style="filter: brightness(0) invert(1);" 
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                />
+              </span>
+            </a>
+          </div>
           
-          <a 
-            href="https://music.youtube.com/playlist?list=OLAK5uy_mwGChRREfOau5FJbcwTGlMN1qDTrt73B0" 
-            class="service-tile focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="Album Petrichor auf YouTube Music anhören (öffnet neues Fenster)"
-          >
-            <span class="service-icon" aria-hidden="true">
-              <img 
-                src="/images/YT_Music.svg" 
-                alt="" 
-                style="filter: brightness(0) invert(1);" 
-                loading="lazy"
-                width="80"
-                height="80"
-              />
-            </span>
-          </a>
+          <!-- Zweite Reihe: YouTube Music, Amazon Music -->
+          <div class="services-row-2">
+            <!-- YouTube Music - NUR auf Desktop in zweiter Reihe -->
+            <a 
+              href="https://music.youtube.com/playlist?list=OLAK5uy_mwGChRREfOau5FJbcwTGlMN1qDTrt73B0" 
+              class="service-tile youtube-desktop focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Album Petrichor auf YouTube Music anhören (öffnet neues Fenster)"
+            >
+              <span class="service-icon" aria-hidden="true">
+                <img 
+                  src="/images/YT_Music.svg" 
+                  alt="" 
+                  style="filter: brightness(0) invert(1);" 
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                />
+              </span>
+            </a>
+            
+            <a 
+              href="https://music.amazon.de/albums/B0DSCK96HY" 
+              class="service-tile focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Album Petrichor auf Amazon Music anhören (öffnet neues Fenster)"
+            >
+              <span class="service-icon" aria-hidden="true">
+                <img 
+                  src="/images/Amazon_Music_(Logo).svg" 
+                  alt="" 
+                  style="filter: brightness(0) invert(1);" 
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                />
+              </span>
+            </a>
+            
+            <!-- Deezer - NUR auf Mobile in zweiter Reihe -->
+            <a 
+              href="https://www.deezer.com/de/album/693504991" 
+              class="service-tile deezer-mobile focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Album Petrichor auf Deezer anhören (öffnet neues Fenster)"
+            >
+              <span class="service-icon" aria-hidden="true">
+                <img 
+                  src="/images/Deezer_logo,_2023.svg" 
+                  alt="" 
+                  style="filter: brightness(0) invert(1);" 
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                />
+              </span>
+            </a>
+          </div>
           
-          <a 
-            href="https://music.amazon.de/albums/B0DSCK96HY" 
-            class="service-tile focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="Album Petrichor auf Amazon Music anhören (öffnet neues Fenster)"
-          >
-            <span class="service-icon" aria-hidden="true">
-              <img 
-                src="/images/Amazon_Music_(Logo).svg" 
-                alt="" 
-                style="filter: brightness(0) invert(1);" 
-                loading="lazy"
-                width="80"
-                height="80"
-              />
-            </span>
-          </a>
-          
-          <a 
-            href="https://www.deezer.com/de/album/693504991" 
-            class="service-tile focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="Album Petrichor auf Deezer anhören (öffnet neues Fenster)"
-          >
-            <span class="service-icon" aria-hidden="true">
-              <img 
-                src="/images/Deezer_logo,_2023.svg" 
-                alt="" 
-                style="filter: brightness(0) invert(1);" 
-                loading="lazy"
-                width="80"
-                height="80"
-              />
-            </span>
-          </a>
+          <!-- Dritte Reihe: Deezer (zentriert) - NUR auf Desktop -->
+          <div class="services-row-2 deezer-desktop-row">
+            <!-- Deezer - NUR auf Desktop in dritter Reihe -->
+            <a 
+              href="https://www.deezer.com/de/album/693504991" 
+              class="service-tile deezer-desktop focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-black transition-all duration-200" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Album Petrichor auf Deezer anhören (öffnet neues Fenster)"
+            >
+              <span class="service-icon" aria-hidden="true">
+                <img 
+                  src="/images/Deezer_logo,_2023.svg" 
+                  alt="" 
+                  style="filter: brightness(0) invert(1);" 
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                />
+              </span>
+            </a>
+          </div>
         </div>
       </aside>
     </div>
   </div>
 </section>
-```

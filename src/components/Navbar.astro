@@ -14,6 +14,33 @@ import MobileNav from './MobileNav.tsx';
   }
 }
 
+/* iOS-spezifische Navbar-Optimierungen */
+.navbar {
+  /* Hardware-Beschleunigung */
+  transform: translateZ(0);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Safe Area Support für iOS - nur auf Mobile */
+@media (max-width: 1023px) {
+  .navbar {
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Touch-Target Optimierung für iOS */
+.navbar a, .navbar button {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .navbar a {
     transition: none;

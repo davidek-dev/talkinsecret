@@ -1,0 +1,21 @@
+/* Entferne mögliche Pseudo-Elemente die Backticks/Apostrophe anzeigen könnten */
+
+/* Verstecke nur text-content Pseudo-Elemente, NICHT die Icon-Elemente */
+.music-services-flex::after,
+.services-container::after,
+.music-services-flex::before,
+.services-container::before {
+  display: none !important;
+  content: none !important;
+  visibility: hidden !important;
+}
+
+/* Verhindere Print-Styles auf Bildschirm */
+@media screen {
+  a[href]::after,
+  abbr[title]::after {
+    content: none !important;
+    display: none !important;
+    visibility: hidden !important;
+  }
+}

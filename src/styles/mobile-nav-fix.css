@@ -1,0 +1,37 @@
+/* Mobile Navigation Sheet Fixes */
+
+/* Sheet Content - volle Höhe ohne Abschnitt */
+[data-radix-scroll-area-viewport] {
+  max-height: 100vh !important;
+}
+
+/* Shadcn Sheet Overlay */
+[data-radix-dialog-overlay] {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+}
+
+/* Shadcn Sheet Content */
+[data-radix-dialog-content] {
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+}
+
+/* iOS Safe Area für Sheet */
+@supports (padding: env(safe-area-inset-bottom)) {
+  [data-radix-dialog-content] {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Scroll Container im Sheet */
+.sheet-scroll-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}

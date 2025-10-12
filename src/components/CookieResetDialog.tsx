@@ -33,7 +33,7 @@ export const CookieResetDialog: React.FC<CookieResetDialogProps> = ({ children }
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+      <DialogContent className="sm:max-w-[425px] bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700" style={{ zIndex: 99999 }}>
         <DialogHeader>
           <DialogTitle className="text-white">Reset Cookie Preferences</DialogTitle>
           <DialogDescription className="text-gray-300">
