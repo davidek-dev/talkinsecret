@@ -166,6 +166,7 @@ img {
     background: transparent !important;
     mix-blend-mode: difference !important; 
     will-change: width, height, transform !important;
+    transition: width 0.2s ease, height 0.2s ease !important;
     display: block !important;
     overflow: visible !important;
   }
